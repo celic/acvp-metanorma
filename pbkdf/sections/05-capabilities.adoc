@@ -25,6 +25,7 @@ A registration *SHALL* use these properties
 
 An example registration within an algorithm capability exchange looks like this
 
+[source,json]
 ----
 "algorithms":[
   {

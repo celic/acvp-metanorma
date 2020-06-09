@@ -1,12 +1,13 @@
 = ACVP Password-based Key Derivation Function JSON Specification
 :doctype: internet-draft
-:name: draft-ietf-acvp-pbkdf-1.0
+:docname: gold-acvp-pbkdf
+:name: draft-gold-acvp-pbkdf-01
 :abbrev: ACVP PBKDF
 :status: informational
 :ipr: trust200902
-:submissionType: individual
+:submission-type: independent
 :area: Internet
-:intended-series: full-standard
+:intended-series: info
 :revdate: 2019-06-05
 :forename_initials: C.C.
 :lastname: Celi
@@ -18,14 +19,14 @@
 :country: United States of America
 :email: christopher.celi@nist.gov
 :role: editor
-// :workgroup: TBD
 :docfile: draft-gold-acvp-pbkdf.adoc
 :mn-document-class: ietf
-:mn-output-extensions: xmlrfc3,txt,html,nits
-//:updates:
-//:obsoletes:
+:mn-output-extensions: xml,rfc,txt,html
 :area: General
 :keyword: acvp, crypto
+// :workgroup: TBD
+//:updates:
+//:obsoletes:
 //:uri:
 
 // Singular name of the algorithm
