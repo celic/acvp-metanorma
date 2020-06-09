@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<?rfc strict="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="full-standard" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
+  <front>
+    <title abbrev="ACVP PBKDF" ascii="ACVP Password-based Key Derivation Function JSON Specification">ACVP Password-based Key Derivation Function JSON Specification</title>
+    <seriesInfo value="" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
+    <seriesInfo name="" value="" status="full-standard"></seriesInfo>
+    <author fullname="Christopher Celi" asciiFullname="Christopher Celi">
+      <address>
+        <postal></postal>
+        <email>christopher.celi@nist.gov</email>
+        <uri></uri>
+      </address>
+    </author>
+    <area>Internet</area>
+  </front>
+  <middle>
+    <section anchor="acknowledgements">
+      <name>Acknowledgements</name>
+      <t anchor="_ab33b3ea-5394-4e99-9fd1-b0a9f45d33a7">There are no acknowledgements.</t>
+    </section>
+    <section anchor="abstract">
+      <name>Abstract</name>
+      <t anchor="_d299a94e-b402-4887-800b-8b7ecc6a5b55">This document defines the JSON schema for testing Password-based KDF implementations with the ACVP specification.</t>
+    </section>
+    <section anchor="introduction">
+      <name>Introduction</name>
+      <t anchor="_7f426a74-584c-4e2c-8e1e-028e796e3f49">The Automated Crypto Validation Protocol (ACVP) defines a mechanism to automatically verify the cryptographic implementation of a software or hardware crypto module. The ACVP specification defines how a crypto module communicates with an ACVP server, including crypto capabilities negotiation, session management, authentication, vector processing and more. The ACVP specification does not define algorithm specific JSON constructs for performing the crypto validation. A series of ACVP sub-specifications define the constructs for testing individual crypto algorithms. Each sub-specification addresses a specific class of crypto algorithms. This sub-specification defines the JSON constructs for testing Password-based KDF implementations using ACVP.</t>
+    </section>
+    <section anchor="conventions">
+      <name>Terms and definitions</name>
+      <t anchor="_7da0e299-9f23-41e6-a418-c275a066be24">No terms and definitions are listed in this document.</t>
+    </section>
+    <section anchor="supported">
+      <name>Supported KDFs</name>
+      <t anchor="_e088b865-c066-4792-9fad-ab62439e5789">The following key derivation functions <bcp14>MAY</bcp14> be advertised by the ACVP compliant cryptographic module:</t>
+      <ul anchor="_cc9254ea-c211-477b-a065-02d16ffc3a25">
+<li>
+<t anchor="_6d99f03f-7764-4723-8cef-880a9d4f9af6">ACVP-KDF-PBKDF</t>
+</li>
+</ul>
+    </section>
+    <section anchor="testtypes">
+      <name>Test Types and Test Coverage</name>
+      <t anchor="_5a3f9baa-b8a7-4b8a-b5fd-93ddff06d040">This section describes the design of the tests used to validate Password-based KDF implementations.</t>
+      <section anchor="_test_types"><name>Test Types</name><t anchor="_fb81a059-a624-4e0b-9eb9-fcb7f6002b27">There is only one test type: functional tests. Each has a specific value to be used in the testType field. The testType field definitions are:</t>
+<ul anchor="_1254f838-ad3f-4cc0-82eb-607dd2d7c9e0">
+<li>
+<t anchor="_6e1d2ad5-effb-4cf3-b890-0c9160c7c9b3">"AFT" - Algorithm Functional Test. These tests can be processed by the client using a normal 'derive_key' operation. AFTs cause the implementation under test to exercise nomral operations on a single block, multiple blocks, or partial blocks. In all cases, random data is used. The functional tests are designed to verify that the logical components of the key deriviation process are operating correctly.</t>
+</li>
+</ul></section>
+      <section anchor="_test_coverage"><name>Test Coverage</name>
+
+<t anchor="_74a749b4-99cb-48d0-9e68-6f70ad3b8346">The tests described in this document have the intention of ensuring an implementation is conformant to XXX.</t>
+</section>
+    </section>
+    <section anchor="capabilities">
+      <name>Capabilities Registration</name>
+      <t anchor="_0f638609-68b1-400a-90ba-af5d910b3e47">ACVP requires crypto modules to register their capabilities. This allows the crypto module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process.  This section describes the constructs for advertising support of {algo-short-name} algorithms to the ACVP server.</t>
+      <t anchor="_d853b8ff-636c-4393-8f81-ef9c10f66947">The algorithm capabilities are advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value is an array, where each array element is an individual JSON object defined in this section. The 'algorithms' value is part of the 'capability_exchange' element of the ACVP JSON registration message. See the ACVP specification <xref target="ACVP"></xref> for more details on the registration message.</t>
+      <section anchor="prerequisites"><name>Prerequisites</name><t anchor="_48b6deda-6768-40a6-8b09-aed3dc7efe9d">Each algorithm implementation <bcp14>MAY</bcp14> rely on other cryptographic primitives.	For example, XXXXXX. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:</t>
+<t anchor="_69927fb2-4601-4792-ad1c-6474feb5e485">Prerequisites, if applicable, <bcp14>MUST</bcp14> be submitted in the registration as the 'prereqVals' JSON property array inside each element of the 'algorithms' array. Each element in the 'prereqVals' array <bcp14>MUST</bcp14> contain the following properties</t>
+<table anchor="_448382e8-839d-40d2-8c2a-8d4c105ad94d"><thead><tr><th align="left">JSON Property</th><th align="left">Description</th><th align="left">JSON Type</th><th align="left">Valid Values</th></tr></thead><tbody><tr><td align="left">algorithm</td><td align="left">a prerequisite algorithm</td><td align="left">string</td><td align="left">XXX</td></tr><tr><td align="left">valValue</td><td align="left">algorithm validation number</td><td align="left">string</td><td align="left">XXX</td></tr></tbody></table>
+<t anchor="_ef48fca5-c153-41cb-b588-aac1dcb6f1ff">A "valValue" of "same" <bcp14>SHALL</bcp14> be used to indicate that the prerequisite is being met by a different algorithm in the capability exchange in the same registration.</t>
+<t anchor="_30120d2d-91e6-4ff9-af21-50310d5fa517">An example description of prequisites within a single algorithm capability exchange looks like this</t>
+<figure anchor="_5232a621-c9ef-4b8c-b403-29644df814fd"><sourcecode><![CDATA["prereqVals":
+[
+  {
+    "algorithm": "Alg1",
+    "valValue": "Val-1234"
+  },
+  {
+    "algorithm": "Alg2",
+    "valValue": "same"
+  }
+]]]></sourcecode></figure>
+</section>
+      <section anchor="properties"><name>Property Registration</name>
+
+<t anchor="_aec5719c-31f9-46ab-be5a-1b21dd7b9bfa">The Password-based KDF mode capabilities are advertised as JSON objects within the 'capabilities_exchange' property.</t>
+</section>
+      <section anchor="_registration_example"><name>Registration Example</name><t anchor="_c5c3dd11-b94a-4c68-9eb8-30f3d9d45a46">A registration <bcp14>SHALL</bcp14> use these properties</t>
+<table anchor="_45aa4858-eec8-45d7-a947-16bffc39ef56"><thead><tr><th align="left">JSON Property</th><th align="left">Description</th><th align="left">JSON Type</th><th align="left">Valid Values</th></tr></thead><tbody><tr><td align="left">algorithm</td><td align="left">Name of the algorithm to be validated</td><td align="left">string</td><td align="left">"kdf-components"</td></tr><tr><td align="left">mode</td><td align="left">Mode of the algorithm to be validated</td><td align="left">string</td><td align="left">"pbkdf"</td></tr><tr><td align="left">revision</td><td align="left">ACVP Test version</td><td align="left">string</td><td align="left">"1.0"</td></tr><tr><td align="left">capabilities</td><td align="left">Array of capabilities</td><td align="left">array</td><td align="left">Each object in the array contains the below properties</td></tr><tr><td align="left">prereqVals</td><td align="left">Prerequisites of the algorithm</td><td align="left">object</td><td align="left">See <xref target="prerequisites"></xref></td></tr><tr><td align="left">iterationCount</td><td align="left">Number of hash interations</td><td align="left">domain</td><td align="left">Min: 1, Max: 10000000</td></tr><tr><td align="left">keyLen</td><td align="left">The length of the output key in bits</td><td align="left">domain</td><td align="left">Min: 112, Max: 4096</td></tr><tr><td align="left">passwordLen</td><td align="left">The length of the password in bytes (characters)</td><td align="left">domain</td><td align="left">Min: 8, Max: 128</td></tr><tr><td align="left">saltLen</td><td align="left">The length of the salt in bits</td><td align="left">domain</td><td align="left">Min: 128, Max: 4096</td></tr><tr><td align="left">hmacAlg</td><td align="left">The supported hash algorithms used for HMAC</td><td align="left">array</td><td align="left">See <xref target="valid-sha"></xref></td></tr></tbody></table>
+<t anchor="_6c0042ea-9d0e-42fc-83f0-ca3bf0522318">An example registration within an algorithm capability exchange looks like this</t>
+<figure anchor="_caa88579-4dba-4fc4-b159-1efa1fc3c9f4"><sourcecode><![CDATA["algorithms":[
+  {
+    "revision":"1.0",
+    "algorithm":"kdf-components",
+    "mode":"pbkdf",
+    "prereqVals":[
+      {
+        "algorithm":"SHA",
+        "valValue":"same"
+      }
+    ],
+    "iterationCount":[
+      {
+        "min":10,
+        "max":1000,
+        "increment":1
+      }
+    ],
+    "keyLen":[
+      {
+        "min":8,
+        "max":4096,
+        "increment":8
+      }
+    ],
+    "passwordLen":[
+      {
+        "min":8,
+        "max":128,
+        "increment":1
+      }
+    ],
+    "saltLen":[
+      {
+        "min":128,
+        "max":4096,
+        "increment":8
+      }
+    ],
+    "hashAlg":[
+      "SHA-1",
+      "SHA2-224",
+      "SHA2-256",
+      "SHA2-384",
+      "SHA2-512",
+      "SHA3-224",
+      "SHA3-256",
+      "SHA3-384",
+      "SHA3-512"
+    ]
+  }
+]]]></sourcecode></figure>
+
+<section anchor="valid-sha"><name>Valid Hash Functions</name><t anchor="_18c83aef-3415-4240-b41d-343d2bdf2b48">The following hash functions <bcp14>MAY</bcp14> be advertised by an ACVP compliant client under the 'hmacAlg' property</t>
+<ul anchor="_fbbf1a6c-20b9-4626-84fe-ae3419bb1686">
+<li>
+<t anchor="_a9d953f7-22b7-4d76-b1e0-275026a04bc9">SHA-1</t>
+</li>
+<li>
+<t anchor="_f50ccd52-994d-433e-81ef-b52e8eda351b">SHA2-224</t>
+</li>
+<li>
+<t anchor="_fe1162c4-8f86-451f-bc8b-bdc0046f29b2">SHA2-256</t>
+</li>
+<li>
+<t anchor="_f4304052-477f-459d-9d87-53fa4f07ad64">SHA2-384</t>
+</li>
+<li>
+<t anchor="_32b4f19f-0598-4ec3-a5d5-f1846674b16c">SHA2-512</t>
+</li>
+<li>
+<t anchor="_c1620e95-cec9-44af-ac0d-6cfd891650b8">SHA2-512/224</t>
+</li>
+<li>
+<t anchor="_adceeaaa-bda1-4b2c-a786-3e6ad5c81026">SHA2-512/256</t>
+</li>
+<li>
+<t anchor="_d424d9ff-ee30-412e-962b-c212339b16bd">SHA3-224</t>
+</li>
+<li>
+<t anchor="_615ce645-88f2-4ab0-8aa8-203ebaa2ef0c">SHA3-256</t>
+</li>
+<li>
+<t anchor="_1c52f2a8-a6dc-4caf-8087-a5fda2525c4a">SHA3-384</t>
+</li>
+<li>
+<t anchor="_4aa64233-f123-444c-a6b1-e103aa84f8fd">SHA3-512</t>
+</li>
+</ul></section></section>
+    </section>
+    <section anchor="test-vectors">
+      <name>Test Vectors</name>
+      <t anchor="_07c8128f-82c7-4675-869c-47b53324234c">The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation test session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual algorithm defined during the capability exchange. This section describes the JSON schema for a test vector set used with Password-based KDF algorithms.</t>
+      <t anchor="_82363b27-cfd6-4820-b8ff-fb79190c4357">The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.</t>
+      <table anchor="_eaaff3fd-12a5-4be5-a0e7-941f8b97e37a">
+        <thead>
+          <tr>
+            <th align="left">JSON Values</th>
+            <th align="left">Description</th>
+            <th align="left">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">acvVersion</td>
+            <td align="left">Protocol version identifier</td>
+            <td align="left">string</td>
+          </tr>
+          <tr>
+            <td align="left">vsId</td>
+            <td align="left">Unique numeric vector set identifier</td>
+            <td align="left">integer</td>
+          </tr>
+          <tr>
+            <td align="left">algorithm</td>
+            <td align="left">Algorithm defined in the capability exchange</td>
+            <td align="left">string</td>
+          </tr>
+          <tr>
+            <td align="left">mode</td>
+            <td align="left">Mode defined in the capability exchange</td>
+            <td align="left">string</td>
+          </tr>
+          <tr>
+            <td align="left">revision</td>
+            <td align="left">Protocol test revision selected</td>
+            <td align="left">string</td>
+          </tr>
+          <tr>
+            <td align="left">testGroups</td>
+            <td align="left">Array of test groups containing test data, see <xref target="tgjs"></xref></td>
+            <td align="left">array</td>
+          </tr>
+        </tbody>
+      </table>
+      <t anchor="_26798af1-9c50-436c-9ef7-88beecc78b67">An example of this would look like this</t>
+      <figure anchor="_87ee414c-82e9-48c2-a95f-20b360440f62">
+        
+      <sourcecode><![CDATA[{
+  "acvVersion": "version",
+  "vsId": 1,
+  "algorithm": "Alg1",
+  "mode": "Mode1",
+  "revision": "Revision1.0",
+  "testGroups": [ ... ]
+}]]></sourcecode></figure>
+      <section anchor="tgjs"><name>Test Groups</name><t anchor="_c54212aa-1bd0-4cc6-953f-a1bb321e74ab">The testGroups element at the top level in the test vector JSON object is an array of test	groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped	together. The Test Group JSON object contains meta data that applies to all test vectors within	the group. The following table describes the Password-based KDF JSON elements of the Test Group JSON object</t>
+<table anchor="_da95f865-c55b-420a-8546-e0896db1b69d"><thead><tr><th align="left">JSON Values</th><th align="left">Description</th><th align="left">JSON Type</th></tr></thead><tbody><tr><td align="left">tgId</td><td align="left">Test group identifier</td><td align="left">integer</td></tr><tr><td align="left">hmacAlg</td><td align="left">The hash algorithm used in HMAC</td><td align="left">string</td></tr><tr><td align="left">testType</td><td align="left">Describes the operation the client should perform on the tests data</td><td align="left">string</td></tr><tr><td align="left">tests</td><td align="left">Array of individual test cases</td><td align="left">array</td></tr></tbody></table>
+<t anchor="_92a4baca-fc44-4b53-b396-459fae62aeb0">The 'tgId', 'testType' and 'tests' objects <bcp14>MUST</bcp14> appear in every test group element communicated from the server to the client as a part of a prompt. Other properties are dependent on which 'testType' the group is addressing.</t></section>
+      <section anchor="_test_cases"><name>Test Cases</name><t anchor="_83cfbf5c-3944-409c-847b-b3baeafb4f58">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each Password-based KDF test vector.</t>
+<table anchor="_9acf9908-aaee-459d-aa55-5dc3e4544cdd"><thead><tr><th align="left">JSON Values</th><th align="left">Description</th><th align="left">JSON Type</th></tr></thead><tbody><tr><td align="left">tcId</td><td align="left">Test case idenfitier</td><td align="left">integer</td></tr><tr><td align="left">keyLen</td><td align="left">Length of the output key</td><td align="left">integer</td></tr><tr><td align="left">salt</td><td align="left">Salt value</td><td align="left">hex</td></tr><tr><td align="left">password</td><td align="left">Password value</td><td align="left">string</td></tr><tr><td align="left">iterationCount</td><td align="left">Number of iterations</td><td align="left">integer</td></tr></tbody></table>
+<t anchor="_de123580-f286-4387-b6e9-bd50d307b72a">Here is an abbreviated yet fully constructed example of the prompt</t>
+<figure anchor="_39d64c6e-30be-4bc4-891e-692a6c98ae61"><sourcecode><![CDATA[{
+  "vsId": 1,
+  "algorithm": "kdf-components",
+  "mode": "PBKDF",
+  "revision": "1.0",
+  "testGroups": [
+    {
+      "tgId": 1,
+      "testType": "AFT",
+      "hmacAlg": "SHA2-224",
+      "tests": [
+        {
+          "tcId": 1,
+          "keyLen": 143,
+          "salt": "BC902BA1EB3BD8519B68022F0FC15600D5D27A",
+          "password": "FSLuCqOV",
+          "iterationCount": 955
+        },
+        {
+          "tcId": 2,
+          "keyLen": 188,
+          "salt": "8120C1DED77061BC5ED637DD51174F12",
+          "password": "HCmKuigqgFlqpJv",
+          "iterationCount": 269
+        }
+      ]
+    }
+  ]
+}]]></sourcecode></figure>
+</section>
+    </section>
+    <section anchor="responses">
+      <name>Responses</name>
+      <t anchor="_c1dd4bca-a0c0-48b3-af79-1f90c123732e">After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.</t>
+      <table anchor="_29aa94af-e097-444c-a7b7-2ba12fa98bab">
+        <thead>
+          <tr>
+            <th align="left">JSON Property</th>
+            <th align="left">Description</th>
+            <th align="left">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">acvVersion</td>
+            <td align="left">The version of the protocol</td>
+            <td align="left">string</td>
+          </tr>
+          <tr>
+            <td align="left">vsId</td>
+            <td align="left">The vector set identifier</td>
+            <td align="left">integer</td>
+          </tr>
+          <tr>
+            <td align="left">testGroups</td>
+            <td align="left">The test group data</td>
+            <td align="left">array</td>
+          </tr>
+        </tbody>
+      </table>
+      <t anchor="_3b841b60-e964-40f3-a0ba-85633f8a6472">An example of this is the following</t>
+      <figure anchor="_a36e65ca-3111-459d-838e-ee2aaa8f3f63">
+        
+      <sourcecode><![CDATA[{
+	"acvVersion": "version",
+	"vsId": 1,
+	"testGroups": [ ... ]
+}]]></sourcecode></figure>
+      <t anchor="_261baf53-6536-4a10-b107-519b5fed8a4b">The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms <bcp14>SHALL</bcp14> require the client to send back group level properties in their response. This structure helps accommodate that.</t>
+      <table anchor="_372dd520-765c-44db-97f0-befce1c721f6">
+        <thead>
+          <tr>
+            <th align="left">JSON Property</th>
+            <th align="left">Description</th>
+            <th align="left">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">tgId</td>
+            <td align="left">The test group identifier</td>
+            <td align="left">integer</td>
+          </tr>
+          <tr>
+            <td align="left">tests</td>
+            <td align="left">The test case data</td>
+            <td align="left">array</td>
+          </tr>
+        </tbody>
+      </table>
+      <t anchor="_904d24cd-f22b-4bfd-b546-94fbaf1574e6">An example of this is the following</t>
+      <figure anchor="_d83e567b-5515-46e8-b59f-569f3f728b41">
+        
+      <sourcecode><![CDATA[{
+	"tgId": 1,
+	"tests": [ ... ]
+}]]></sourcecode></figure>
+      <t anchor="_92b62be0-f774-4e86-b3ab-21abf4318f3a">The following table describes the JSON object that represents a test case response for a Password-based KDF.</t>
+      <table anchor="_b0537eaa-39a2-4f8f-a408-d37116ba65f0">
+        <thead>
+          <tr>
+            <th align="left">JSON Property</th>
+            <th align="left">Description</th>
+            <th align="left">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">tcId</td>
+            <td align="left">The test case identifier</td>
+            <td align="left">integer</td>
+          </tr>
+          <tr>
+            <td align="left">derivedKey</td>
+            <td align="left">The outputted key</td>
+            <td align="left">hex</td>
+          </tr>
+        </tbody>
+      </table>
+      <t anchor="_fbf80a26-3026-4e17-bcb9-8b770c0b774c">Here is an abbreviated example of the response</t>
+      <figure anchor="_4ebabd74-9184-4c9f-93a9-fd1b8237f04e">
+        
+      <sourcecode><![CDATA[{
+  "vsId": 1,
+  "algorithm": "kdf-components",
+  "mode": "pbkdf",
+  "revision": "1.0",
+  "testGroups": [
+    {
+      "tgId": 1,
+      "tests": [
+        {
+          "tcId": 1,
+          "derivedKey": "986B212420E3B977068244E6BD..."
+        },
+        {
+          "tcId": 2,
+          "derivedKey": "B8F3EEC6B5FA270FB05644DE40..."
+        }
+      ]
+    }
+  ]
+}]]></sourcecode></figure>
+    </section>
+    <section anchor="security">
+      <name>Security Considerations</name>
+      <t anchor="_65c03e47-0d43-4198-8d17-8caf99dc7f76">There are no additional security considerations outside of those outlined in the ACVP document.</t>
+    </section>
+    <section anchor="iana">
+      <name>IANA Considerations</name>
+      <t anchor="_3aa26354-ea77-49d4-8c47-0ac37f535799">This document does not require any action by IANA.</t>
+    </section>
+  </middle>
+  <back>
+    <references anchor="_normative_references">
+      <name>Normative References</name>
+      <reference anchor="ACVP">
+  <front>
+    <title>Automatic Cryptographic Validation Protocol</title>
+
+    <author initials="B." surname="Fussell">
+      <organization>Cisco</organization>
+    </author>
+
+    <author initials="A." surname="Vassilev">
+      <organization>NIST</organization>
+    </author>
+
+    <author initials="H." surname="Booth">
+      <organization>NIST</organization>
+    </author>
+
+    <date month="July" year="2019"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119">
+  <front>
+    <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+
+    <author initials="S." surname="Bradner"></author>
+
+	<date month="March" year="1997"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC7991" target="https://www.rfc-editor.org/info/rfc7991">
+  <front>
+    <title>The "xml2rfc" Version 3 Vocabulary</title>
+
+    <author initials="P." surname="Hoffman"></author>
+
+	<date month="December" year="2016"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC8174" target="https://www.rfc-editor.org/info/rfc8174">
+  <front>
+    <title>The "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+
+    <author initials="B." surname="Leiba"></author>
+
+	<date month="May" year="2017"></date>
+  </front>
+</reference>
+    </references>
+    <references anchor="_informative_references">
+      <name>Bibliography</name>
+      <reference anchor="I-D.ribose-asciirfc">
+  <front>
+    <title>AsciiRFC: Authoring Internet-Drafts And RFCs Using AsciiDoc</title>
+
+    <author initials="R." surname="Tse"></author>
+
+	<author initials="N." surname="Nicholas"></author>
+
+	<author initials="P." surname="Brasolin"></author>
+
+    <date month="April" year="2018"></date>
+  </front>
+</reference>
+
+<reference anchor="IETF.TLP" target="https://trustee.ietf.org/trust-legal-provisions.html">
+  <front>
+    <title>IETF Trust Legal Provisions (TLP)</title>
+
+    <author surname="IETF">
+      <organization>IETF</organization>
+    </author>
+
+	<date month="April" year="2018"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC3552" target="https://www.rfc-editor.org/info/rfc3552">
+  <front>
+    <title>Guidelines for Writing RFC Text on Security Considerations</title>
+
+    <author initials="E." surname="Rescorla"></author>
+
+	<author initials="B." surname="Korver"></author>
+
+    <date month="July" year="2003"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC5378" target="https://www.rfc-editor.org/info/rfc5378">
+  <front>
+    <title>Rights Contributors Provide to the IETF Trust</title>
+
+    <author initials="S." surname="Bradner"></author>
+
+	<author initials="J." surname="Contreras"></author>
+
+    <date month="November" year="2008"></date>
+  </front>
+</reference>
+
+<reference anchor="RFC7253" target="https://www.rfc-editor.org/info/rfc7253">
+  <front>
+    <title>The OCB Authenticated-Encryption Algorithm</title>
+
+    <author initials="T." surname="Krovetz"></author>
+
+	<author initials="P." surname="Rogaway"></author>
+
+    <date month="May" year="2014"></date>
+  </front>
+</reference>
+
+<reference anchor="RNP" target="https://github.com/riboseinc/rnp/">
+  <front>
+    <title>RNP: A C library approach to OpenPGP</title>
+
+    <author surname="Ribose Inc.">
+      <organization>Ribose Inc.</organization>
+    </author>
+
+	<date month="March" year="2018"></date>
+  </front>
+</reference>
+    </references>
+  </back>
+</rfc>

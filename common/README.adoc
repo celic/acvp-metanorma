@@ -1,0 +1,90 @@
+= AsciiRFC Template For Writing RFC / Internet Drafts
+
+image:https://travis-ci.org/metanorma/rfc-asciirfc-minimal.svg?branch=master["Build Status", link="https://travis-ci.org/metanorma/rfc-asciirfc-minimal"]
+
+This document is available in its rendered forms here:
+
+* https://metanorma.github.io/rfc-asciirfc-minimal/[AsciiRFC Template For Writing RFC (HTML)]
+* https://metanorma.github.io/rfc-asciirfc-minimal/draft-asciirfc-minimal.txt[TXT]
+* https://metanorma.github.io/rfc-asciirfc-minimal/draft-asciirfc-minimal.nits[NITS]
+* https://metanorma.github.io/rfc-asciirfc-minimal/draft-asciirfc-minimal.xml[RFC XML v2]
+//* https://metanorma.github.io/rfc-asciirfc-minimal/draft-asciirfc-minimal.rxl[Relaton XML (Bibliographic item)]
+
+This Internet-Draft is written in
+https://datatracker.ietf.org/doc/draft-ribose-asciirfc/[AsciiRFC]
+using the https://www.metanorma.com[Metanorma framework], via the
+https://github.com/metanorma/metanorma-ietf[`metanorma-ietf` gem].
+
+== Quick Start
+
+For a blank slate start of your Internet-Draft written in AsciiRFC:
+
+1. Clone this repository
+2. Copy out all the files (including the dot-files)
+3. Done!
+
+== Usage
+
+=== Fetching The Document
+
+[source,sh]
+----
+git clone https://github.com/metanorma/rfc-asciirfc-minimal
+----
+
+=== Installing Build Tools
+
+You will need to install Metanorma, `xml2rfc` and `idnits` (for submission preflight).
+
+Please see https://www.metanorma.com for installation instructions.
+
+=== On macOS
+
+[source,sh]
+----
+brew install idnits
+brew install python
+easy_install pip
+pip install -r requirements.txt
+gem install bundler
+bundle install
+----
+
+=== Building The Document
+
+[source,sh]
+----
+make all
+----
+
+=== Checking Against idnits
+
+https://tools.ietf.org/tools/idnits/[idnits] is the RFC checking tool
+prior to submissions.
+
+The `make` target finds exactly the document name from the `:name:`
+document attribute and puts the file in the right place before calling
+`idnits` to prevent it complaining about the location.
+
+[source,sh]
+----
+export ID_NAME=asciirfc-minimal
+make draft-${ID_NAME}.nits
+----
+
+=== Checking For Invalid / Unicode Characters
+
+[source,sh]
+----
+export ID_NAME=asciirfc-minimal
+pcregrep --color='auto' -n "[\x80-\xFF]" draft-${ID_NAME}.xml
+----
+
+=== Iterating The Document
+
+[source,sh]
+----
+export ID_NAME=asciirfc-minimal
+make clean all; open draft-${ID_NAME}.txt
+----
+
