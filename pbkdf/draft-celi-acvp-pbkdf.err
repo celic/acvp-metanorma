@@ -4,23 +4,8 @@
 == Style Warning
 
 (XML Line 000101): Hanging paragraph in clause
-(XML Line 000112): Hanging paragraph in clause
-(XML Line 000116): Table should have title
-(XML Line 000158): Hanging paragraph in clause
-(XML Line 000159): Table should have title
-(XML Line 000321): Hanging paragraph in clause
-(XML Line 000323): Table should have title
-(XML Line 000375): Table should have title
-(XML Line 000408): Table should have title
-(XML Line 000476): Table should have title
-(XML Line 000510): Table should have title
-(XML Line 000538): Table should have title
 
 
 == Syntax
 
-(XML Line 000025:43): character content of element "revision-date" invalid; must be a string matching the regular expression "([\+\-]?\d{4})((-?)((0[1-9]|1[0-2])((-?)([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6]))))?"
 (XML Line 000056:75): attribute "obligation" not allowed here; expected attribute "language", "numbered", "removeInRFC", "script" or "toc"
-(XML Line 000089:439): IDREF "ACVP" without matching ID
-(XML Line 000570:14): element "passthrough" not allowed here; expected the element end-tag or element "admonition", "bibitem", "bookmark", "dl", "example", "figure", "formula", "hr", "note", "ol", "p", "pagebreak", "permission", "pre", "quote", "recommendation", "references", "requirement", "review", "sourcecode", "table" or "ul"
-(XML Line 000621:14): element "passthrough" not allowed here; expected the element end-tag or element "admonition", "bibitem", "bookmark", "dl", "example", "figure", "formula", "hr", "note", "ol", "p", "pagebreak", "permission", "pre", "quote", "recommendation", "references", "requirement", "review", "sourcecode", "table" or "ul"

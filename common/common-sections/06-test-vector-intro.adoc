@@ -19,6 +19,7 @@ The test vector set JSON schema is a multi-level hierarchy that contains meta da
 
 An example of this would look like this
 
+[source,json]
 ----
 {
   "acvVersion": "version",

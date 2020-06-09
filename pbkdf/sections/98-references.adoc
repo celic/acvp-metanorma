@@ -2,136 +2,35 @@
 [bibliography]
 == Normative References
 
-++++
-<reference anchor="ACVP">
-  <front>
-    <title>Automatic Cryptographic Validation Protocol</title>
+* [[[RFC2119,RFC 2119]]]
+* [[[RFC7991,RFC 7991]]]
+* [[[RFC8174,RFC 8174]]]
 
-    <author initials="B." surname="Fussell">
-      <organization>Cisco</organization>
-    </author>
-
-    <author initials="A." surname="Vassilev">
-      <organization>NIST</organization>
-    </author>
-
-    <author initials="H." surname="Booth">
-      <organization>NIST</organization>
-    </author>
-
-    <date month="July" year="2019"></date>
-  </front>
-</reference>
-
-<reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119">
-  <front>
-    <title>Key words for use in RFCs to Indicate Requirement Levels</title>
-
-    <author initials="S." surname="Bradner"></author>
-	
-	<date month="March" year="1997"></date> 
-  </front>
-</reference>
-
-<reference anchor="RFC7991" target="https://www.rfc-editor.org/info/rfc7991">
-  <front>
-    <title>The "xml2rfc" Version 3 Vocabulary</title>
-
-    <author initials="P." surname="Hoffman"></author>
-	
-	<date month="December" year="2016"></date> 
-  </front>
-</reference>
-
-<reference anchor="RFC8174" target="https://www.rfc-editor.org/info/rfc8174">
-  <front>
-    <title>The "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
-
-    <author initials="B." surname="Leiba"></author>
-	
-	<date month="May" year="2017"></date> 
-  </front>
-</reference>
-
-++++
+[%bibitem]
+=== Automatic Cryptographic Validation Protocol
+id:: ACVP
+contributor::
+contributor.person.name.initial:: B.
+contributor.person.name.surname:: Fussell
+contributor.person.affiliation.organization.name:: Cisco
+contributor::
+contributor.person.name.initial:: A.
+contributor.person.name.surname:: Vassilev
+contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
+contributor.person.affiliation.organization.abbreviation:: NIST
+contributor::
+contributor.person.name.initial:: H.
+contributor.person.name.surname:: Booth
+contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
+contributor.person.affiliation.organization.abbreviation:: NIST
+contributor::
+contributor.role:: publisher
+contributor.organization.name:: National Institute of Standards and Technology
+contributor.organization.abbreviation:: NIST
+date::
+date.type:: published
+date.value:: 2019-07-01
 
 // [#informref]
 [bibliography]
 == Informative References
-
-++++
-<reference anchor="I-D.ribose-asciirfc">
-  <front>
-    <title>AsciiRFC: Authoring Internet-Drafts And RFCs Using AsciiDoc</title>
-
-    <author initials="R." surname="Tse"></author>
-	
-	<author initials="N." surname="Nicholas"></author>
-	
-	<author initials="P." surname="Brasolin"></author>
-	
-    <date month="April" year="2018"></date>
-  </front>
-</reference>
-
-<reference anchor="IETF.TLP" target="https://trustee.ietf.org/trust-legal-provisions.html">
-  <front>
-    <title>IETF Trust Legal Provisions (TLP)</title>
-
-    <author surname="IETF">
-      <organization>IETF</organization>
-    </author>
-	
-	<date month="April" year="2018"></date> 
-  </front>
-</reference>
-
-<reference anchor="RFC3552" target="https://www.rfc-editor.org/info/rfc3552">
-  <front>
-    <title>Guidelines for Writing RFC Text on Security Considerations</title>
-
-    <author initials="E." surname="Rescorla"></author>
-	
-	<author initials="B." surname="Korver"></author>
-
-    <date month="July" year="2003"></date>
-  </front>
-</reference>
-
-<reference anchor="RFC5378" target="https://www.rfc-editor.org/info/rfc5378">
-  <front>
-    <title>Rights Contributors Provide to the IETF Trust</title>
-
-    <author initials="S." surname="Bradner"></author>
-	
-	<author initials="J." surname="Contreras"></author>
-
-    <date month="November" year="2008"></date>
-  </front>
-</reference>
-
-<reference anchor="RFC7253" target="https://www.rfc-editor.org/info/rfc7253">
-  <front>
-    <title>The OCB Authenticated-Encryption Algorithm</title>
-
-    <author initials="T." surname="Krovetz"></author>
-	
-	<author initials="P." surname="Rogaway"></author>
-
-    <date month="May" year="2014"></date>
-  </front>
-</reference>
-
-<reference anchor="RNP" target="https://github.com/riboseinc/rnp/">
-  <front>
-    <title>RNP: A C library approach to OpenPGP</title>
-
-    <author surname="Ribose Inc.">
-      <organization>Ribose Inc.</organization>
-    </author>
-	
-	<date month="March" year="2018"></date> 
-  </front>
-</reference>
-
-++++

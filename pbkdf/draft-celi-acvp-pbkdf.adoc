@@ -1,13 +1,14 @@
 = ACVP Password-based Key Derivation Function JSON Specification
 :doctype: internet-draft
+:docname: celi-acvp-pbkdf
 :name: draft-celi-acvp-pbkdf-00
 :abbrev: ACVP PBKDF
 :status: informational
 :ipr: trust200902
-:submissionType: individual
+:submission-type: independent
 :area: Internet
-:intended-series: full-standard
-:revdate: 2019-06-05T
+:intended-series: info
+:revdate: 2019-06-05
 :fullname: Christopher Celi
 :lastname: Celi
 :forename_initials: C. C.
@@ -19,7 +20,7 @@
 :email: christopher.celi@nist.gov
 :docfile: draft-celi-acvp-pbkdf.adoc
 :mn-document-class: ietf
-:mn-output-extensions: xmlrfc2,txt,html,nits
+:mn-output-extensions: xml,rfc,txt,html
 
 // Singular name of the algorithm
 :spec-algorithm: Password-based KDF

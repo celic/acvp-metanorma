@@ -1,497 +1,159 @@
-<?xml version="1.0" encoding="US-ASCII"?>
-<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY RFC2119 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC7991 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7991.xml">
-<!ENTITY RFC8174 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
-<!ENTITY I-D.ribose-asciirfc SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml3//reference.I-D.ribose-asciirfc.xml">
-<!ENTITY RFC3552 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
-<!ENTITY RFC5378 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5378.xml">
-<!ENTITY RFC7253 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7253.xml">
-]>
-<?rfc strict="yes"?>
-<?rfc compact="yes"?>
-<?rfc subcompact="no"?>
-<?rfc toc="yes"?>
-<?rfc tocdepth="4"?>
-<?rfc symrefs="yes"?>
-<?rfc sortrefs="yes"?>
-<rfc ipr="trust200902" category="info" submissionType="IETF" docName="draft-celi-acvp-pbkdf-00">
-<front>
-  <title abbrev="ACVP PBKDF">ACVP Password-based Key Derivation Function JSON Specification</title>
-  <author fullname="Christopher Celi" surname="Celi" initials="C. C.">
-    <organization>National Institute of Standards and Technology</organization>
-    <address>
-      <postal>
-        <street>100 Bureau Drive</street>
-        <city>Gaithersburg</city>
-        <code>20899</code>
-        <country>United States of America</country>
-      </postal>
-      <email>christopher.celi@nist.gov</email>
-    </address>
-  </author>
-  <date day="5" month="June" year="2019"/>
-  <area>Internet</area>
+<?xml version="1.0" encoding="UTF-8"?>
+<ietf-standard xmlns="https://www.metanorma.org/ns/ietf">
+<bibdata type="standard">
+<title language="en" format="text/plain" type="main">ACVP Password-based Key Derivation Function JSON Specification</title>
+<title language="en" format="text/plain" type="abbrev">ACVP PBKDF</title>
 
-</front><middle>
-<section anchor="abstract" title="Abstract">
-  <t>This document defines the JSON schema for testing Password-based KDF implementations with the ACVP specification.</t>
-</section>
-<section anchor="introduction" title="Introduction">
-  <t>The Automated Crypto Validation Protocol (ACVP) defines a mechanism to automatically verify the cryptographic implementation of a software or hardware crypto module. The ACVP specification defines how a crypto module communicates with an ACVP server, including crypto capabilities negotiation, session management, authentication, vector processing and more. The ACVP specification does not define algorithm specific JSON constructs for performing the crypto validation. A series of ACVP sub-specifications define the constructs for testing individual crypto algorithms. Each sub-specification addresses a specific class of crypto algorithms. This sub-specification defines the JSON constructs for testing Password-based KDF implementations using ACVP.</t>
-</section>
-<section anchor="conventions" title="Terms and Definitions"><t>The key words "<spanx style="strong">MUST</spanx>", "<spanx style="strong">MUST NOT</spanx>", "<spanx style="strong">REQUIRED</spanx>", "<spanx style="strong">SHALL</spanx>",
-"<spanx style="strong">SHALL NOT</spanx>", "<spanx style="strong">SHOULD</spanx>", "<spanx style="strong">SHOULD NOT</spanx>", "<spanx style="strong">RECOMMENDED</spanx>",
-"<spanx style="strong">NOT RECOMMENDED</spanx>", "<spanx style="strong">MAY</spanx>", and "<spanx style="strong">OPTIONAL</spanx>" in this
-document are to be interpreted as described in BCP 14
-of RFC2119 and RFC8174 when, and only when, they appear in
-all capitals, as shown here.</t>
-<t>This document also refers to the following terms and
-definitions:</t>
-<t>
-  <list style="symbols">
-    <t>Prompt: Thing</t>
-    <t>Registration: Thing</t>
-    <t>Response: Thing</t>
-    <t>Test Case: Thing</t>
-    <t>Test Group: Thing</t>
-    <t>Test Vector Set: Thing</t>
-    <t>Validation: Thing</t>
-  </list>
-</t></section>
-<section anchor="supported" title="Supported KDFs"><t>The following key derivation functions <spanx style="strong">MAY</spanx> be advertised by the ACVP compliant cryptographic module:</t>
-<t>
-  <list style="symbols">
-    <t>ACVP-KDF-PBKDF</t>
-  </list>
-</t></section>
-<section anchor="testtypes" title="Test Types and Test Coverage"><t>This section describes the design of the tests used to validate Password-based KDF implementations.</t>
-<section anchor="_test_types" title="Test Types"><t>There is only one test type: functional tests. Each has a specific value to be used in the testType field. The testType field definitions are:</t>
-<t>
-  <list style="symbols">
-    <t>"AFT" - Algorithm Functional Test. These tests can be processed by the client using a normal 'derive_key' operation. AFTs cause the implementation under test to exercise nomral operations on a single block, multiple blocks, or partial blocks. In all cases, random data is used. The functional tests are designed to verify that the logical components of the key deriviation process are operating correctly.</t>
-  </list>
-</t></section>
-<section anchor="_test_coverage" title="Test Coverage">
-  <t>The tests described in this document have the intention of ensuring an implementation is conformant to XXX.</t>
-</section></section>
-<section anchor="capabilities" title="Capabilities Registration"><t>ACVP requires crypto modules to register their capabilities. This allows the crypto module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process.  This section describes the constructs for advertising support of {algo-short-name} algorithms to the ACVP server.</t>
-<t>The algorithm capabilities are advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value is an array, where each array element is an individual JSON object defined in this section. The 'algorithms' value is part of the 'capability_exchange' element of the ACVP JSON registration message. See the ACVP specification <xref target="ACVP"/> for more details on the registration message.</t>
-<section anchor="properties" title="Property Registration">
-  <t>The Password-based KDF mode capabilities are advertised as JSON objects within the 'capabilities_exchange' property.</t>
-</section>
-<section anchor="_registration_example" title="Registration Example"><t>A registration <spanx style="strong">SHALL</spanx> use these properties</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Property</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <ttcol align="left">Valid Values</ttcol>
-  <c>algorithm</c>
-  <c>Name of the algorithm to be validated</c>
-  <c>string</c>
-  <c>"kdf-components"</c>
-  <c>mode</c>
-  <c>Mode of the algorithm to be validated</c>
-  <c>string</c>
-  <c>"pbkdf"</c>
-  <c>revision</c>
-  <c>ACVP Test version</c>
-  <c>string</c>
-  <c>"1.0"</c>
-  <c>capabilities</c>
-  <c>Array of capabilities</c>
-  <c>array</c>
-  <c>Each object in the array contains the below properties</c>
-  <c>prereqVals</c>
-  <c>Prerequisites of the algorithm</c>
-  <c>object</c>
-  <c>See <xref target="prerequisites"/></c>
-  <c>iterationCount</c>
-  <c>Number of hash interations</c>
-  <c>domain</c>
-  <c>Min: 1, Max: 10000000</c>
-  <c>keyLen</c>
-  <c>The length of the output key in bits</c>
-  <c>domain</c>
-  <c>Min: 112, Max: 4096</c>
-  <c>passwordLen</c>
-  <c>The length of the password in bytes (characters)</c>
-  <c>domain</c>
-  <c>Min: 8, Max: 128</c>
-  <c>saltLen</c>
-  <c>The length of the salt in bits</c>
-  <c>domain</c>
-  <c>Min: 128, Max: 4096</c>
-  <c>hmacAlg</c>
-  <c>The supported hash algorithms used for HMAC</c>
-  <c>array</c>
-  <c>See <xref target="valid-sha"/></c>
-</texttable>
-<t>An example registration within an algorithm capability exchange looks like this</t>
-<figure>
-  <artwork><![CDATA[
-"algorithms":[
-  {
-    "revision":"1.0",
-    "algorithm":"kdf-components",
-    "mode":"pbkdf",
-    "prereqVals":[
-      {
-        "algorithm":"SHA",
-        "valValue":"same"
-      }
-    ],
-    "iterationCount":[
-      {
-        "min":10,
-        "max":1000,
-        "increment":1
-      }
-    ],
-    "keyLen":[
-      {
-        "min":8,
-        "max":4096,
-        "increment":8
-      }
-    ],
-    "passwordLen":[
-      {
-        "min":8,
-        "max":128,
-        "increment":1
-      }
-    ],
-    "saltLen":[
-      {
-        "min":128,
-        "max":4096,
-        "increment":8
-      }
-    ],
-    "hashAlg":[
-      "SHA-1",
-      "SHA2-224",
-      "SHA2-256",
-      "SHA2-384",
-      "SHA2-512",
-      "SHA3-224",
-      "SHA3-256",
-      "SHA3-384",
-      "SHA3-512"
-    ]
-  }
-]
-]]></artwork>
-</figure>
-<section anchor="valid-sha" title="Valid Hash Functions"><t>The following hash functions <spanx style="strong">MAY</spanx> be advertised by an ACVP compliant client under the 'hmacAlg' property</t>
-<t>
-  <list style="symbols">
-    <t>SHA-1</t>
-    <t>SHA2-224</t>
-    <t>SHA2-256</t>
-    <t>SHA2-384</t>
-    <t>SHA2-512</t>
-    <t>SHA2-512/224</t>
-    <t>SHA2-512/256</t>
-    <t>SHA3-224</t>
-    <t>SHA3-256</t>
-    <t>SHA3-384</t>
-    <t>SHA3-512
-=== Prerequisites</t>
-  </list>
-</t>
-<t>Each algorithm implementation <spanx style="strong">MAY</spanx> rely on other cryptographic primitives.	For example, XXXXXX. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:</t>
-<t>Prerequisites, if applicable, <spanx style="strong">MUST</spanx> be submitted in the registration as the 'prereqVals' JSON property array inside each element of the 'algorithms' array. Each element in the 'prereqVals' array <spanx style="strong">MUST</spanx> contain the following properties</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Property</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <ttcol align="left">Valid Values</ttcol>
-  <c>algorithm</c>
-  <c>a prerequisite algorithm</c>
-  <c>string</c>
-  <c>XXX</c>
-  <c>valValue</c>
-  <c>algorithm validation number</c>
-  <c>string</c>
-  <c>XXX</c>
-</texttable>
-<t>A "valValue" of "same" <spanx style="strong">SHALL</spanx> be used to indicate that the prerequisite is being met by a different algorithm in the capability exchange in the same registration.</t>
-<t>An example description of prequisites within a single algorithm capability exchange looks like this</t>
-<figure>
-  <artwork><![CDATA[
-"prereqVals":
-[
-  {
-    "algorithm": "Alg1",
-    "valValue": "Val-1234"
-  },
-  {
-    "algorithm": "Alg2",
-    "valValue": "same"
-  }
-]
-]]></artwork>
-</figure></section></section></section>
-<section anchor="test-vectors" title="Test Vectors"><t>The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation test session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual algorithm defined during the capability exchange. This section describes the JSON schema for a test vector set used with Password-based KDF algorithms.</t>
-<t>The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Values</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>acvVersion</c>
-  <c>Protocol version identifier</c>
-  <c>string</c>
-  <c>vsId</c>
-  <c>Unique numeric vector set identifier</c>
-  <c>integer</c>
-  <c>algorithm</c>
-  <c>Algorithm defined in the capability exchange</c>
-  <c>string</c>
-  <c>mode</c>
-  <c>Mode defined in the capability exchange</c>
-  <c>string</c>
-  <c>revision</c>
-  <c>Protocol test revision selected</c>
-  <c>string</c>
-  <c>testGroups</c>
-  <c>Array of test groups containing test data, see <xref target="tgjs"/></c>
-  <c>array</c>
-</texttable>
-<t>An example of this would look like this</t>
-<figure>
-  <artwork><![CDATA[
-{
-  "acvVersion": "version",
-  "vsId": 1,
-  "algorithm": "Alg1",
-  "mode": "Mode1",
-  "revision": "Revision1.0",
-  "testGroups": [ ... ]
-}
-]]></artwork>
-</figure>
-<section anchor="tgjs" title="Test Groups"><t>The testGroups element at the top level in the test vector JSON object is an array of test	groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped	together. The Test Group JSON object contains meta data that applies to all test vectors within	the group. The following table describes the Password-based KDF JSON elements of the Test Group JSON object</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Values</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>tgId</c>
-  <c>Test group identifier</c>
-  <c>integer</c>
-  <c>hmacAlg</c>
-  <c>The hash algorithm used in HMAC</c>
-  <c>string</c>
-  <c>testType</c>
-  <c>Describes the operation the client should perform on the tests data</c>
-  <c>string</c>
-  <c>tests</c>
-  <c>Array of individual test cases</c>
-  <c>array</c>
-</texttable>
-<t>The 'tgId', 'testType' and 'tests' objects <spanx style="strong">MUST</spanx> appear in every test group element communicated from the server to the client as a part of a prompt. Other properties are dependent on which 'testType' the group is addressing.</t></section>
-<section anchor="_test_cases" title="Test Cases"><t>Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each Password-based KDF test vector.</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Values</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>tcId</c>
-  <c>Test case idenfitier</c>
-  <c>integer</c>
-  <c>keyLen</c>
-  <c>Length of the output key</c>
-  <c>integer</c>
-  <c>salt</c>
-  <c>Salt value</c>
-  <c>hex</c>
-  <c>password</c>
-  <c>Password value</c>
-  <c>string</c>
-  <c>iterationCount</c>
-  <c>Number of iterations</c>
-  <c>integer</c>
-</texttable>
-<t>Here is an abbreviated yet fully constructed example of the prompt</t>
-<figure>
-  <artwork><![CDATA[
-{
-  "vsId": 1,
-  "algorithm": "kdf-components",
-  "mode": "PBKDF",
-  "revision": "1.0",
-  "testGroups": [
-    {
-      "tgId": 1,
-      "testType": "AFT",
-      "hmacAlg": "SHA2-224",
-      "tests": [
-        {
-          "tcId": 1,
-          "keyLen": 143,
-          "salt": "BC902BA1EB3BD8519B68022F0FC15600D5D27A",
-          "password": "FSLuCqOV",
-          "iterationCount": 955
-        },
-        {
-          "tcId": 2,
-          "keyLen": 188,
-          "salt": "8120C1DED77061BC5ED637DD51174F12",
-          "password": "HCmKuigqgFlqpJv",
-          "iterationCount": 269
-        }
-      ]
-    }
-  ]
-}
-]]></artwork>
-</figure></section></section>
-<section anchor="responses" title="Responses"><t>After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Property</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>acvVersion</c>
-  <c>The version of the protocol</c>
-  <c>string</c>
-  <c>vsId</c>
-  <c>The vector set identifier</c>
-  <c>integer</c>
-  <c>testGroups</c>
-  <c>The test group data</c>
-  <c>array</c>
-</texttable>
-<t>An example of this is the following</t>
-<figure>
-  <artwork><![CDATA[
-{
-	"acvVersion": "version",
-	"vsId": 1,
-	"testGroups": [ ... ]
-}
-]]></artwork>
-</figure>
-<t>The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms <spanx style="strong">SHALL</spanx> require the client to send back group level properties in their response. This structure helps accommodate that.</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Property</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>tgId</c>
-  <c>The test group identifier</c>
-  <c>integer</c>
-  <c>tests</c>
-  <c>The test case data</c>
-  <c>array</c>
-</texttable>
-<t>An example of this is the following</t>
-<figure>
-  <artwork><![CDATA[
-{
-	"tgId": 1,
-	"tests": [ ... ]
-}
-]]></artwork>
-</figure>
-<t>The following table describes the JSON object that represents a test case response for a Password-based KDF.</t>
-<texttable suppress-title="false" style="full">
-  <ttcol align="left">JSON Property</ttcol>
-  <ttcol align="left">Description</ttcol>
-  <ttcol align="left">JSON Type</ttcol>
-  <c>tcId</c>
-  <c>The test case identifier</c>
-  <c>integer</c>
-  <c>derivedKey</c>
-  <c>The outputted key</c>
-  <c>hex</c>
-</texttable>
-<t>Here is an abbreviated example of the response</t>
-<figure>
-  <artwork><![CDATA[
-{
-  "vsId": 1,
-  "algorithm": "kdf-components",
-  "mode": "pbkdf",
-  "revision": "1.0",
-  "testGroups": [
-    {
-      "tgId": 1,
-      "tests": [
-        {
-          "tcId": 1,
-          "derivedKey": "986B212420E3B977068244E6BD..."
-        },
-        {
-          "tcId": 2,
-          "derivedKey": "B8F3EEC6B5FA270FB05644DE40..."
-        }
-      ]
-    }
-  ]
-}
-]]></artwork>
-</figure></section>
-<section anchor="security" title="Security Considerations">
-  <t>There are no additional security considerations outside of those outlined in the ACVP document.</t>
-</section>
-<section anchor="iana" title="IANA Considerations">
-  <t>This document does not require any action by IANA.</t>
-</section>
-<section anchor="acknowledgements" title="Acknowledgements">
-  <t>There are no acknowledgements.</t>
-</section>
-</middle><back>
-<references title="Normative References">
-  <reference anchor="ACVP">
-  <front>
-    <title>Automatic Cryptographic Validation Protocol</title>
 
-    <author initials="B." surname="Fussell">
-      <organization>Cisco</organization>
-    </author>
+<contributor>
+<role type="author"/>
+<person>
+<name>
+<completename>Christopher Celi</completename>
+</name>
+<email>christopher.celi@nist.gov</email>
+</person>
+</contributor>
+<contributor>
+<role type="publisher"/>
+<organization>
+<name>Internet Engineering Task Force</name>
+<abbreviation>IETF</abbreviation>
+</organization>
+</contributor>
+<version>
+<revision-date>2019-06-05</revision-date>
+</version>
+<language>en</language>
+<script>Latn</script>
+<status>
+<stage>informational</stage>
+</status>
+<copyright>
+<from>2020</from>
+<owner>
+<organization>
+<name>Internet Engineering Task Force</name>
+<abbreviation>IETF</abbreviation>
+</organization>
+</owner>
+</copyright>
+<series type="stream">
+<title>independent</title>
+</series>
+<series type="intended">
+<title>info</title>
+</series>
+<ext>
+<doctype>internet-draft</doctype>
+<area>Internet</area>
+<ipr>trust200902</ipr>
+<pi>
+<toc>yes</toc>
+</pi>
+</ext>
+</bibdata>
+<preface><acknowledgements id="acknowledgements" obligation="informative">
+<title>Acknowledgements</title>
+<p id="_5ec1abf9-c722-42bf-b00d-2416f227bab7">There are no acknowledgements.</p>
+</acknowledgements></preface><sections><clause id="abstract" inline-header="false" obligation="normative">
+<title>Abstract</title>
+<p id="_6ab62e08-ce45-44f0-9898-3e0f157c1857">This document defines the JSON schema for testing Password-based KDF implementations with the ACVP specification.</p>
+</clause>
+<clause id="introduction" inline-header="false" obligation="normative">
+<title>Introduction</title>
+<p id="_b2830102-e8d0-4ad5-b097-86caafefe33c">The Automated Crypto Validation Protocol (ACVP) defines a mechanism to automatically verify the cryptographic implementation of a software or hardware crypto module. The ACVP specification defines how a crypto module communicates with an ACVP server, including crypto capabilities negotiation, session management, authentication, vector processing and more. The ACVP specification does not define algorithm specific JSON constructs for performing the crypto validation. A series of ACVP sub-specifications define the constructs for testing individual crypto algorithms. Each sub-specification addresses a specific class of crypto algorithms. This sub-specification defines the JSON constructs for testing Password-based KDF implementations using ACVP.</p>
+</clause>
+<terms id="conventions" obligation="normative"><title>Terms and definitions</title><p id="_dff6864c-c577-489d-8698-d1fb727333f5">No terms and definitions are listed in this document.</p>
 
-    <author initials="A." surname="Vassilev">
-      <organization>NIST</organization>
-    </author>
 
-    <author initials="H." surname="Booth">
-      <organization>NIST</organization>
-    </author>
+</terms>
+<clause id="supported" inline-header="false" obligation="normative"><title>Supported KDFs</title><p id="_3a9117e2-ccd7-4a90-b18b-c1b2eaef3ce7">The following key derivation functions <bcp14>MAY</bcp14> be advertised by the ACVP compliant cryptographic module:</p>
+<ul id="_983253ff-4458-4bff-a30a-a61ed6db6a5c">
+<li>
+<p id="_1498c588-1a57-4729-8e6d-4dfe62ba8a03">ACVP-KDF-PBKDF</p>
+</li>
+</ul></clause>
+<clause id="testtypes" inline-header="false" obligation="normative"><title>Test Types and Test Coverage</title><p id="_a30736d6-70dc-4ec2-b58a-1ccabb26edb0">This section describes the design of the tests used to validate Password-based KDF implementations.</p>
+<clause id="_test_types" inline-header="false" obligation="normative"><title>Test Types</title><p id="_07a370c9-ffac-4e27-b1b9-e6b50d2f72be">There is only one test type: functional tests. Each has a specific value to be used in the testType field. The testType field definitions are:</p>
+<ul id="_104b472f-bb27-47bf-a6b0-53eb0309383b">
+<li>
+<p id="_c41a804c-c8a3-4c7a-bdd9-95345718b483">"AFT" - Algorithm Functional Test. These tests can be processed by the client using a normal <tt>derive_key</tt> operation. AFTs cause the implementation under test to exercise normal operations on a single block, multiple blocks, or partial blocks. In all cases, random data is used. The functional tests are designed to verify that the logical components of the key derivation process are operating correctly.</p>
+</li>
+</ul></clause>
+<clause id="_test_coverage" inline-header="false" obligation="normative">
+<title>Test Coverage</title>
+<p id="_5d889ac5-dcbf-465f-acd2-a765959998f1">The tests described in this document have the intention of ensuring an implementation is conformant to XXX.
+Unresolved directive in draft-celi-acvp-pbkdf.adoc - include::sections/03-capabilities.adoc[]
+Unresolved directive in draft-celi-acvp-pbkdf.adoc - include::sections/04-test-vectors.adoc[]
+Unresolved directive in draft-celi-acvp-pbkdf.adoc - include::sections/05-responses.adoc[]</p>
+</clause></clause>
+<clause id="security" inline-header="false" obligation="normative">
+<title>Security Considerations</title>
+<p id="_a4ae173b-27dc-4cc8-a5b5-40d5f95bfc74">There are no additional security considerations outside of those outlined in the ACVP document.</p>
+</clause>
+<clause id="iana" inline-header="false" obligation="normative">
+<title>IANA Considerations</title>
+<p id="_57f0ebf8-fcfd-47ec-82b6-168f200f0eb8">This document does not require any action by IANA.</p>
+</clause>
 
-    <date month="July" year="2019"/>
-  </front>
-</reference>
-  &RFC2119;
-  &RFC7991;
-  &RFC8174;
-</references>
-<references title="Informative References">
-  &I-D.ribose-asciirfc;
-  <reference anchor="IETF.TLP" target="https://trustee.ietf.org/trust-legal-provisions.html">
-  <front>
-    <title>IETF Trust Legal Provisions (TLP)</title>
 
-    <author surname="IETF">
-      <organization>IETF</organization>
-    </author>
-
-	<date month="April" year="2018"/>
-  </front>
-</reference>
-  &RFC3552;
-  &RFC5378;
-  &RFC7253;
-  <reference anchor="RNP" target="https://github.com/riboseinc/rnp/">
-  <front>
-    <title>RNP: A C library approach to OpenPGP</title>
-
-    <author surname="Ribose Inc.">
-      <organization>Ribose Inc.</organization>
-    </author>
-
-	<date month="March" year="2018"/>
-  </front>
-</reference>
-</references>
-</back>
-</rfc>
+</sections><bibliography><references id="_normative_references" normative="true" obligation="informative"><title>Normative References</title> <bibitem id="RFC2119" type="standard">  <fetched>2020-06-10</fetched>  <title format="text/plain" language="en" script="Latn">Key words for use in RFCs to Indicate Requirement Levels</title>  <uri type="xml">https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml</uri>  <uri type="src">https://www.rfc-editor.org/info/rfc2119</uri>  <docidentifier type="IETF">RFC 2119</docidentifier>  <docidentifier type="rfc-anchor">RFC2119</docidentifier>  <docidentifier type="DOI">10.17487/RFC2119</docidentifier>  <date type="published">    <on>1997-03</on>  </date>  <contributor>    <role type="author"/>    <person>      <name>        <completename language="en">S. Bradner</completename>      </name>      <affiliation>        <organization>          <name>Internet Engineering Task Force</name>          <abbreviation>IETF</abbreviation>        </organization>      </affiliation>    </person>  </contributor>  <contributor>    <role type="publisher"/>    <organization>      <name>Internet Engineering Task Force</name>      <abbreviation>IETF</abbreviation>    </organization>  </contributor>  <language>en</language>  <script>Latn</script>  <abstract format="text/plain" language="en" script="Latn">In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</abstract>  <series type="main">    <title format="text/plain" language="en" script="Latn">BCP</title>    <number>14</number>  </series>  <series type="main">    <title format="text/plain" language="en" script="Latn">RFC</title>    <number>2119</number>  </series>  <place>Fremont, CA</place></bibitem> <bibitem id="RFC7991" type="standard">  <fetched>2020-06-10</fetched>  <title format="text/plain" language="en" script="Latn">The "xml2rfc" Version 3 Vocabulary</title>  <uri type="xml">https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7991.xml</uri>  <uri type="src">https://www.rfc-editor.org/info/rfc7991</uri>  <docidentifier type="IETF">RFC 7991</docidentifier>  <docidentifier type="rfc-anchor">RFC7991</docidentifier>  <docidentifier type="DOI">10.17487/RFC7991</docidentifier>  <date type="published">    <on>2016-12</on>  </date>  <contributor>    <role type="author"/>    <person>      <name>        <completename language="en">P. Hoffman</completename>      </name>      <affiliation>        <organization>          <name>Internet Engineering Task Force</name>          <abbreviation>IETF</abbreviation>        </organization>      </affiliation>    </person>  </contributor>  <contributor>    <role type="publisher"/>    <organization>      <name>Internet Engineering Task Force</name>      <abbreviation>IETF</abbreviation>    </organization>  </contributor>  <language>en</language>  <script>Latn</script>  <abstract format="text/plain" language="en" script="Latn">This document defines the "xml2rfc" version 3 vocabulary: an XML-based language used for writing RFCs and Internet-Drafts.  It is heavily derived from the version 2 vocabulary that is also under discussion.  This document obsoletes the v2 grammar described in RFC 7749.</abstract>  <series type="main">    <title format="text/plain" language="en" script="Latn">RFC</title>    <number>7991</number>  </series>  <place>Fremont, CA</place></bibitem> <bibitem id="RFC8174" type="standard">  <fetched>2020-06-10</fetched>  <title format="text/plain" language="en" script="Latn">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>  <uri type="xml">https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml</uri>  <uri type="src">https://www.rfc-editor.org/info/rfc8174</uri>  <docidentifier type="IETF">RFC 8174</docidentifier>  <docidentifier type="rfc-anchor">RFC8174</docidentifier>  <docidentifier type="DOI">10.17487/RFC8174</docidentifier>  <date type="published">    <on>2017-05</on>  </date>  <contributor>    <role type="author"/>    <person>      <name>        <completename language="en">B. Leiba</completename>      </name>      <affiliation>        <organization>          <name>Internet Engineering Task Force</name>          <abbreviation>IETF</abbreviation>        </organization>      </affiliation>    </person>  </contributor>  <contributor>    <role type="publisher"/>    <organization>      <name>Internet Engineering Task Force</name>      <abbreviation>IETF</abbreviation>    </organization>  </contributor>  <language>en</language>  <script>Latn</script>  <abstract format="text/plain" language="en" script="Latn">RFC 2119 specifies common key words that may be used in protocol  specifications.  This document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the key words have the  defined special meanings.</abstract>  <series type="main">    <title format="text/plain" language="en" script="Latn">BCP</title>    <number>14</number>  </series>  <series type="main">    <title format="text/plain" language="en" script="Latn">RFC</title>    <number>8174</number>  </series>  <place>Fremont, CA</place></bibitem>
+<bibitem id="ACVP">
+  <fetched>2020-06-10</fetched>
+  <title type="main" format="text/plain" language="en" script="Latn">Automatic Cryptographic Validation Protocol</title>
+  <date type="published">
+    <on>2019</on>
+  </date>
+  <contributor>
+    <person>
+      <name>
+        <initial>B.</initial>
+        <surname>Fussell</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Cisco</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <person>
+      <name>
+        <initial>A.</initial>
+        <surname>Vassilev</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>National Institute of Standards and Technology</name>
+          <abbreviation>NIST</abbreviation>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <person>
+      <name>
+        <initial>H.</initial>
+        <surname>Booth</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>National Institute of Standards and Technology</name>
+          <abbreviation>NIST</abbreviation>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>National Institute of Standards and Technology</name>
+      <abbreviation>NIST</abbreviation>
+    </organization>
+  </contributor>
+</bibitem></references><references id="_informative_references" normative="false" obligation="informative">
+<title>Bibliography</title>
+</references></bibliography>
+</ietf-standard>
