@@ -1,0 +1,67 @@
+= ACVP Password-based Key Derivation Function JSON Specification
+:title-main: ACVP Password-based Key Derivation Function JSON Specification
+:title-main-short: ACVP Password-based Key Derivation Function JSON Specification
+:fullname: Christopher Celi
+:affiliation: Computer Security Division, Information Technology Laboratory
+:doi: https://doi.org/10.6028/NIST.SP.800-999
+:series: nist-sp
+:title-document-class: Information Security
+:docnumber: 800-999
+:issued-date: 2020-06-20
+:copyright-year: 2020
+:revision: 1
+:keywords: ACVP, cryptography
+:doc-email: acvp@nist.gov.example
+:docfile: nist.sp.800.acvp-pbkdf.adoc
+:mn-document-class: nist
+:mn-output-extensions: xml,html,doc,pdf,rxl
+:biblio-as-appendix:
+:local-cache-only:
+:data-uri-image:
+
+// Singular name of the algorithm
+:spec-algorithm: Password-based KDF
+:algo-short-name: PBKDF
+
+
+.Reports on Computer Systems Technology
+The Information Technology Laboratory (ITL) at the National
+Institute of Standards and Technology (NIST) promotes the U.S.
+economy and public welfare by providing technical leadership for
+the Nation's measurement and standards infrastructure. ITL develops
+tests, test methods, reference data, proof of concept
+implementations, and technical analyses to advance the development
+and productive use of information technology. ITL's
+responsibilities include the development of management,
+administrative, technical, and physical standards and guidelines
+for the cost-effective security and privacy of other than national
+security-related information in federal information systems. The
+Special Publication 800-series reports on ITL's research,
+guidelines, and outreach efforts in information system security,
+and its collaborative activities with industry, government, and
+academic organizations.
+
+
+include::nist-sections/00-abstract.adoc[]
+include::nist-sections/00-preface.adoc[]
+include::common/common-sections/01-intro.adoc[]
+//include::common/common-sections/02-conventions.adoc[]
+include::pbkdf/sections/03-supported.adoc[]
+include::pbkdf/sections/04-testtypes.adoc[]
+include::common/common-sections/05-capabilities-description.adoc[]
+include::common/common-sections/051-prerequisites.adoc[]
+include::pbkdf/sections/05-capabilities.adoc[]
+include::common/common-sections/06-test-vector-intro.adoc[]
+include::pbkdf/sections/06-test-vectors.adoc[]
+include::pbkdf/sections/07-responses.adoc[]
+include::common/common-sections/10-security.adoc[]
+//include::common/common-sections/11-iana.adoc[]
+include::nist-sections/96-terminology.adoc[]
+include::nist-sections/97-abbrev.adoc[]
+include::nist-sections/98-revision-history.adoc[]
+
+// References must be given before appendixes
+include::nist-sections/99-references.adoc[]
+// include::{pbkdfdir}/97-examples.adoc[]
+
+
