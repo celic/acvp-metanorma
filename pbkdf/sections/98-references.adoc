@@ -10,15 +10,18 @@
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
 contributor::
+contributor.role:: author
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
 contributor.person.affiliation.organization.name:: Cisco
 contributor::
+contributor.role:: author
 contributor.person.name.initial:: A.
 contributor.person.name.surname:: Vassilev
 contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
 contributor.person.affiliation.organization.abbreviation:: NIST
 contributor::
+contributor.role:: author
 contributor.person.name.initial:: H.
 contributor.person.name.surname:: Booth
 contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
