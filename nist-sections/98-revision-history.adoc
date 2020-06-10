@@ -1,0 +1,11 @@
+
+[appendix]
+== Revision History
+
+[cols="a,a,a",options="header"]
+|===
+| Version | Release Date | Updates
+
+| SP 800-999 | November 2020 | Initial Release
+
+|===

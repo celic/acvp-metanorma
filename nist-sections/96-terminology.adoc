@@ -1,0 +1,33 @@
+
+[appendix]
+== Terminology
+
+
+=== Prompt
+
+Thing
+
+=== Registration
+
+Thing
+
+=== Response
+
+Thing
+
+=== Test Case
+
+Thing
+
+=== Test Group
+
+Thing
+
+=== Test Vector Set
+
+Thing
+
+=== Validation
+
+Thing
+
