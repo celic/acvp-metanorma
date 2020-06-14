@@ -6,9 +6,6 @@
 * [[[RFC7991,RFC 7991]]]
 * [[[RFC8174,RFC 8174]]]
 
-////
-TODO: This is crashing Metanorma, need to be fixed...
-
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
@@ -36,4 +33,3 @@ contributor.organization.abbreviation:: NIST
 date::
 date.type:: published
 date.value:: 2019-07-01
-////
