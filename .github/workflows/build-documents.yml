@@ -7,7 +7,7 @@ on:
     types: [opened, ready_for_review]
 
 jobs:
-  test-linux:
+  build-documents:
     name: Test on Ubuntu
     runs-on: ubuntu-latest
     steps:
