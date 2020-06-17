@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-documents:
-    name: Test on Ubuntu
+    name: Compile Documents HTML and TXT
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
