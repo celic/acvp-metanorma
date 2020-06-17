@@ -33,3 +33,7 @@ date.value:: 2019-07-01
 
 [bibliography]
 == Informative References
+
+[%bibitem]
+=== SP800-90A Spec
+id:: SP800-90A

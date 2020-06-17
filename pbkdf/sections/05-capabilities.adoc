@@ -11,8 +11,7 @@ A registration *SHALL* use these properties
 |===
 | JSON Property | Description | JSON Type | Valid Values
 
-| algorithm | Name of the algorithm to be validated | string | "kdf-components"
-| mode | Mode of the algorithm to be validated | string | "pbkdf"
+| algorithm | Name of the algorithm to be validated | string | "PBKDF"
 | revision | ACVP Test version | string | "1.0"
 | capabilities | Array of capabilities | array | Each object in the array contains the below properties
 | prereqVals | Prerequisites of the algorithm | object | See <<prerequisites>>
@@ -30,8 +29,7 @@ An example registration within an algorithm capability exchange looks like this
 "algorithms":[
   {
     "revision":"1.0",
-    "algorithm":"kdf-components",
-    "mode":"pbkdf",
+    "algorithm":"PBKDF",
     "prereqVals":[
       {
         "algorithm":"SHA",

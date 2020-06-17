@@ -33,3 +33,19 @@ date.value:: 2019-07-01
 
 [bibliography]
 == Informative References
+
+[%bibitem]
+=== The Secure Hash Algorithm Validation System (SHAVS)
+id:: SHAVS
+
+// <reference anchor="SHAVS">
+//   <front>
+//     <title>The Secure Hash Algorithm Validation System (SHAVS)</title>
+
+//     <author initials="L.E." surname="Bassham III">
+//       <organization>NIST</organization>
+//     </author>
+
+//     <date year="2014"></date>
+//   </front>
+// </reference>

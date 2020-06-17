@@ -1,0 +1,12 @@
+*.DS_Store
+*.txt
+*.html
+*.xml
+*.nits
+*.err
+DebugInfo/
+*.log
+GenDocsNew/
+Gemfile.lock
+*.js
+
