@@ -19,10 +19,10 @@ jobs:
       - uses: actions/setup-go@v2-beta
         with:
           go-version: '^1.13.1'
-      - name: Install yq
-        run: |
-          GO111MODULE=on go get github.com/mikefarah/yq/v3
-          ln -s $GOPATH/bin/yq /usr/local/bin/yq
+#      - name: Install yq
+#        run: |
+#          GO111MODULE=on go get github.com/mikefarah/yq/v3
+#          ln -s $GOPATH/bin/yq /usr/local/bin/yq
       - name: Install gems from local Gemfile
         run: |
           curl -LO --retry 3 https://raw.githubusercontent.com/metanorma/metanorma-build-scripts/master/gemfile-to-bundle-add.sh | bash
@@ -35,8 +35,8 @@ jobs:
           make clean all publish
       - uses: actions/upload-artifact@master
         with:
-          name: published
-          path: published
+          name: documents
+          path: documents
 
   deploy-gh-pages:
     if: github.ref == 'refs/heads/master'
@@ -46,12 +46,12 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@v1
       with:
-        name: published
+        name: documents
     - name: Deploy to GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         deploy_key: ${{ secrets.GH_DEPLOY_KEY }}
-        publish_dir: ./published
+        publish_dir: ./
         force_orphan: true
         user_name: ${{ github.actor }}
         user_email: ${{ format('{0}@users.noreply.github.com', github.actor) }}
