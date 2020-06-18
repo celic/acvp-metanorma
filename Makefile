@@ -25,9 +25,9 @@ SRC :=
 endif
 
 ifeq ($(BUILT),)
-SRC := $(filter-out README.adoc, $(wildcard sources/*.adoc))
+SRC := $(filter-out README.adoc, $(wildcard *.adoc))
 else
-XML := $(patsubst sources/%,documents/%,$(BUILT))
+XML := $(patsubst %,documents/%,$(BUILT))
 endif
 endif
 
@@ -37,7 +37,7 @@ FORMAT_MARKER := mn-output-
 FORMATS := $(shell grep "$(FORMAT_MARKER)" $(SRC) | cut -f 2 -d " " | tr "," "\\n" | sort | uniq | tr "\\n" " ")
 endif
 
-XML  ?= $(patsubst sources/%,documents/%,$(patsubst %.adoc,%.xml,$(SRC)))
+XML  ?= $(patsubst %,documents/%,$(patsubst %.adoc,%.xml,$(SRC)))
 HTML := $(patsubst %.xml,%.html,$(XML))
 
 ifdef METANORMA_DOCKER
@@ -68,14 +68,14 @@ documents:
 documents/%.html: documents/%.xml | documents
 	${PREFIX_CMD} metanorma $<
 
-documents/%.xml: sources/%.xml | documents
+documents/%.xml: %.xml | documents
 	mkdir -p $(dir $@)
 	mv $< $@
 
 # Build canonical XML output
 # If XML file is provided, copy it over
 # Otherwise, build the xml using adoc
-sources/%.xml: | bundle
+%.xml: | bundle
 	BUILT_TARGET="$(shell yq r metanorma.yml metanorma.source.built_targets[$@])"; \
 	if [ "$$BUILT_TARGET" = "" ] || [ "$$BUILT_TARGET" = "null" ]; then \
 		BUILT_TARGET=$@; \
