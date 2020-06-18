@@ -37,7 +37,7 @@ FORMAT_MARKER := mn-output-
 FORMATS := $(shell grep "$(FORMAT_MARKER)" $(SRC) | cut -f 2 -d " " | tr "," "\\n" | sort | uniq | tr "\\n" " ")
 endif
 
-XML  ?= $(patsubst %,documents/%,$(patsubst %.adoc,%.xml,$(SRC)))
+XML  ?= $(patsubst %.adoc,%.xml,$(SRC))
 HTML := $(patsubst %.xml,%.html,$(XML))
 
 ifdef METANORMA_DOCKER
