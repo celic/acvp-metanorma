@@ -1,0 +1,8 @@
+---
+metanorma:
+  deploy:
+    email: "test@example.com"
+relaton:
+  collection:
+    organization: "National Institute of Standards and Technology"
+    name: "Automated Cryptographic Validation Program"
