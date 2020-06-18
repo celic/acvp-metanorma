@@ -1,4 +1,4 @@
-.PHONY: update clean
+.PHONY: update clean publish
 
 update:
 	bundle install
@@ -12,8 +12,9 @@ clean:
 %.txt: %.adoc
 	metanorma compile -t ietf -x txt $<
 
-all: *.html *.txt
+publish:
 	mkdir -p documents
 	mv *.html documents/
 	mv *.txt documents/
 
+all: *.html *.txt
