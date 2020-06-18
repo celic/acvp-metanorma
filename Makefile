@@ -65,10 +65,10 @@ all: documents.html
 documents:
 	mkdir -p $@
 
-documents/%.html: documents/%.xml | documents
+%.html: documents/%.xml | documents
 	${PREFIX_CMD} metanorma $<
 
-documents/%.xml: %.xml | documents
+%.xml: %.xml | documents
 	mkdir -p $(dir $@)
 	mv $< $@
 
