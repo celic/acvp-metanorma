@@ -12,4 +12,4 @@ clean:
 %.txt: %.adoc
 	metanorma compile -t ietf -x txt $<
 
-all: %.html %.txt
+all: *.html *.txt
