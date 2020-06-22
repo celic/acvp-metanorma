@@ -6,7 +6,7 @@
 :abbrev: ACVP KDFs
 :status: informational
 :ipr: trust200902
-:submission-type: independent
+:submission-type: info
 :area: Internet
 :intended-series: info
 :revdate: 2019-06-05

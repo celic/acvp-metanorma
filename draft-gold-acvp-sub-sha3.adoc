@@ -5,7 +5,7 @@
 :abbrev: ACVP SHA3
 :status: informational
 :ipr: trust200902
-:submission-type: independent
+:submission-type: info
 :area: General
 :intended-series: info
 :revdate: 2018-11-01
