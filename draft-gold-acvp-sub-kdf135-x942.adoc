@@ -1,13 +1,12 @@
 = ACVP ANS x9.42 Key Derivation Function JSON Specification
 :doctype: internet-draft
 :docname: acvp-x942
-:name: draft-gold-acvp-sub-kdf135-x942-00
+:docnumber: draft-gold-acvp-sub-kdf135-x942-00
 :abbrev: ACVP ANS x9.42 KDF
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :fullname: Christopher Celi
 :lastname: Celi

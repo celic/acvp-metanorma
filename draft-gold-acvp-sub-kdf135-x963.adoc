@@ -1,13 +1,12 @@
 = ACVP ANS X9.63 Key Derivation Function Algorithm JSON Specification
 :doctype: internet-draft
 :docname: acvp-x963
-:name: draft-fussell-acvp-ans-x963-00
+:docnumber: draft-fussell-acvp-ans-x963-00
 :abbrev: ACVP ANS x9.63 KDF
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: B.F.
 :lastname: Fussell

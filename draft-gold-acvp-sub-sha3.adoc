@@ -1,13 +1,12 @@
 = ACVP SHA3 and SHAKE JSON Specification
 :doctype: internet-draft
 :docname: acvp-sha3
-:name: draft-ietf-acvp-sub-sha3-1.0
+:docnumber: draft-ietf-acvp-sub-sha3-01
 :abbrev: ACVP SHA3
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: General
-:intended-series: info
+:intended-series: informational
 :revdate: 2018-11-01
 :forename_initials: C.C.
 :lastname: Celi

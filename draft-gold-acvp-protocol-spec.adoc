@@ -1,14 +1,12 @@
-
 = Automated Cryptographic Validation Protocol (ACVP) JSON Specification
 :doctype: internet-draft
 :docname: acvp-spec
-:name: draft-ietf-acvp-spec-1.0
+:docnumber: draft-ietf-acvp-spec-01
 :abbrev: ACVP Protocol
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-01-01
 :forename_initials: B.F.
 :lastname: Fussell
@@ -20,7 +18,7 @@
 :country: United States of America
 :email: bfussell@cisco.com
 :role: editor
-:forename_initials_2: A.V.
+:initials_2: A.V.
 :lastname_2: Vassilev
 :fullname_2: Apostol Vassilev
 :organization_2: National Institute of Standards and Technology
@@ -30,7 +28,7 @@
 :country_2: United States of America
 :email_2: apostol.vassilev@nist.gov
 :role_2: editor
-:forename_initials_3: H.B.
+:initials_3: H.B.
 :lastname_3: Booth
 :fullname_3: Harold Booth
 :organization_3: National Institute of Standards and Technology
@@ -40,10 +38,8 @@
 :country_3: United States of America
 :email_3: harold.booth@nist.gov
 :role_3: editor
-
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
-
 :area: General
 :keyword: acvp, template
 

@@ -18,6 +18,8 @@
 [%bibitem]
 === ACVP IANA Registry
 id:: acvp-iana
+docid::
+  id::: NIST ACVP IANA Registry
 contributor::
 contributor.person.name.initial:: A.
 contributor.person.name.surname:: Vassilev
@@ -29,6 +31,8 @@ date.value:: 2018-11-01
 [%bibitem]
 === Cryptographic Algorithm Validation Program
 id:: cavp
+docid::
+  id::: NIST CAVP
 contributor::
 contributor.person.name.initial:: A.
 contributor.person.name.surname:: Vassilev
@@ -40,9 +44,11 @@ date.value:: 2018-02
 [%bibitem]
 === ACVP Symmetric Algorithm JSON Specification
 id:: sub-symmetric
+docid::
+  id::: NIST ACVP Symmetric Algorithm JSON Specification
 contributor::
 contributor.person.name.initial:: C.
-contributor.person.name.surname:: CELI
+contributor.person.name.surname:: Celi
 contributor.person.affiliation.organization.name:: NIST
 date::
 date.type:: published
