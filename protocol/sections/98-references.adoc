@@ -48,7 +48,7 @@ docid::
   id::: NIST ACVP Symmetric Algorithm JSON Specification
 contributor::
 contributor.person.name.initial:: C.
-contributor.person.name.surname:: CELI
+contributor.person.name.surname:: Celi
 contributor.person.affiliation.organization.name:: NIST
 date::
 date.type:: published
