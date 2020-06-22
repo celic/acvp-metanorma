@@ -9,6 +9,8 @@
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+  id::: ACVP
 contributor::
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
@@ -37,6 +39,8 @@ date.value:: 2019-07-01
 [%bibitem]
 === The CMAC Validation System (CMACVS)
 id:: CMACVS
+docid::
+  id::: NIST CMACVS
 
 // <reference anchor="CMACVS">
 //   <front>
@@ -53,6 +57,8 @@ id:: CMACVS
 [%bibitem]
 === The Keyed-Hash Message Authentication Code (HMAC)
 id:: FIPS-198-1
+docid::
+  id::: FIPS 198-1
 
 // <reference anchor="FIPS-198-1" target="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.198-1.pdf">
 //   <front>
@@ -69,6 +75,8 @@ id:: FIPS-198-1
 [%bibitem]
 === The Keyed-Hash Message Authentication Code Validation System (HMACVS)
 id:: HMACVS
+docid::
+  id::: NIST HMACVS
 
 // <reference anchor="HMACVS">
 //   <front>
@@ -85,6 +93,8 @@ id:: HMACVS
 [%bibitem]
 === The Secure Hash Algorithm 3 Validation System (SHA3VS)
 id:: SHA3VS
+docid::
+  id::: NIST SHA3VS
 
 // <reference anchor="SHA3VS">
 //   <front>
@@ -101,6 +111,8 @@ id:: SHA3VS
 [%bibitem]
 === The Secure Hash Algorithm Validation System (SHAVS)
 id:: SHAVS
+docid::
+  id::: NIST SHAVS
 
 // <reference anchor="SHAVS">
 //   <front>
@@ -117,6 +129,8 @@ id:: SHAVS
 [%bibitem]
 === Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication
 id:: SP-800-38B
+docid::
+  id::: NIST SP 800-38B
 
 // <reference anchor="SP-800-38B" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38b.pdf">
 //   <front>
@@ -133,6 +147,8 @@ id:: SP-800-38B
 [%bibitem]
 === Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC
 id:: SP-800-38D
+docid::
+  id::: NIST SP 800-38D
 
 // <reference anchor="SP-800-38D" target="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf">
 //   <front>

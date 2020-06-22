@@ -142,6 +142,8 @@ Security considerations are addressed by the ACVP specification.
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+  id::: ACVP
 contributor::
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
@@ -167,6 +169,8 @@ date.value:: 2019-07-01
 [%bibitem]
 === ACVP Symmetric Algorithm JSON Specification
 id:: Sub-symmetric
+docid::
+  id::: ACVP-Symmetric
 
 // <reference anchor="Sub-symmetric">
 //   <front>

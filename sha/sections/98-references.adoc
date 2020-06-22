@@ -9,6 +9,8 @@
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+  id::: ACVP
 contributor::
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
@@ -37,6 +39,8 @@ date.value:: 2019-07-01
 [%bibitem]
 === Secure Hash Standard (SHS)
 id:: FIPS180-4
+docid::
+  id::: FIPS 180-4
 
 // <reference anchor="FIPS180-4" target="https://csrc.nist.gov/csrc/media/publications/fips/180/4/archive/2012-03-06/documents/fips180-4.pdf">
 //   <front>
@@ -53,6 +57,8 @@ id:: FIPS180-4
 [%bibitem]
 === The Secure Hash Algorithm Validation System (SHAVS)
 id:: SHAVS
+docid::
+  id::: NIST SHAVS
 
 // <reference anchor="SHAVS">
 //   <front>
