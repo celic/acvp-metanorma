@@ -6,7 +6,7 @@
 :abbrev: ACVP MAC
 :status: informational
 :ipr: trust200902
-:submission-type: info
+:submission-type: independent
 :area: Internet
 :intended-series: info
 :revdate: 2018-08-01
