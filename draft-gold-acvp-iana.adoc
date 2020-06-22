@@ -1,15 +1,13 @@
 = ACVP IANA Registry
 :doctype: internet-draft
-:docname: acvp-iana
-:name: draft-ietf-acvp-iana-1.0
+:docnumber: draft-ietf-acvp-iana-01
 :abbrev: ACVP IANA
-:status: informational
 :ipr: trust200902
 :submission-type: independent
+:intended-series: informational
 :area: Internet
-:intended-series: info
 :revdate: 2019-06-05
-:forename_initials: A.V.
+:initials: A.V.
 :lastname: Vassilev
 :fullname: Apostol Vassilev
 :organization: National Institute of Standards and Technology
@@ -20,10 +18,8 @@
 :email: apostol.vassilev@nist.gov
 :docfile: draft-gold-acvp-iana.adoc
 :role: editor
-
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
-
 :area: General
 :keyword: acvp, crypto
 

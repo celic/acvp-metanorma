@@ -1,13 +1,12 @@
 = ACVP Password-based Key Derivation Function JSON Specification
 :doctype: internet-draft
 :docname: acvp-pbkdf
-:name: draft-gold-acvp-pbkdf-01
+:docnumber: draft-gold-acvp-pbkdf-01
 :abbrev: ACVP PBKDF
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: C.C.
 :lastname: Celi

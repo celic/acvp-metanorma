@@ -1,14 +1,12 @@
-
 = ACVP SP800-108 Key Derivation Function JSON Specification
 :doctype: internet-draft
 :docname: acvp-kdf
-:name: draft-gold-acvp-kdf-1.0
+:docnumber: draft-gold-acvp-kdf-01
 :abbrev: ACVP KDFs
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: C.C.
 :lastname: Celi

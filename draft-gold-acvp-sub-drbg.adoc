@@ -1,13 +1,12 @@
 = ACVP Deterministic Random Bit Generator (DRBG) Algorithm JSON Specification
 :doctype: internet-draft
 :docname: acvp-drbg
-:name: draft-vassilev-acvp-drbg-00
+:docnumber: draft-vassilev-acvp-drbg-00
 :abbrev: ACVP DRBG
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: A.V.
 :lastname: Vassilev

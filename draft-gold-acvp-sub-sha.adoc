@@ -1,13 +1,12 @@
 = ACVP Secure Hash Algorithm (SHA) JSON Specification
 :doctype: internet-draft
 :docname: acvp-sha
-:name: draft-ietf-acvp-sub-sha-1.0
+:docnumber: draft-ietf-acvp-sub-sha-01
 :abbrev: ACVP SHA
-:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2018-11-01
 :forename_initials: C.C.
 :lastname: Celi
