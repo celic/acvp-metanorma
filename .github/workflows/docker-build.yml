@@ -35,6 +35,7 @@ jobs:
           make clean all publish
       - uses: actions/upload-artifact@master
         with:
+          name: all-files
           path: ./
 
   deploy-gh-pages:
@@ -45,7 +46,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@v1
       with:
-        name: ./
+        name: all-files
     - name: Deploy to GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
