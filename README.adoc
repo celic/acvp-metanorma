@@ -1,3 +1,0 @@
-= ACVP Documents
-
-Algorithm documents are shown here.
