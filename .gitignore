@@ -1,6 +1,4 @@
 *.DS_Store
-*.txt
-*.html
 *.xml
 *.nits
 *.err
