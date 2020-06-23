@@ -19,3 +19,5 @@ publish:
 	mkdir -p documents
 	mv *.html documents/
 	mv *.txt documents/
+	cp README.md documents/README.md
+	cp _config.yml documents/_config.yml
