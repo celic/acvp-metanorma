@@ -35,8 +35,8 @@ jobs:
           make clean all publish
       - uses: actions/upload-artifact@master
         with:
-          name: all-files
-          path: ./
+          name: documents
+          path: documents
 
   deploy-gh-pages:
     if: github.ref == 'refs/heads/master'
@@ -46,12 +46,12 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@v1
       with:
-        name: all-files
+        name: documents
     - name: Deploy to GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         deploy_key: ${{ secrets.GH_DEPLOY_KEY }}
-        publish_dir: ./
+        publish_dir: documents/
         force_orphan: true
         user_name: ${{ github.actor }}
         user_email: ${{ format('{0}@users.noreply.github.com', github.actor) }}
