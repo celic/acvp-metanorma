@@ -17,7 +17,6 @@ clean:
 
 publish:
 	mkdir -p documents
-	cp index.html documents/index.html
 	cp README.md documents/README.md
 	cp _config.yml documents/_config.yml
 	mv *.html documents/
