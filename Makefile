@@ -21,3 +21,4 @@ publish:
 	mv *.txt documents/
 	cp README.md documents/README.md
 	cp _config.yml documents/_config.yml
+	cp index.html documents/index.html
