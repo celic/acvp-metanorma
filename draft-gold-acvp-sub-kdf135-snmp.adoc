@@ -21,7 +21,6 @@
 :docfile: draft-gold-acvp-kdf-snmp.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
-:xrefstyle: full
 :area: General
 :keyword: acvp, crypto
 
@@ -47,6 +46,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::snmp/sections/98-references.adoc[]
-include::snmp/sections/97-examples.adoc[]
-
-
