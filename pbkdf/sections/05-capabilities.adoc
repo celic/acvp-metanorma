@@ -13,8 +13,8 @@ A registration *SHALL* use these properties
 
 | algorithm | Name of the algorithm to be validated | string | "PBKDF"
 | revision | ACVP Test version | string | "1.0"
-| capabilities | Array of capabilities | array | Each object in the array contains the below properties
 | prereqVals | Prerequisites of the algorithm | object | See <<prerequisites>>
+| capabilities | Array of capabilities | array | Each object in the array contains the below properties
 | iterationCount | Number of hash interations | domain | Min: 1, Max: 10000000
 | keyLen | The length of the output key in bits | domain | Min: 112, Max: 4096
 | passwordLen | The length of the password in bytes (characters) | domain | Min: 8, Max: 128
@@ -26,57 +26,55 @@ An example registration within an algorithm capability exchange looks like this
 
 [source,json]
 ----
-"algorithms":[
-  {
-    "revision":"1.0",
-    "algorithm":"PBKDF",
-    "prereqVals":[
-      {
-        "algorithm":"SHA",
-        "valValue":"same"
-      }
-    ],
-    "iterationCount":[
-      {
-        "min":10,
-        "max":1000,
-        "increment":1
-      }
-    ],
-    "keyLen":[
-      {
-        "min":8,
-        "max":4096,
-        "increment":8
-      }
-    ],
-    "passwordLen":[
-      {
-        "min":8,
-        "max":128,
-        "increment":1
-      }
-    ],
-    "saltLen":[
-      {
-        "min":128,
-        "max":4096,
-        "increment":8
-      }
-    ],
-    "hashAlg":[
-      "SHA-1",
-      "SHA2-224",
-      "SHA2-256",
-      "SHA2-384",
-      "SHA2-512",
-      "SHA3-224",
-      "SHA3-256",
-      "SHA3-384",
-      "SHA3-512"
-    ]
-  }
-]
+{
+  "revision":"1.0",
+  "algorithm":"PBKDF",
+  "prereqVals":[
+    {
+      "algorithm":"SHA",
+      "valValue":"same"
+    }
+  ],
+  "iterationCount":[
+    {
+      "min":10,
+      "max":1000,
+      "increment":1
+    }
+  ],
+  "keyLen":[
+    {
+      "min":8,
+      "max":4096,
+      "increment":8
+    }
+  ],
+  "passwordLen":[
+    {
+      "min":8,
+      "max":128,
+      "increment":1
+    }
+  ],
+  "saltLen":[
+    {
+      "min":128,
+      "max":4096,
+      "increment":8
+    }
+  ],
+  "hmacAlg":[
+    "SHA-1",
+    "SHA2-224",
+    "SHA2-256",
+    "SHA2-384",
+    "SHA2-512",
+    "SHA3-224",
+    "SHA3-256",
+    "SHA3-384",
+    "SHA3-512"
+  ]
+}
 ----
 
 [#valid-sha]
