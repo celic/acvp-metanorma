@@ -1,57 +1,15 @@
 
-[#responses]
+[[responses]]
 == Test Vector Responses
 
 After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
-
-
 [[vr_top_table]]
-
-[cols="<,<,<"]
-. Vector Set Response JSON Object
+.Vector Set Response JSON Object
 |===
-| JSON Value| Description| JSON type
+| JSON Value | Description | JSON type
 
-| acvVersion| Protocol version identifier| value
-| vsId| Unique numeric identifier for the vector set| value
-| testGroups| Array of JSON objects that represent each test group of results, as defined by the tables below| array
+| acvVersion | Protocol version identifier | string
+| vsId | Unique numeric identifier for the vector set | integer
+| testGroups | Array of JSON objects that are defined in <<eddsa_keygen_responses>>, <<eddsa_keyver_responses>>, <<eddsa_siggen_responses>> and <<eddsa_sigver_responses>> | array
 |===
-
-
-
-The following table describes the JSON object that represents a test group response for EDDSA.
-
-
-
-[[vr_top_table2]]
-
-[cols="<,<,<"]
-. Test Group Response JSON Object
-|===
-| JSON Value| Description| JSON type
-
-| tgId| Unique numeric identifier for the test group| value
-| q| Optional encoded public key for the group| value
-| tests| Array of JSON objects that represent each result, as defined by the table below| array
-|===
-
-
-
-The following table describes the JSON object that represents a test case response for EDDSA.
-
-
-
-[[vr_top_table5]]
-
-[cols="<,<,<,<"]
-. Test Case Response JSON Object
-|===
-| JSON Value| Description| JSON type| Optional
-
-| d| The encoded private key point| value| Yes
-| q| The encoded public key point | value| Yes
-| signature| The signature component S| value| Yes
-| testPassed| The pass or fail result of the verify or validation| true/false| Yes
-|===
-

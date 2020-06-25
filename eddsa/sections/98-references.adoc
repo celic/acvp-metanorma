@@ -9,6 +9,8 @@
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+  id::: ACVP
 contributor::
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
@@ -32,25 +34,10 @@ date.type:: published
 date.value:: 2019-07-01
 
 [%bibitem]
-=== FIPS 186-4 Digital Signature Standard
-id:: FIPS186-4
-
-// ++++
-//
-//
-// <front>
-// <title>Digital Signature Standard (DSS)</title>
-//
-// <author>
-// <organization>NIST</organization>
-// </author>
-// <date month="July" year="2013"></date>
-// </front>
-// ++++
-
-[%bibitem]
-=== SP800-89 Recommmendation for Obtaining Assurances for Digital Signature Applications
+=== SP800-89 - Recommendation for Obtaining Assurances for Digital Signature Applications
 id:: SP800-89
+docid::
+  id::: SP800-89
 
 // ++++
 //
@@ -69,7 +56,9 @@ id:: SP800-89
 
 [%bibitem]
 === SP800-106 - Randomized Hashing for Digital Signatures
-id: SP800-106
+id:: SP800-106
+docid::
+  id::: SP800-106
 
 // ++++
 //
@@ -83,6 +72,25 @@ id: SP800-106
 // <date month="February" year="2009"></date>
 // </front>
 //
+// ++++
+
+[%bibitem]
+=== FIPS Pub 186-5 - Digital Signature Standard (DSS)
+id:: FIPS186-5
+docid::
+  id::: FIPS186-5
+
+// ++++
+//
+//
+// <front>
+// <title>Digital Signature Standard (DSS)</title>
+//
+// <author>
+// <organization>NIST</organization>
+// </author>
+// <date month="July" year="2013"></date>
+// </front>
 // ++++
 
 [bibliography]
