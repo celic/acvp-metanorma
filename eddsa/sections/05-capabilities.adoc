@@ -1,0 +1,193 @@
+
+// [#properties]
+// == Capabilities Registration
+// 
+// ACVP requires crypto modules to register their capabilities. This allows the crypto	module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process. This section describes the constructs for advertising support of EDDSA algorithms to the ACVP server.
+// 
+// The algorithm capabilities are advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value is an array, where each	array element is an individual JSON object defined in this section. The 'algorithms' value is part of the 'capability_exchange' element of the ACVP JSON registration message. See the ACVP specification for details on the registration message.
+// 
+
+[[prereq_algs]]
+=== Required Prerequisite Algorithms for EDDSA Validations
+
+Each EDDSA implementation relies on other cryptographic primitives. For example, EDDSA uses an underlying SHA algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:
+
+
+
+[[rereqs_table]]
+
+[cols="<,<,<,<,<"]
+. Required EDDSA Prerequisite Algorithms JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| algorithm| a prerequisite algorithm| value| DRBG, DRBG_OPT2, SHA, SHA_OPT2, SHA_OPT3| No
+| valValue| algorithm validation number| value| actual number or "same"| No
+| prereqAlgVal| prerequistie algorithm validation| object with algorithm and valValue properties| see above| No
+| prereqVals| prerequistie algorithm validations| array of prereqAlgVal objects| see above| No
+|===
+
+
+
+
+[[eddsa_caps_reg]]
+=== EDDSA Algorithm Capabilities Registration
+
+Each algorithm capability advertised is a self-contained JSON object using the following values
+
+
+
+[[caps_table]]
+
+[cols="<,<,<,<,<"]
+. EDDSA Algorithm Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| algorithm| The algorithm under test| value| "EDDSA"| No
+| mode| The EDDSA mode to be validated| value| "keyGen", "keyVer", "sigGen", or "sigVer"| No
+| revision| The algorithm testing revision to use.| value| "1.0"| No
+| prereqVals| prerequistie algorithm validations| array of prereqAlgVal objects| See 																																				
+						
+                        
+                        <<prereq_algs>>| No
+| capabilities| array of JSON objects, each with fields pertaining to the global EDDSA mode indicated above and identified uniquely by the combination of the EDDSA "mode" and indicated properties| Array of JSON objects| See                                                                                                 																		
+						
+                        
+                        <<supported_modes>>| Yes
+|===
+
+
+
+
+[[supported_modes]]
+=== Supported EDDSA Modes Capabilities
+
+The EDDSA mode capabilities are advertised as JSON objects within the 'capabilities' value of the ACVP registration message - see                                                             															
+					
+                    
+                    <<caps_table>>.
+The 'capabilities' value is an array, where each array element is a JSON object corresponding to a particular EDDSA mode defined in this section. The 'capabilities'	value is part of the 'capability_exchange' element of the ACVP JSON registration message.	See the ACVP specification for details on the registration message.                                                												
+				
+                
+                
+
+Each EDDSA mode's capabilities are advertised as JSON objects.
+
+
+[[mode_keyGen]]
+==== The keyGen Mode Capabilities
+
+The EDDSA keyGen mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.
+
+Each EDDSA keyGen mode capability set is advertised as a self-contained JSON object.
+
+
+[[mode_keyGenFullSet]]
+===== keyGen Full Set of Capabilities
+
+The complete list of EDDSA key generation capabilities may be advertised by the ACVP compliant crypto module:
+
+
+
+[[keyGen_table]]
+
+[cols="<,<,<,<,<"]
+. EDDSA keyGen Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| curve| The curve names supported for the IUT in keyGen.| array| Any non-empty subset of {"ED-25519", "ED-448"}| No
+| secretGenerationMode| The method used to generate the randomness incoporated in the key.| array| Any non-empty subset of {"extra bits", "testing candidates"}| No
+|===
+
+
+
+
+[[mode_keyVer]]
+==== The keyVer Mode Capabilities
+
+The EDDSA keyVer mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.
+
+Each EDDSA keyVer mode capability set is advertised as a self-contained JSON object.
+
+
+[[mode_keyVerFullSet]]
+===== keyVer Full Set of Capabilities
+
+The complete list of EDDSA key verification capabilities may be advertised by the ACVP compliant crypto module:
+
+
+
+[[keyVer_table]]
+
+[cols="<,<,<,<,<"]
+. EDDSA keyVer Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| curve| The curve names supported for the IUT in keyVer.| array| Any non-empty subset of {"ED-25519", "ED-448"}| No
+|===
+
+
+
+
+[[mode_sigGen]]
+==== The sigGen Mode Capabilities
+
+The EDDSA sigGen mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.
+
+Each EDDSA sigGen mode capability set is advertised as a self-contained JSON object.
+
+
+[[mode_sigGenFullSet]]
+===== sigGen Full Set of Capabilities
+
+The complete list of EDDSA signature generation capabilities may be advertised by the ACVP compliant crypto module:
+
+
+
+[[sigGen_table]]
+
+[cols="<,<,<,<,<"]
+. EDDSA sigGen Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| curve| The curve names supported for the IUT in sigGen.| array| Any non-empty subset of {"ED-25519", "ED-448"}| No
+| pure| If the IUT supports normal 'pure' sigGen functionality| bool| true/false| No
+| preHash| If the IUT supports accepting a preHashed message to sign| bool| true/false| No
+|===
+
+
+
+
+[[mode_sigVer]]
+==== The sigVer Mode Capabilities
+
+The EDDSA sigVer mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.
+
+Each EDDSA sigVer mode capability set is advertised as a self-contained JSON object.
+
+
+[[mode_sigVerFullSet]]
+===== sigVer Full Set of Capabilities
+
+The complete list of EDDSA signature verification capabilities may be advertised by the ACVP compliant crypto module:
+
+
+
+[[sigVer_table]]
+
+[cols="<,<,<,<,<"]
+. EDDSA sigVer Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| curve| The curve names supported for the IUT in sigVer.| array| Any non-empty subset of {"ED-25519", "ED-448"}| No
+| pure| If the IUT supports normal 'pure' sigGen functionality| bool| true/false| No
+| preHash| If the IUT supports accepting a preHashed message to sign| bool| true/false| No
+|===
+
+
+

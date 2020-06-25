@@ -70,6 +70,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::mac/sections/98-references.adoc[]
-// include::mac/sections/97-examples.adoc[]
-
-
