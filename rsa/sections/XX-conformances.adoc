@@ -1,0 +1,14 @@
+[[supported_conformances]]
+== Supported RSA Conformances
+
+Conformances MAY be used to test additional features of certain algorithms.
+
+[[conformances_table]]
+
+[cols="<,<,<,<"]
+. RSA Conformances
+|===
+| String Value | Description | Valid algorithm modes | Optional
+
+| SP800-106 | This conformance signifies the SigGen and/or SigVer modes support randomized message hashing as described in <<SP800-106>>. Utilizing this conformance SHALL generate additional test groups, denoted with a group level property of '"conformance": "SP800-106"'. | SigGen, SigVer| Yes
+|===

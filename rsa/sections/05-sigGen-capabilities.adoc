@@ -1,0 +1,49 @@
+[[mode_sigGen]]
+=== sigGen Mode Capabilities
+
+The RSA sigGen mode capabilities are advertised as JSON objects within the 'capabilities' array
+    as part of the 'capability_exchange' element of the ACVP JSON registration message.
+    See the ACVP specification for details on the registration message.
+
+Each RSA sigGen mode capability is advertised as a self-contained JSON object consisting of the algorithm, mode, and capabilities array.  The capabilities array may contain multiple elements, each pertaining to a sigType that is supported by the client for the RSA mode being advertised.
+
+The following table defines the capabilities that may be advertised by the ACVP compliant crypto modules.
+
+
+[[mode_sigGenCap]]
+==== sigGen Capabilities Table
+
+The following RSA signature generation capabilities may be advertised by the ACVP compliant crypto module:
+
+
+
+[[sigGenRSAMod]]
+
+[cols="<,<,<,<,<"]
+. Supported RSA sigGen moduli and hash options JSON Values
+|===
+| JSON value| Description| JSON type| Valid values| Optional
+
+| sigType| supported RSA signature types  - see
+                                <<FIPS186-4>>, Section 5
+                            | value| one of {"ansx9.31", "pkcs1v1.5", "pss"}| No
+| properties| properties supported for this sigType  - see
+                                <<FIPS186-4>>, Section 5
+                            | array| a single modulo with an array of at least one hashPair| No
+| modulo| supported RSA moduli for signature generation - see
+                                <<FIPS186-4>>, Section 5
+                            | value| one of the supported modulo sizes {2048, 3072, 4096}| No
+| hashPair| supported hash algorithms and optional salt length for signature generation for this sigType and modulo - see
+                                <<SP800-131A>>, Section 9
+                            | array| an array of objects containing a hashAlg and an optional saltLen| No
+| hashAlg| supported hash algorithm for signature generation for this sigType and modulo - see
+                                <<SP800-131A>>, Section 9
+                            | value| any value from {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256"}| No
+| saltLen| supported salt lengths in bytes for PSS signature generation - see
+                                <<FIPS186-4>>, Section 5.5. See also note below.
+                            | value| any integer value subject to the constraint in the note below.| Yes
+|===
+
+
+
+Note: the salt length for each hash algorithm used in PSS signature generation is between 0 and the length of the corresponding hash function output block (in bytes), the end points included.

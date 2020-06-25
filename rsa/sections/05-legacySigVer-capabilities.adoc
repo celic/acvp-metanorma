@@ -1,0 +1,48 @@
+[[mode_legacySigVer]]
+=== legacySigVer Mode Capabilities
+
+The RSA legacySigVer mode capabilities are advertised as JSON objects within the array of 'capabilities'
+    as part of the 'capability_exchange' element of the ACVP JSON registration message.
+    See the ACVP specification for details on the registration message.
+
+Each RSA legacySigVer mode capability is advertised as a self-contained JSON object consisting of the algorithm, mode, and capabilities array.  The capabilities array may contain multiple elements, each pertaining to a sigType that is supported by the client for the RSA mode being advertised.
+
+The following table defines the capabilities that may be advertised by the ACVP compliant crypto modules.
+
+
+
+[[legacySigVerRSAMod]]
+==== legacySigVer Capabilities Table
+
+The following RSA legacy signature verification capabilities may be advertised by the ACVP compliant crypto module:
+
+[cols="<,<,<,<,<"]
+. Supported RSA legacySigVer moduli and hash options JSON Values
+|===
+| JSON value| Description| JSON type| Valid values| Optional
+
+| sigType| supported RSA legacy signature types  - see
+                            <<FIPS186-4>>, Section 5
+                        | value| one of {"ansx9.31", "pkcs1v1.5", "pss"}| No
+| properties| RSA legacy signature verification parameters  - see
+                            <<FIPS186-4>>, Section 5
+                        | array| modulo, hashAlg, and saltLen (when sigType is "pss")| No
+| modulo| supported RSA modulo for signature verification - see
+                            <<FIPS186-4>>, Section 5
+                        | value| any one of the supported modulo sizes {1024, 1536, 2048, 3072, 4096}| No
+| hashPair| supported hash algorithms and optional salt length for signature verification for this sigType and modulo - see
+                            <<SP800-131A>>, Section 9
+                        | array| an array of objects containing a hashAlg and an optional saltLen| No
+| hashAlg| supported hash algorithms for this sigType and modulo - see
+                            <<SP800-131A>>, Section 9
+                        | array| any non-empty subset of {"SHA-1", "SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512"}| No
+| saltLen| supported salt lengths for PSS signature verification - see
+                            <<FIPS186-4>>, Section 5.5. See also note below.
+                        | array| array of values for each hash algorithm used subject to the constraint in the note below.| Yes
+| pubExpMode| type of public exponent| value| "fixed" or "random"| Yes
+| fixedPubExp| if pubExpMode is defined as "fixed", this is the corresponding public exponent value| value| hex| Yes
+|===
+
+
+
+Note: the salt length for each hash algorithm used in PSS signature generation is between 0 and the length of the corresponding hash function output block (in bytes), the end points included.
