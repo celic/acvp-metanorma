@@ -24,4 +24,4 @@ The tests described in this document have the intention of ensuring an implement
 
 ==== Requirements Not Covered
 
-* KAS SSC testing only covers testing of SP800-56Ar2 through the computation of a shared secret `z`.  Additional functions of KAS as a whole such as KDF, KC, etc. MAY be covered within the scope of the full KAS testing; please see that document for further details.
+* KAS SSC testing only covers testing of SP800-56Ar3 through the computation of a shared secret `z`.  Additional functions of KAS as a whole such as KDF, KC, etc. MAY be covered within the scope of the full KAS testing; please see that document for further details.
