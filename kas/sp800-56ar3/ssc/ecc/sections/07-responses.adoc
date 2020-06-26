@@ -4,6 +4,7 @@
 
 After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
+.Vector Set Response Properties
 |===
 | JSON Property | Description | JSON Type
 
@@ -12,19 +13,9 @@ After the ACVP client downloads and processes a vector set, it must send the res
 | testGroups | The test group data | array
 |===
 
-An example of this is the following
-
-[source,json]
-----
-{
-	"acvVersion": "version",
-	"vsId": 1,
-	"testGroups": [ ]
-}
-----
-
 The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
 
+.Test Group Response Properties
 |===
 | JSON Property | Description | JSON Type
 
@@ -32,18 +23,9 @@ The testGroups section is used to organize the ACVP client response in a similar
 | tests | The test case data | array
 |===
 
-An example of this is the following
-
-[source,json]
-----
-{
-	"tgId": 1,
-	"tests": [ ]
-}
-----
-
 The following table describes the JSON object that represents a test case response for a {spec-algorithm}.
 
+.Test Case Response Properties
 |===
 | JSON Property | Description | JSON Type
 
@@ -59,6 +41,7 @@ The following table describes the JSON object that represents a test case respon
 
 Here is an abbreviated example of the response
 
+.Example Response JSON
 [source,json]
 ----
 {

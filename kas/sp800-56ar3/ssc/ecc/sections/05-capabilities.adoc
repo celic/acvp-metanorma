@@ -5,6 +5,7 @@ The {spec-algorithm} mode capabilities are advertised as JSON objects within a r
 
 A registration *SHALL* use these properties:
 
+.Registration Properties
 |===
 | JSON Property | Description | JSON Type | Valid Values
 
@@ -38,6 +39,7 @@ Schemes *MUST* be registered as a dictionary (key/value pairs) where the key is 
 
 The scheme object is made up of the following properties:
 
+.Scheme Properties
 |===
 | JSON Property | Description | JSON Type | Valid Values
 | kasRole | The roles the IUT can support for the scheme | array of string | "initiator", "responder" |
@@ -79,6 +81,7 @@ The following hash functions *MAY* be advertised by an ACVP compliant server:
 
 === Registration Example
 
+.Registration JSON Example
 [source,json]
 ----
 {
