@@ -1,0 +1,45 @@
+
+[bibliography]
+== Normative References
+
+* [[[RFC2119,RFC 2119]]]
+* [[[RFC7991,RFC 7991]]]
+* [[[RFC8174,RFC 8174]]]
+
+[%bibitem]
+=== Automatic Cryptographic Validation Protocol
+id:: ACVP
+docid::
+  id::: ACVP
+contributor::
+contributor.person.name.initial:: R.
+contributor.person.name.surname:: Hammett
+contributor.person.affiliation.organization.name:: HII
+contributor::
+contributor.role:: publisher
+contributor.organization.name:: National Institute of Standards and Technology
+contributor.organization.abbreviation:: NIST
+date::
+date.type:: published
+date.value:: 2020-06-26
+
+[bibliography]
+== Informative References
+
+[%bibitem]
+=== Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
+id:: SP800-56Ar3
+docid::
+  id::: NIST SP800-56Ar3
+
+// <reference anchor="SP800-56a"
+//     target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar3.pdf">
+//     <front>
+//         <title>Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete
+//             Logarithm Cryptography</title>
+//         <author>
+//             <organization>NIST</organization>
+//         </author>
+//         <date month="April" year="2018"/>
+//     </front>
+// </reference>
