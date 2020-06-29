@@ -4,16 +4,18 @@
 
 After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
+.Response JSON Object
 |===
 | JSON Property | Description | JSON Type
 
 | acvVersion | The version of the protocol | string
 | vsId | The vector set identifier | integer
-| testGroups | The test group data | array
+| testGroups | The test group data, see <<response_group_table>> | array
 |===
 
 An example of this is the following
 
+[source, json]
 ----
 {
 	"acvVersion": "version",
@@ -22,78 +24,23 @@ An example of this is the following
 }
 ----
 
-The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
+The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that. The following is a skeleton for the test group structure. Additional properties may be included at this level depending on the algorithm, mode and revision.
 
+[[response_group_table]]
+.Response Test Group JSON Objects
 |===
 | JSON Property | Description | JSON Type
 
 | tgId | The test group identifier | integer
-| tests | The test case data | array
+| tests | The test case data, depending on the algorithm see <<rsa_keygen_vs_tr_table>>, <<rsa_siggen_vs_tr_table>>, <<rsa_sigver_vs_tr_table>>, <<rsa_sigprim_vs_tr_table>> or <<rsa_decprim_vs_tr_table>> | array
 |===
 
 An example of this is the following
 
+[source, json]
 ----
 {
 	"tgId": 1,
 	"tests": [ ... ]
 }
 ----
-
-[[vs_tr_keyGen_table]]
-=== JSON Elements - RSA Test Vector Response
-
-The following table describes the JSON elements for the response to a RSA test vector.
-
-
-[cols="<,<,<,<"]
-. RSA Test Case Results JSON Object
-|===
-| JSON Value| Description| JSON type| Optional
-
-| tcId| Numeric identifier for the test case, unique across the entire vector set.| value| No
-| e | the public exponent| hex value| Yes
-| pRand| the random for P, testing probable primes according to
-                    <<FIPS186-4>>, Appendix B.3.3
-                | hex value| Yes
-| qRand| the random for Q, if applicable, testing probable primes according to
-                    <<FIPS186-4>>, Appendix B.3.3
-                | hex value| Yes
-| testPassed| the verdict on the prime generation, signature verification, signature primitice, decryption primitive process, testing for the supplied pRand/qRand combination, see
-                    <<FIPS186-4>>, Appendix B.3.3.
-                | "passed"/"failed"| Yes
-| seed| the seed used in prime generation according to
-                    <<FIPS186-4>>, Appendix B.3.2, B.3.4, or B.3.5
-                | hex value| Yes
-| bitlens| the length of p1, p2, q1, and q2 for prime generation according to
-                    <<FIPS186-4>>, Appendix B.3.2, B.3.4, B.3.5 or the length of xP1, xP2, xQ1, and xQ2 for B.3.6
-                | array of ints| Yes
-| xP1| the prime factor p1 for Primes with Conditions - see
-                    <<FIPS186-4>>, Appendix B.3.3, B.3.4, or B.3.5, if applicable
-                | hex value| Yes
-| xP2| the prime factor p2 for Primes with Conditions - see
-                    <<FIPS186-4>>, Appendix B.3.3, B.3.4, or B.3.5, if applicable
-                | hex value| Yes
-| xP| the random number used in Step 3 of the algorithm in
-                    <<FIPS186-4>>, Appendix C.9 to generate the prime P, if applicable
-                | hex value| Yes
-| p | the private prime factor p| hex value| Yes
-| xQ1| the prime factor q1 for Primes with Conditions - see
-                    <<FIPS186-4>>, Appendix B.3.3, B.3.4, or B.3.5, if applicable
-                | hex value| Yes
-| xQ2| the prime factor q2 for Primes with Conditions - see
-                    <<FIPS186-4>>, Appendix B.3.3, B.3.4, or B.3.5, if applicable
-                | hex value| Yes
-| xQ| the random number used in Step 3 of the algorithm in
-                    <<FIPS186-4>>, Appendix C.9 to generate the prime Q, if applicable
-                | hex value| Yes
-| q | the private prime factor q| hex value| Yes
-| n | the modulus| hex value| Yes
-| d | the private exponent d| hex value| Yes
-| dmp1| the private exponent d modulo (p - 1) used in a Chinese Remainder Theorem private key| hex value| Yes
-| dmq1| the private exponent d modulo (q - 1) used in a Chinese Remainder Theorem private key| hex value| Yes
-| iqmp| the multiplicative inverse of q modulo p used in a Chinese Remainder Theorem private key| hex value| Yes
-| signature| the digital signature value| hex value| Yes
-| randomValue| The random value to be used as an input into the message randomization function as described in <<SP800-106>>.| value| Yes
-| randomValueLen| The random value's bit length.| value| Yes
-|===

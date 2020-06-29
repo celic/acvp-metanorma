@@ -5,10 +5,13 @@
 * [[[RFC2119,RFC 2119]]]
 * [[[RFC7991,RFC 7991]]]
 * [[[RFC8174,RFC 8174]]]
+* [[[RFC3447,RFC 3447]]]
 
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+  id::: ACVP
 contributor::
 contributor.person.name.initial:: B.
 contributor.person.name.surname:: Fussell
@@ -31,14 +34,11 @@ date::
 date.type:: published
 date.value:: 2019-07-01
 
-[bibliography]
-== Informative References
-
-* [[[RFC3447,RFC 3447]]]
-
 [%bibitem]
 === FIPS PUB 186-2 Digital Signature Standard (DSS)
 id:: FIPS186-2
+docid::
+  id::: FIPS186-2
 
 // <reference anchor="FIPS186-2" target="https://csrc.nist.gov/csrc/media/publications/fips/186/2/              archive/2000-01-27/documents/fips186-2.pdf">
 //   <front>
@@ -55,6 +55,8 @@ id:: FIPS186-2
 [%bibitem]
 === FIPS PUB 186-4 Digital Signature Standard (DSS)
 id:: FIPS186-4
+docid::
+  id::: FIPS186-4
 
 // <reference anchor="FIPS186-4" target="http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">
 //   <front>
@@ -71,6 +73,8 @@ id:: FIPS186-4
 [%bibitem]
 === Draft FIPS PUB 186-5 Digital Signature Standard (DSS)
 id:: FIPS186-5
+docid::
+  id::: FIPS186-5
 
 // <reference anchor="FIPS186-5" target="http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5-Draft.pdf">
 //   <front>
@@ -87,6 +91,8 @@ id:: FIPS186-5
 [%bibitem]
 === Randomized Hashing for Digital Signatures
 id:: SP800-106
+docid::
+  id::: SP800-106
 
 // <reference anchor="SP800-106" target="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/              nistspecialpublication800-106.pdf">
 //   <front>
@@ -103,6 +109,8 @@ id:: SP800-106
 [%bibitem]
 === Transitions: Recommendation for Transitioning the Use of Cryptographic Algorithms and Key Lengths, Revision 1
 id:: SP800-131A
+docid::
+  id::: SP800-131A
 
 // <reference anchor="SP800-131A" target="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/              NIST.SP.800-131Ar1.pdf">
 //   <front>
@@ -123,6 +131,8 @@ id:: SP800-131A
 [%bibitem]
 === Recommendation for Pair-Wise Key-Esablishment Schems Using Integer Factorization Cryptography, Revision 1
 id:: SP800-56B
+docid::
+  id::: SP800-56B
 
 // <reference anchor="SP800-56B" target="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/              NIST.SP.800-56Br1.pdf">
 //   <front>
@@ -144,3 +154,5 @@ id:: SP800-56B
 //   </front>
 // </reference>
 
+[bibliography]
+== Informative References
