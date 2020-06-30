@@ -19,7 +19,7 @@
 :email: christopher.celi@nist.gov
 :docfile: draft-celi-acvp-ans-x942.adoc
 :mn-document-class: ietf
-:mn-output-extensions: rfc,txt,html,nits
+:mn-output-extensions: rfc,txt,html
 
 // Singular name of the algorithm
 :spec-algorithm: ANS x9.42 KDF
