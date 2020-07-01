@@ -3,24 +3,28 @@
 :docname: acvp-ecdsa
 :name: draft-fussell-acvp-sub-ecdsa-1.0
 :abbrev: ACVP ECDSA
+:status: informational
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
 :intended-series: informational
 :revdate: 2016-06-01
+:keyword: acvp, crypto
 :forename_initials: B.F.
 :lastname: Fussell
 :fullname: Barry Fussell
 :organization: Cisco Systems, Inc.
-:city: Morrisville
-:code: 27560
+:street: 170 West Tasman Drive
+:city: San Jose
+:code: 95134
 :country: United States of America
 :email: bfussell@cisco.com
 :role: editor
-:docfile: draft-gold-acvp-sub-ecdsa.adoc
+:organization: Cisco Systems, Inc.
+:email: bfussell@cisco.com
+:docfile: draft-fussell-acvp-ecdsa.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
-:area: General
 
 // Singular name of the algorithm
 :spec-algorithm: FIPS PUB 186 ECDSA

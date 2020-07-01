@@ -2,7 +2,7 @@
 [#supported]
 == Supported ECDSA Algorithms
 
-The following ECDSA algorithms *MAY* be advertised by the ACVP compliant cryptographic module:
+The following ECDSA algorithms *MAY* be advertised by the ACVP compliant cryptographic module. The list is in the form "algorithm / mode / revision".
 
 * ECDSA / KeyGen / 1.0
 * ECDSA / KeyVer / 1.0
@@ -13,8 +13,6 @@ The following ECDSA algorithms *MAY* be advertised by the ACVP compliant cryptog
 * ECDSA / SigGen / FIPS186-5
 * ECDSA / SigVer / FIPS186-5
 * DetECDSA / SigGen / FIPS186-5
-
-NOTE: The listing is in the form "algorithm / mode / revision".
 
 [[supported_conformances]]
 === Supported Conformances for ECDSA Algorithms
