@@ -78,8 +78,6 @@ The objective of this project is to define a protocol allowing independent imple
 The development of an Automated Cryptographic Validation Protocol (ACVP) that enables the generation and 
 validation of standardized algorithm test evidence to facilitate the [modernization](https://csrc.nist.gov/Projects/Automated-Cryptographic-Validation-Testing) of [CAVP](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program#) and [CMVP](https://csrc.nist.gov/projects/cryptographic-module-validation-program).
 
-The new automated testing scope is available starting on April 8, 2019. This testing scope will eventually replace the existing Cryptographic Algorithm Validation Testing (17CAV) scope. To allow for a smooth transition <b> both scopes will be available for no less than six months, but the legacy 17CAV scope will be retired after no more than one year and may be retired earlier depending on the speed of the transition and scope of testing improvements ACVP implements relative to the legacy 17CAV scope </b>.
-
 # Status
 The demo server (demo.acvts.nist.gov) supports ACVP version 1.0. All endpoints defined in the [protocol specification](./draft-gold-acvp-protocol-spec.html) are available.
 

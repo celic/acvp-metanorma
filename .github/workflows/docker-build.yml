@@ -46,6 +46,7 @@ jobs:
         deploy_key: ${{ secrets.GH_DEPLOY_KEY }}
         publish_dir: ./documents
         force_orphan: true
+        enable_jekyll: true
         user_name: ${{ github.actor }}
         user_email: ${{ format('{0}@users.noreply.github.com', github.actor) }}
         commit_message: "${{ format('Deploy to GitHub Pages: {0}', github.sha) }}"
