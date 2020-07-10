@@ -23,9 +23,6 @@ date::
 date.type:: published
 date.value:: 2020-06-26
 
-[bibliography]
-== Informative References
-
 [%bibitem]
 === Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
 id:: SP800-56Ar3

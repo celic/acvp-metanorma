@@ -153,6 +153,3 @@ docid::
 // 	<date month="September" year="2014"></date>
 //   </front>
 // </reference>
-
-[bibliography]
-== Informative References

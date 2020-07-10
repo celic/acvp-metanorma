@@ -112,6 +112,3 @@ docid::
 // <date month="July" year="2013"></date>
 // </front>
 // ++++
-
-[bibliography]
-== Informative References

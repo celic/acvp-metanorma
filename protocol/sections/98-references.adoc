@@ -12,9 +12,6 @@
 * [[[RFC7991,RFC 7991]]]
 * [[[RFC8174,RFC 8174]]]
 
-[bibliography]
-== Informative References
-
 [%bibitem]
 === ACVP IANA Registry
 id:: acvp-iana

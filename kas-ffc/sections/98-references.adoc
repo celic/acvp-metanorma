@@ -75,6 +75,3 @@ contributor.organization.abbreviation:: NIST
 date::
 date.type:: published
 date.value:: 2018-04
-
-
-== Informative References

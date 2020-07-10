@@ -32,6 +32,3 @@ contributor.organization.abbreviation:: NIST
 date::
 date.type:: published
 date.value:: 2019-07-01
-
-[bibliography]
-== Informative References
