@@ -244,7 +244,7 @@ The demo server allows validation of the following algorithms (a superset of the
 * [IKEv1](./draft-gold-acvp-sub-kdf135-ikev1.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev1.html)
 * [IKEv2](./draft-gold-acvp-sub-kdf135-ikev2.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev2.html) 
 * [SNMP](./draft-gold-acvp-sub-kdf135-snmp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-snmp.html)
-* [SRTP](./acvp_sub_kdf135_srtp.txt) - [HTML](./acvp_sub_kdf135_srtp.html)
+* [SRTP](./draft-gold-acvp-sub-kdf135-srtp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-srtp.html)
 * [SSH](./acvp_sub_kdf135_ssh.txt) - [HTML](./acvp_sub_kdf135_ssh.html)
 * [TLS](./draft-gold-acvp-sub-kdf135-tls.txt) - [HTML](./draft-gold-acvp-sub-kdf135-tls.html)
 * [TPM](./acvp_sub_kdf135_tpm.txt) - [HTML](./acvp_sub_kdf135_tpm.html)
