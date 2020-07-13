@@ -7,7 +7,7 @@
 :ipr: trust200902
 :submissionType: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: C. C.
 :lastname: Celi
