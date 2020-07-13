@@ -253,8 +253,8 @@ The demo server allows validation of the following algorithms (a superset of the
 * [PBKDF](./draft-gold-acvp-sub-pbkdf.txt) - [HTML](./draft-gold-acvp-sub-pbkdf.html)
 
 ### Safe Primes
-* [SafePrimes KeyGen](./acvp_sub_safePrimes.txt) - [HTML](./acvp_sub_safePrimes.html) - DEMO only
-* [SafePrimes KeyVer](./acvp_sub_safePrimes.txt) - [HTML](./acvp_sub_safePrimes.html) - DEMO only
+* [SafePrimes KeyGen](./draft-gold-acvp-sub-safe-primes.txt) - [HTML](./draft-gold-acvp-sub-safe-primes.html) - DEMO only
+* [SafePrimes KeyVer](./draft-gold-acvp-sub-safe-primes.txt) - [HTML](./draft-gold-acvp-sub-safe-primes.html) - DEMO only
 
 The prod server supports all of the above except for the EdDSA variants, AES-FF3-1, KAS/KTS-IFC, and AES-GCM-SIV. Some of these algorithms have NIST SP800 series drafts in progress and will be available on the prod server when the draft becomes a standard. 
 
