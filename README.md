@@ -207,13 +207,13 @@ The demo server allows validation of the following algorithms (a superset of the
 * [KAS ECC onePassMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
 * [KAS ECC OnePassUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
 * [KAS ECC staticUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhHybrid1 Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC mqv2 Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html)  - DEMO only
-* [KAS FFC dhEphem Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhHybridOneFlow Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC mqv1 Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhOneFlow Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhStatic Sp800-56Ar3](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./adraft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC dhHybrid1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC mqv2 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html)  - DEMO only
+* [KAS FFC dhEphem Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC dhHybridOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC mqv1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC dhOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
+* [KAS FFC dhStatic Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
 * [KAS IFC KAS1-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
 * [KAS IFC KAS1-Party_V-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
 * [KAS IFC KAS2-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
