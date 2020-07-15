@@ -223,6 +223,7 @@ The demo server allows validation of the following algorithms (a superset of the
 * [KTS IFC KTS-OAEP-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
 * [KTS IFC KTS-OAEP-Party_V-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
 * [KAS KDF OneStep Sp800-56Cr1](./draft-gold-acvp-sub-kas-kdf-onestep-Sp800-56Cr1.txt) - [HTML](./draft-gold-acvp-sub-kas-kdf-onestep-Sp800-56Cr1.html) - DEMO only
+* [KAS KDF TwoStep Sp800-56Cr1](./draft-gold-acvp-sub-kas-kdf-twostep-Sp800-56Cr1.txt) - [HTML](./draft-gold-acvp-sub-kas-kdf-twostep-Sp800-56Cr1.html) - DEMO only
 * [KAS SSC ECC ephemeralUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
 * [KAS SSC ECC fullMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
 * [KAS SSC ECC fullUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
