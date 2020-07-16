@@ -3,6 +3,8 @@
 == Normative References
 
 * [[[RFC2119,RFC 2119]]]
+* [[[RFC3526,RFC 3526]]]
+* [[[RFC7919,RFC 7919]]]
 * [[[RFC7991,RFC 7991]]]
 * [[[RFC8174,RFC 8174]]]
 
@@ -23,20 +25,61 @@ date::
 date.type:: published
 date.value:: 2020-06-26
 
-[%bibitem]
-=== Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
-id:: SP800-56Ar3
-docid::
-  id::: NIST SP800-56Ar3
 
-// <reference anchor="SP800-56a"
-//     target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar3.pdf">
-//     <front>
-//         <title>Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete
-//             Logarithm Cryptography</title>
-//         <author>
-//             <organization>NIST</organization>
-//         </author>
-//         <date month="April" year="2018"/>
-//     </front>
-// </reference>
+[%bibitem]
+=== FIPS 186-4 Digital Signature Standard (DSS)
+id:: FIPS186-4
+link::
+link.type:: src
+link.content:: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf
+contributor::
+contributor.role:: publisher
+contributor.organization.name:: National Institute of Standards and Technology
+contributor.organization.abbreviation:: NIST
+date::
+date.type:: published
+date.value:: 2013-07
+
+
+[%bibitem]
+=== SP800-56Ar3 Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
+id:: SP800-56Ar3
+link::
+link.type:: src
+link.content:: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar3.pdf
+contributor::
+contributor.role:: author
+contributor.person.name.initial:: E.
+contributor.person.name.surname:: Barker
+contributor.person.affiliation.organization.name:: NIST
+contributor::
+contributor.role:: author
+contributor.person.name.initial:: L.
+contributor.person.name.surname:: Chen
+contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
+contributor.person.affiliation.organization.abbreviation:: NIST
+contributor::
+contributor.role:: author
+contributor.person.name.initial:: A.
+contributor.person.name.surname:: Roginsky
+contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
+contributor.person.affiliation.organization.abbreviation:: NIST
+contributor::
+contributor.role:: author
+contributor.person.name.initial:: A.
+contributor.person.name.surname:: Vassilev
+contributor.person.affiliation.organization.name:: National Institute of Standards and Technology
+contributor.person.affiliation.organization.abbreviation:: NIST
+contributor::
+contributor.role:: author
+contributor.person.name.initial:: R.
+contributor.person.name.surname:: Davis
+contributor.person.affiliation.organization.name:: National Security Agency
+contributor.person.affiliation.organization.abbreviation:: NSA
+contributor::
+contributor.role:: publisher
+contributor.organization.name:: National Institute of Standards and Technology
+contributor.organization.abbreviation:: NIST
+date::
+date.type:: published
+date.value:: 2018-04

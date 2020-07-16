@@ -2,6 +2,8 @@
 == Normative References
 
 * [[[RFC2119,RFC 2119]]]
+* [[[RFC7991,RFC 7991]]]
+* [[[RFC8174,RFC 8174]]]
 
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
