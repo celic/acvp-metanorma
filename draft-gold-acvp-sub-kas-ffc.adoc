@@ -56,6 +56,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::kas-ffc/sections/98-references.adoc[]
-// include::kas-ffc/sections/97-examples.adoc[]
-
-

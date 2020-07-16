@@ -2,18 +2,10 @@
 [[prereq_algs]]
 === Required Prerequisite Algorithms for KAS FFC Validations
 
-Some algorithm implementations rely on other cryptographic primitives. For
-					example, IKEv2 uses an underlying SHA algorithm. Each of these underlying
-					algorithm primitives must be validated, either separately or as part of the same
-					submission. ACVP provides a mechanism for specifying the required
-					prerequisites:
-
-
+Some algorithm implementations rely on other cryptographic primitives. For example, IKEv2 uses an underlying SHA algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:
 
 [[rereqs_table]]
-
-[cols="<,<,<,<,<"]
-. Required Prerequisite Algorithms JSON Values
+.Required Prerequisite Algorithms JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -22,47 +14,29 @@ Some algorithm implementations rely on other cryptographic primitives. For
 | prereqAlgVal| prerequistie algorithm validation| object with algorithm and valValue properties| see above| Yes
 |===
 
-
-KAS has conditional prerequisite algorithms, depending on the capabilities
-					registered:
-
+KAS has conditional prerequisite algorithms, depending on the capabilities registered:
 
 [[prereqs_requirements_table]]
-
-[cols="<,<"]
-. Prerequisite requirement conditions
+.Prerequisite requirement conditions
 |===
 | Prerequisite Algorithm| Condition
 
-| DRBG| Always REQUIRED
-| SHA| Always REQUIRED
-| DSA|  DSA.PQGGen validation REQUIRED when IUT using assurance function of "dpGen".
-						DSA.PQGVer validation REQUIRED when IUT using assurance function of "dpVal".
-						DSA.KeyPairGen validation REQUIRED when IUT using assurances functions of
-						"keyPairGen", or "keyRegen". 
-| AES-CCM| AES-CCM validation REQUIRED when IUT is performing KeyConfirmation (KC) and
-						utilizing AES-CCM.
-| CMAC| CMAC validation REQUIRED when IUT is performing KeyConfirmation (KC) and
-						utilizing CMAC.
-| HMAC| HMAC validation REQUIRED when IUT is performing KeyConfirmation (KC) and
-						utilizing HMAC.
+| DRBG| Always *REQUIRED*
+| SHA| Always *REQUIRED*
+| DSA|  DSA.PQGGen validation *REQUIRED* when IUT using assurance function of "dpGen". DSA.PQGVer validation *REQUIRED* when IUT using assurance function of "dpVal". DSA.KeyPairGen validation *REQUIRED* when IUT using assurances functions of "keyPairGen", or "keyRegen". 
+| AES-CCM| AES-CCM validation *REQUIRED* when IUT is performing KeyConfirmation (KC) and utilizing AES-CCM.
+| CMAC| CMAC validation *REQUIRED* when IUT is performing KeyConfirmation (KC) and utilizing CMAC.
+| HMAC| HMAC validation *REQUIRED* when IUT is performing KeyConfirmation (KC) and utilizing HMAC.
 |===
-
-
-
 
 [[cap_ex]]
 === KAS FFC Algorithm Capabilities JSON Values
 
-Each algorithm capability advertised is a self-contained JSON object using the
-					following values.
-
-
+Each algorithm capability advertised is a self-contained JSON object using the following values.
 
 [[caps_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC Capabilities JSON Values
+.KAS FFC Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -75,121 +49,77 @@ Each algorithm capability advertised is a self-contained JSON object using the
 						capabilities| object| See <<supported_schemes>>| No
 |===
 
-
-
-Note: Some optional values are REQUIRED depending on the algorithm. Failure to
-					provide these values will result in the ACVP server returning an error to the
-					ACVP client during registration.
-
+Note: Some optional values are *REQUIRED* depending on the algorithm. Failure to provide these values will result in the ACVP server returning an error to the ACVP client during registration.
 
 [[supported_functions]]
 === Supported KAS FFC Functions
 
-The following function types MAY be advertised by the ACVP compliant crypto
-					module:
-
+The following function types *MAY* be advertised by the ACVP compliant crypto module:
 					
 * dpGen - IUT can perform domain parameter generation (FFC only)
 * dpVal - IUT can perform domain parameter validation (FFC only)
 * keyPairGen - IUT can perform keypair generation.
 * fullVal - IUT can perform full public key validation ( <<SP800-56a>> section 5.6.2.3.1 / 5.6.2.3.3) 
 * partialVal - IUT can perform partial public key validation ( <<SP800-56a>> section 5.6.2.3.2 / 5.6.2.3.4) 
-* keyRegen - IUT can regenerate keys given a specific seed and domain
-							parameter (pqg for FFC, curve for ECC)
-
-				
-
+* keyRegen - IUT can regenerate keys given a specific seed and domain parameter (pqg for FFC, curve for ECC)
 
 [[schemes]]
 === KAS FFC Schemes
 
-
 [[supported_schemes]]
 ==== KAS FFC Scheme Capabilities JSON Values
 
- All other scheme capabilities are advertised is a self-contained JSON object using
-						the following values. Note that at least one of "noKdfNoKc", "kdfNoKc", or
-						"kdfKc" MUST be supplied with the registration. See <<supported_scheme_values>> for allowed FFC scheme types. 
-
-
+All other scheme capabilities are advertised is a self-contained JSON object using the following values. Note that at least one of "noKdfNoKc", "kdfNoKc", or "kdfKc" *MUST* be supplied with the registration. See <<supported_scheme_values>> for allowed FFC scheme types. 
 
 [[scheme_caps_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC Capabilities JSON Values
+.KAS FFC Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
 | kasRole| Roles supported for key agreement| array| initiator and/or responder| No
-| noKdfNoKc| Indicates no KDF, no KC tests are to be generated. Note this is a
-							COMPONENT mode only test. This property MUST only be used with "KAS-FFC"
-							/ "Component"| object| <<noKdfNoKc>>| Yes
-| kdfNoKc| Indicates KDF, no KC tests are to be generated. Note this is a KAS-FFC
-							only test. This mode MUST only be used for registrations with "KAS-FFC" (no
-							mode)| object| <<kdfNoKc>>| Yes
-| kdfKc| Indicates KDF, KC tests are to be generated. Note this is a KAS-FFC only
-                            test. This mode MAY only be used for registrations with "KAS-FFC" (no
-                            mode)| object| <<kdfKc>>| Yes
+| noKdfNoKc| Indicates no KDF, no KC tests are to be generated. Note this is a COMPONENT mode only test. This property *MUST* only be used with "KAS-FFC" / "Component"| object| <<noKdfNoKc>>| Yes
+| kdfNoKc| Indicates KDF, no KC tests are to be generated. Note this is a KAS-FFC only test. This mode *MUST* only be used for registrations with "KAS-FFC" (no mode)| object| <<kdfNoKc>>| Yes
+| kdfKc| Indicates KDF, KC tests are to be generated. Note this is a KAS-FFC only test. This mode *MAY* only be used for registrations with "KAS-FFC" (no mode)| object| <<kdfKc>>| Yes
 |===
-
-
-
 
 [[supported_scheme_values]]
 ==== Supported KAS FFC Schemes
 
-The following schemes MAY be advertised by the ACVP compliant crypto
-						module:
-
-
+The following schemes *MAY* be advertised by the ACVP compliant crypto module:
 						
 * dhHybrid1
 * MQV2
 * dhEphem - KeyConfirmation not supported.
 * dhHybridOneFlow
 * MQV1
-* dhOneFlow - Can only provide unilateral key confirmation party V to
-								party U.
+* dhOneFlow - Can only provide unilateral key confirmation party V to party U.
 * dhStatic
-
-					
-
 
 [[kasMode]]
 === KAS FFC Modes
 
-
 [[noKdfNoKc]]
 ==== KAS FFC noKdfNoKc
 
-Contains properties REQUIRED for "noKdfNoKc" registration. 
-
-
+Contains properties *REQUIRED* for "noKdfNoKc" registration. 
 
 [[noKdfNoKc_table]]
 
-[cols="<,<,<,<,<"]
-. NoKdfNoKc Capabilities
+.NoKdfNoKc Capabilities
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
 | parameterSet| The parameterSet options for "noKdfNoKc"| object| <<parameter_set>>| No
 |===
 
-
-
-
 [[kdfNoKc]]
 ==== KAS FFC kdfNoKc
 
-Contains properties REQUIRED for "kdfNoKc" registration. 
-
-
+Contains properties *REQUIRED* for "kdfNoKc" registration. 
 
 [[kdfNoKc_table]]
-
-[cols="<,<,<,<,<"]
-. kdfNoKc Capabilities
+.kdfNoKc Capabilities
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -197,20 +127,14 @@ Contains properties REQUIRED for "kdfNoKc" registration.
 | parameterSet| The parameterSet options for "kdfNoKc"| object| <<parameter_set>>| No
 |===
 
-
-
-
 [[kdfKc]]
 ==== KAS FFC kdfKc
 
-Contains properties REQUIRED for "kdfKc" registration. 
-
-
+Contains properties *REQUIRED* for "kdfKc" registration. 
 
 [[kdfKc_table]]
 
-[cols="<,<,<,<,<"]
-. kdfKc Capabilities
+.kdfKc Capabilities
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -219,25 +143,17 @@ Contains properties REQUIRED for "kdfKc" registration.
 | parameterSet| The parameterSet options for "kdfNoKc"| object| <<parameter_set>>| No
 |===
 
-
-
-
 [[parameterSet]]
 === Parameter Sets
-
 
 [[parameter_set]]
 ==== KAS FFC Parameter Set
 
-Each parameter set advertised is a self-contained JSON object using the
-						following values. Note that at least one parameter set ("fb", "fc") MUST be provided.
-
-
+Each parameter set advertised is a self-contained JSON object using the following values. Note that at least one parameter set ("fb", "fc") *MUST* be provided.
 
 [[parameter_set_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC Parameter Set Capabilities JSON Values
+.KAS FFC Parameter Set Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -245,32 +161,24 @@ Each parameter set advertised is a self-contained JSON object using the
 | fc| The fc parameter set| object| See <<parameter_set_details>>| Yes
 |===
 
-
-
-
 [[parameter_set_details]]
 ==== KAS FFC Parameter Set Details
 
 fb/fc changes minimum allowed values on options.
 
-fb: Len p - 2048, Len q - 224, min hash len - 224, min keySize - 112, min
-						macSize - 64
+* fb: Len p - 2048, Len q - 224, min hash len - 224, min keySize - 112, min macSize - 64
 
-fc: Len p - 2048, Len q - 256, min hash len - 256, min keySize - 128, min
-						macSize - 64
+* fc: Len p - 2048, Len q - 256, min hash len - 256, min keySize - 128, min macSize - 64
 
-"noKdfNoKc" REQUIRES "hashAlg"
+"noKdfNoKc" *REQUIRES* "hashAlg"
 
-"kdfNoKc" REQUIRES "hashAlg" and at least one valid MAC registration
+"kdfNoKc" *REQUIRES* "hashAlg" and at least one valid MAC registration
 
-"kdfKc" REQUIRES "hashAlg" and at least one valid MAC registration
-
-
+"kdfKc" *REQUIRES* "hashAlg" and at least one valid MAC registration
 
 [[parameter_set_details_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC Parameter Set Details Capabilities JSON Values
+.KAS FFC Parameter Set Details Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -278,33 +186,21 @@ fc: Len p - 2048, Len q - 256, min hash len - 256, min keySize - 128, min
 | macOption| The macOption(s) to use with "kdfNoKc" and/or "kdfKc"| object| See <<supported_macOption>>| Yes
 |===
 
-
-
-
 [[supported_hashAlg]]
 === Supported Hash Algorithm Methods
 
-The following SHA methods MAY be advertised by the ACVP compliant crypto
-					module:
+The following SHA methods *MAY* be advertised by the ACVP compliant crypto module:
 
-
-					
 * SHA2-224
 * SHA2-256
 * SHA2-384
 * SHA2-512
 
-				
-
-
 [[supported_macOption]]
 === Supported KAS FFC MAC Options
 
-The following MAC options MAY be advertised for registration under a "kdfNoKc" and
-					"kdfKc" kasMode:
+The following MAC options *MAY* be advertised for registration under a "kdfNoKc" and "kdfKc" kasMode:
 
-
-					
 * AES-CCM
 * CMAC
 * HMAC-SHA2-224
@@ -312,128 +208,69 @@ The following MAC options MAY be advertised for registration under a "kdfNoKc" a
 * HMAC-SHA2-384
 * HMAC-SHA2-512
 
-				
-
-
-
 [[macOption_details_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC Mac Option Details
+.KAS FFC Mac Option Details
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
-
-| keyLen| The supported keyLens for the selected MAC.| Domain|  AES based MACs limited to 128, 192, 256. HashAlg based MACs mod 8. All
-						keySizes minimum MUST conform to parameter set requirements See <<parameter_set_details>> . | No
-| nonceLen| The nonce len for use with AES-CCM mac| value| Input as bits, 56-104, odd byte values only (7-13). Additionally minimum MUST
-						conform to parameter set requirements See <<parameter_set_details>> . | Yes (REQUIRED for AES-CCM)
-| macLen| The mac len for use with mac| value| Input as bits, mod 8, minimum MUST conform to parameter set requirements See
-							<<parameter_set_details>> , maximum MAY NOT exceed block
-						size.. | Yes (REQUIRED for AES-CCM)
+| keyLen| The supported keyLens for the selected MAC.| Domain|  AES based MACs limited to 128, 192, 256. HashAlg based MACs mod 8. All keySizes minimum *MUST* conform to parameter set requirements See <<parameter_set_details>> . | No
+| nonceLen| The nonce len for use with AES-CCM mac| value| Input as bits, 56-104, odd byte values only (7-13). Additionally minimum *MUST* conform to parameter set requirements See <<parameter_set_details>> . | Yes (*REQUIRED* for AES-CCM)
+| macLen| The mac len for use with mac| value| Input as bits, mod 8, minimum *MUST* conform to parameter set requirements See <<parameter_set_details>> , maximum *MAY NOT* exceed block size.. | Yes (*REQUIRED* for AES-CCM)
 |===
-
-
-
 
 [[supported_kdfOption]]
 === Supported KAS FFC KDF Options
 
-The following MAC options are available for registration under a "kdfNoKc" and
-					"kdfKc" kasMode:
+The following MAC options are available for registration under a "kdfNoKc" and "kdfKc" kasMode:
 
-
-					
 * concatenation
-* asn1
-
-				
-
-
 
 [[kdfOption_details_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC KDF Option Details
+.KAS FFC KDF Option Details
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
 | oiPattern| The OI pattern to use for constructing OtherInformation.| value| See <<oiPatternConstruction>> . | No
 |===
 
-
-
-
 [[oiPatternConstruction]]
 ==== Other Information Construction
 
- Some IUTs MAY require a specific pattern for the OtherInfo portion of the KDFs
-						for KAS. An "oiPattern" is specified in the KDF registration to accommodate
-						such requirements. Regardless of the oiPattern specified, the OI bitlength
-						MUST be 240 for FFC, and 376 for ECC. The OI will be padded with random bits
-						(or the most significant bits utilized) when the specified OI pattern does
-						not meet the bitlength requirement 
+Some IUTs *MAY* require a specific pattern for the OtherInfo portion of the KDFs for KAS. An "oiPattern" is specified in the KDF registration to accommodate such requirements. Regardless of the oiPattern specified, the OI bitlength *MUST* be 240 for FFC, and 376 for ECC. The OI will be padded with random bits (or the most significant bits utilized) when the specified OI pattern does not meet the bitlength requirement 
 
 Pattern candidates:
-
-
 						
 * literal[123456789ABCDEF] 
-** uses the specified hex within "[]". literal[123456789ABCDEF]
-										substitutes "123456789ABCDEF" in place of the field
+  ** uses the specified hex within "[]". literal[123456789ABCDEF] substitutes "123456789ABCDEF" in place of the field
 
-							
 * uPartyInfo 
-** uPartyId { || dkmNonce } 
-*** dkmNonce is provided by party u for static
-												schemes
+  ** uPartyId { || dkmNonce } 
+    *** dkmNonce is provided by party u for static schemes
 
-									
-
-							
 * vPartyInfo 
-** vPartyId
-
+  ** vPartyId
 							
 * counter 
-** 32bit counter starting at "1" (0x00000001)
+  ** 32bit counter starting at "1" (0x00000001)
 
-							
+Example (Note that party U is the server in this case "434156536964", party V is the IUT "a1b2c3d4e5", using an FFC non-static scheme):
 
-					
-
-Example (Note that party U is the server in this case "434156536964", party V
-						is the IUT "a1b2c3d4e5", using an FFC non-static scheme):
-
-
-						
-* "concatenation" :
-								"literal[123456789CAFECAFE]||uPartyInfo||vPartyInfo"
-
-					
+* "concatenation" : "literal[123456789CAFECAFE]||uPartyInfo||vPartyInfo"
 
 Evaluated as:
-
-
 						
 * "123456789CAFECAFE434156536964a1b2c3d4e5b16c5f78ef56e8c14a561"
-* "b16c5f78ef56e8c14a561" are random bits applied to meet length
-								requirements
-
-					
-
+  ** "b16c5f78ef56e8c14a561" are random bits applied to meet length requirements
 
 [[supported_kcOption]]
 === Supported KAS FFC KC Options
 
-The following KC options are available for registration under a "kdfKc"
-					kasMode:
-
-
+The following KC options are available for registration under a "kdfKc" kasMode:
 
 [[kcOption_details_table]]
 
-[cols="<,<,<,<,<"]
-. KAS FFC KC Option Details Capabilities
+.KAS FFC KC Option Details Capabilities
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
@@ -442,17 +279,13 @@ The following KC options are available for registration under a "kdfKc"
 | nonceType| The nonce type(s) the IUT is to use for KeyConfirmation.| array| randomNonce, timestamp, sequence, timestampSequence| No
 |===
 
-
-
-
 [[app-reg-ex]]
 === Example KAS FFC Capabilities JSON Object
 
 The following is a example JSON object advertising support for KAS FFC.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                        
 {
 	"algorithm": "KAS-FFC",
 	"revision": "1.0",
@@ -568,20 +401,15 @@ The following is a example JSON object advertising support for KAS FFC.
 		}
 	}
 }
-            
-                    
-....
-
-
+----
 
 [[app-reg-component-ex]]
 === Example KAS FFC Component Capabilities JSON Object
 
 The following is a example JSON object advertising support for KAS FFC.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                        
 {
 	"algorithm": "KAS-FFC",
 	"mode": "Component",
@@ -635,24 +463,16 @@ The following is a example JSON object advertising support for KAS FFC.
 		}
 	}
 }
-            
-                    
-....
-
-
+----
 
 [[generation_reqs_per_scheme]]
 == Generation requirements per party per scheme
 
-The various schemes of KAS all have their own requirements as to keys and nonces per
-				scheme, per party. The below table demonstrates those generation requirements:
-
-
+The various schemes of KAS all have their own requirements as to keys and nonces per scheme, per party. The below table demonstrates those generation requirements:
 
 [[scheme_generation_requirements]]
 
-[cols="<,<,<,<,<,<,<,<,<"]
-. Required Party Generation Obligations
+.Required Party Generation Obligations
 |===
 | Scheme| KasMode| KasRole| KeyConfirmationRole| KeyConfirmationDirection| StaticKeyPair| EphemeralKeyPair| EphemeralNonce| DkmNonce
 
