@@ -4,10 +4,8 @@
 
 After the ACVP client downloads and processes a vector set, it *MUST* send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
-
-[cols="<,<,<,<"]
 [[vr_top_table]]
-. Vector Set Response JSON Object
+.Vector Set Response JSON Object
 |===
 | JSON Value| Description| JSON type | Optional
 
@@ -16,14 +14,10 @@ After the ACVP client downloads and processes a vector set, it *MUST* send the r
 | testGroups| Array of JSON objects that represent each test vector group. See <<vr_group_table>>.| array | No
 |===
 
-
 The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
 
-
-
-[cols="<,<,<,<"]
 [[vr_group_table]]
-. Vector Set Group Response JSON Object
+.Vector Set Group Response JSON Object
 |===
 | JSON Value| Description| JSON type | Optional
 
@@ -31,13 +25,10 @@ The testGroups section is used to organize the ACVP client response in a similar
 | tests| Array of JSON objects that represent each test vector group.  See <<vr_tc_table>>. | array | No
 |===
 
-
 The testCase section is used to organize the ACVP client response in a similar manner to how it receives vectors.  Several algorithms *SHALL* require the client to send back group level properties in their response.  This structure helps accommodate that.
 
-
-[cols="<,<,<,<"]
 [[vr_tc_table]]
-. Vector Set Test Case Response JSON Object
+.Vector Set Test Case Response JSON Object
 |===
 | JSON Value| Description| JSON type | Optional
 
@@ -58,12 +49,11 @@ The testCase section is used to organize the ACVP client response in a similar m
 
 The following is an example JSON object for KAS-ECC test results sent from the crypto module to the ACVP server.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+---- 
 [
   {
-    "acvVersion": <acvp-version>
+    "acvVersion": "version"
   },
   {
     "vsId": 0,
@@ -95,7 +85,4 @@ The following is an example JSON object for KAS-ECC test results sent from the c
     ]
   }
 ]
-            
-                    
-....
-
+----

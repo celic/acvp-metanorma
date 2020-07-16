@@ -1,15 +1,12 @@
 
 [[prereq_algs]]
-=== Prerequisite Algorithms for KAS ECC Validations
+=== Prerequisite Algorithms
 
 Some algorithm implementations rely on other cryptographic primitives. For example, IKEv2 uses an underlying SHA algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same 	submission. ACVP provides a mechanism for specifying the required prerequisites:
 
-
-
 [[rereqs_table]]
 
-[cols="<,<,<,<,<"]
-. Prerequisite Algorithms JSON Values
+.Prerequisite Algorithms JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -18,19 +15,14 @@ Some algorithm implementations rely on other cryptographic primitives. For examp
 | prereqAlgVal| prerequistie algorithm validation| object with algorithm and valValue properties| see above| Yes
 |===
 
-
-
 [[cap_ex]]
-=== KAS ECC Algorithm Capabilities JSON Values
+=== Algorithm Capabilities JSON Values
 
 Each algorithm capability advertised is a self-contained JSON object using the following values.
 
-
-
 [[caps_table]]
 
-[cols="<,<,<,<,<"]
-. KAS ECC Capabilities JSON Values
+.Capabilities JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -43,9 +35,7 @@ Each algorithm capability advertised is a self-contained JSON object using the f
 | domainParameterGen| Array of IUT supported domain paameter generation methods. | array | P-192, P-224, P-256, P-384, P-521, K-163, K-233, K-283, K-409, K-571, B-163, B-233, B-283, B-409, B-571| No
 |===
 
-
 Note: Some optional values are *REQUIRED* depending on the algorithm. Failure to provide these values will result in the ACVP server returning an error to the ACVP client during registration.
-
 
 [[supported_functions]]
 === Supported KAS ECC Functions
@@ -57,9 +47,7 @@ The following function types *MAY* be advertised by the ACVP compliant crypto mo
 * partialVal - IUT can perform partial public key validation ([SP800-56Ar3] section 5.6.2.3).
 
 * fullVal - IUT can perform full public key validation (
-[SP800-56Ar3] section 5.6.2.3).
-
-
+<<SP800-56Ar3>> section 5.6.2.3).
 
 [[schemes]]
 === KAS ECC Schemes
@@ -77,12 +65,8 @@ All other scheme capabilities are advertised as a self-contained JSON object usi
 * onePassUnified
 * staticUnified
 
-
-
-
-[cols="<,<,<,<,<"]
 [[scheme_caps_table]]
-. KAS ECC Capabilities JSON Values
+.Capabilities JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -97,8 +81,7 @@ All other scheme capabilities are advertised as a self-contained JSON object usi
 
 Note that AT LEAST one KDF Method is required for KAS schemes.  The following *MAY* be advertised by the ACVP compliant crypto module:
 
-[cols="<,<,<,<,<"]
-. KDF Options
+.KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -109,8 +92,7 @@ Note that AT LEAST one KDF Method is required for KAS schemes.  The following *M
 [[onestepkdf]]
 ====== One Step KDF Capabilities
 
-[cols="<,<,<,<,<"]
-. One Step KDF Options
+.One Step KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -119,11 +101,8 @@ Note that AT LEAST one KDF Method is required for KAS schemes.  The following *M
 | encoding| The encoding type to use with fixedInfo construction.  Note concatenation is currently supported.  ASN.1 should be coming. | array of string| concatenation| No
 |===
 
-
-
-[cols="<,<,<,<,<"]
 [[auxfunc]]
-. AuxFunction Options
+.AuxFunction Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -134,20 +113,17 @@ Note that AT LEAST one KDF Method is required for KAS schemes.  The following *M
 [[twostepkdf]]
 ====== Two Step KDF Capabilities
 
-[cols="<,<,<,<,<"]
-. Two Step KDF Options
+.Two Step KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
 | capabilities| The capabilities supported for the Two Step KDF.| array of <<twostepcapcap>>| See <<twostepcapcap>>| No
 |===
 
-
 Note this capabilities object is very similar to the capability object from SP800-108.
 
-[cols="<,<,<,<,<"]
 [[twostepcapcap]]
-. TwoStepCapabilities Options
+.TwoStepCapabilities Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -163,12 +139,10 @@ Note this capabilities object is very similar to the capability object from SP80
 | requiresEmptyIv| The KDF requires an empty IV (feedback mode). | boolean| true, false| Yes
 |===
 
-
 [[keyconfirmmethod]]
 ===== Supported KeyConfirmation Method
 
-[cols="<,<,<,<,<"]
-. KAS ECC KeyConfirmation Capabilities JSON Values
+.KAS ECC KeyConfirmation Capabilities JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -186,34 +160,33 @@ Pattern candidates:
 
 * literal[0123456789ABCDEF]
 
-** uses the specified hex within "[]". literal[0123456789ABCDEF]
+  ** uses the specified hex within "[]". literal[0123456789ABCDEF]
 substitutes "0123456789ABCDEF" in place of the field
 
 * uPartyInfo
 
-** uPartyId { || dkmNonce } { || c }
+  ** uPartyId { || dkmNonce } { || c }
 
 * vPartyInfo
 
-** vPartyId { || dkmNonce } { || c }
+  ** vPartyId { || dkmNonce } { || c }
 
 * context
 
-** Random value chosen by ACVP server to represent the context.
+  ** Random value chosen by ACVP server to represent the context.
 
 * algorithmId
 
-** Random value chosen by ACVP server to represent the
+  ** Random value chosen by ACVP server to represent the
 algorithmId.
 
 * label
 
-** Random value chosen by ACVP server to represent the label.
+  ** Random value chosen by ACVP server to represent the label.
 
 Example (Note that party U is the server in this case "434156536964", party V is the IUT "a1b2c3d4e5"):
 
-* "concatenation" :
-"literal[123456789CAFECAFE]||uPartyInfo||vPartyInfo"
+* "concatenation" : "literal[123456789CAFECAFE]||uPartyInfo||vPartyInfo"
 
 Evaluated as:
 
@@ -224,8 +197,7 @@ Evaluated as:
 
 Note that AT LEAST one mac method must be supplied when making use of Key Confirmation.
 
-[cols="<,<,<,<,<"]
-. MAC Method Options
+.MAC Method Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -247,16 +219,13 @@ Note that AT LEAST one mac method must be supplied when making use of Key Confir
 [[supmacopt]]
 ====== Supported MAC Options
 
-[cols="<,<,<,<,<"]
-. MAC Method Base Options
+.MAC Method Base Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
-| keyLen| The amount of bits from the DKM to pass into the KeyConfirmation MAC function.| integer| 128 - 512.  Note that the DKM is *Required* to have at least 8 bits available after subtracting the keyLen specified.| No
+| keyLen| The amount of bits from the DKM to pass into the KeyConfirmation MAC function.| integer| 128 - 512.  Note that the DKM is *REQUIRED* to have at least 8 bits available after subtracting the keyLen specified.| No
 | macLen| The amount of bits to use as the tag from the MAC function.| integer| 64 - 512. | No
 |===
-
-
 
 [[app-reg-ex]]
 === Example KAS-ECC Registration
@@ -264,8 +233,8 @@ Note that AT LEAST one mac method must be supplied when making use of Key Confir
 The following is a example JSON object advertising support for KAS ECC.
 
 [align=left,alt=,type=]
-....
-                        
+[source,json]
+----
 {
   "algorithm": "KAS-ECC",
   "revision": "Sp800-56Ar3",
@@ -419,22 +388,16 @@ The following is a example JSON object advertising support for KAS ECC.
     "P-192"
   ]
 }    
-                    
-....
-
-
+----
 
 [[generation_reqs_per_scheme]]
 == Generation Requirements per Party per Scheme
 
 The various schemes of KAS all have their own requirements as to keys and nonces per scheme, per party. The below table demonstrates those generation requirements:
 
-
-
 [[scheme_generation_requirements]]
 
-[cols="<,<,<,<,<,<,<,<,<"]
-. Required Party Generation Obligations
+.Required Party Generation Obligations
 |===
 | Scheme| KasMode| KasRole| KeyConfirmationRole| KeyConfirmationDirection| StaticKeyPair| EphemeralKeyPair| EphemeralNonce| DkmNonce
 

@@ -32,7 +32,7 @@
 include::common/common-sections/00-abstract.adoc[]
 include::common/common-sections/01-intro.adoc[]
 include::common/common-sections/02-conventions.adoc[]
-// include::kas-ecc-56ar3/sections/03-supported.adoc[]
+ include::kas-ecc-56ar3/sections/03-supported.adoc[]
 include::kas-ecc-56ar3/sections/04-testtypes.adoc[]
 include::common/common-sections/05-capabilities-description.adoc[]
 include::common/common-sections/051-prerequisites.adoc[]
@@ -46,6 +46,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::kas-ecc-56ar3/sections/98-references.adoc[]
-// include::kas-ecc/sections/97-examples.adoc[]
-
-
