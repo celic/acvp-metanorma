@@ -1,17 +1,12 @@
 [[vector_responses]]
 == Test Vector Responses
 
-After the ACVP client downloads and processes a vector set, it must send the response
-                vectors back to the ACVP server. The following table describes the JSON object that
-                represents a vector set response.
-
-
+After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
 [[vr_top_table]]
 === Vector Set Response JSON Object
 
-[cols="<,<,<"]
-// . Vector Set Response JSON Object
+.Vector Set Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
@@ -20,18 +15,12 @@ After the ACVP client downloads and processes a vector set, it must send the res
 | testGroups| Array of JSON objects that represent each test vector group. See <<vr_group_table>>| array
 |===
 
-
-
-The testGroups section is used to organize the ACVP client response in a similar
-                manner to how it receives vectors. Several algorithms SHALL require the client to
-                send back group level properties in their response. This structure helps accommodate
-                that.
+The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the  client to send back group level properties in their response. This structure helps accommodate that.
 
 [[vr_group_table]]
 === Vector Set Group Response JSON Object
 
-[cols="<,<,<"]
-// . Vector Set Group Response JSON Object
+.Vector Set Group Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
@@ -39,20 +28,15 @@ The testGroups section is used to organize the ACVP client response in a similar
 | tests| The tests associated to the group specified in tgId| value
 |===
 
-
-
-
 [[app-results-ex]]
 === Example Test Results JSON Object
 
-The following is a example JSON object for KAS ECC test results sent from the
-                    crypto module to the ACVP server.
+The following is a example JSON object for KAS ECC test results sent from the crypto module to the ACVP server.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                
 [{
-		"acvVersion": <acvp-version>
+		"acvVersion": "1.0"
 	},
 	{
 		"vsId": 1564,
@@ -102,23 +86,17 @@ The following is a example JSON object for KAS ECC test results sent from the
 		]
 	}
 ]
-            
-                    
-....
-
-
+----
 
 [[app-results-component-ex]]
 === Example Test Results Component JSON Object
 
-The following is a example JSON object for KAS ECC Component test results sent
-                    from the crypto module to the ACVP server.
+The following is a example JSON object for KAS ECC Component test results sent from the crypto module to the ACVP server.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                
 [{
-		"acvVersion": <acvp-version>
+		"acvVersion": "1.0"
 	},
 	{
 		"vsId": 1564,
@@ -157,7 +135,4 @@ The following is a example JSON object for KAS ECC Component test results sent
 		]
 	}
 ]
-            
-                    
-....
-
+----

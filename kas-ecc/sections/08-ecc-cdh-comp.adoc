@@ -3,45 +3,30 @@
 
 The ECC CDH Component Test
 
-
 [[eccCompCap]]
 === ECC CDH Component Capabilities JSON Values
 
-Each algorithm capability advertised is a self-contained JSON object using the
-                    following values.
-
+Each algorithm capability advertised is a self-contained JSON object using the following values.
 
 
 [[eccComp_caps_table]]
-
-[cols="<,<,<,<,<"]
-. KAS ECC Component Capabilities JSON Values
+.KAS ECC Component Capabilities JSON Values
 |===
 |JSON Value|Description|JSON type|Valid Values|Optional
-
 |algorithm|The algorithm under test|value|KAS-ECC|No
-
 |mode|The algorithm mode|value|CDH-Component|No
- 
 |revision|The algorithm testing revision to use.|value|"1.0"|No
-
 |prereqVals|Prerequisite algorithm validations|array of prereqAlgVal objects|See <<prereq_algs>>|No
-
 |curve|Array of supported curves|array|See <<supported_curves>>|No
 |===
-
-
-
 
 [[app-eccComponent-reg-ex]]
 ==== Example KAS ECC CDH-Component Capabilities JSON Object
 
-The following is a example JSON object advertising support for KAS ECC
-                        CDH-Component.
+The following is a example JSON object advertising support for KAS ECC CDH-Component.
 
-[align=left,alt=,type=]
-....
-                            
+[source,json]
+----
 {
 	"algorithm": "KAS-ECC",
 	"mode": "CDH-Component",
@@ -53,99 +38,62 @@ The following is a example JSON object advertising support for KAS ECC
 	"function": ["keyPairGen", "dpGen"],
 	"curve": ["p-192", "k-163", "b-163"]
 }
-            
-                        
-....
-
-
+----
 
 [[eccCompVectors]]
 === ECC CDH Component TestVectors JSON Values
 
-
-
 [[eccComp_vector_table]]
 
-[cols="<,<,<,<,<"]
-. KAS ECC CDH Component TestVectors JSON Values
+.KAS ECC CDH Component TestVectors JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
 | algorithm| The algorithm under test| value| KAS-ECC| No
- 
 | mode| The algorithm mode under test| value| CDH-Component| No
-
 | revision| The algorithm testing revision to use.| value| "1.0"| No
- 
 | testGroups| Array of individual test group JSON objects, which are defined in <<eccCompTestGroup>>| Array| Array of test group information| No
 |===
-
-
-
 
 [[eccCompTestGroup]]
 ==== ECC CDH Component TestGroup JSON Values
 
-
-
 [[eccComp_testGroup_table]]
 
-[cols="<,<,<,<,<"]
-. KAS ECC CDH Component TestGroup JSON Values
+.KAS ECC CDH Component TestGroup JSON Values
 |===
 | JSON Value| Description| JSON type| Valid Values| Optional
 
-| testType| The test type expected within the group. AFT is the only valid value for
-                            ECC Component.| value| AFT| No
-
+| testType| The test type expected within the group. AFT is the only valid value for ECC Component.| value| AFT| No
 | curve| The curve used in the test group| value| P-224, P-256, P-384, P-521, K-233, K-283, K-409, K-571, B-233, B-283, B-409, B-571| No
- 
 | tests| Array of individual test vector JSON objects, which are defined in <<eccCompTestCase>>| array|  | No 
 |===
-
-
-
 
 [[eccCompTestCase]]
 ==== ECC CDH Component TestCase JSON Values
 
-
-
 [[eccComp_testCase_table]]
-
-[cols="<,<,<,<"]
-. KAS ECC CDH Component TestCase JSON Values
+.KAS ECC CDH Component TestCase JSON Values
 |===
 | JSON Value| Description| Valid Values| Optional
 
-| tcId| Numeric identifier for the test case, unique across the entire vector
-                            set.| value| No
- 
+| tcId| Numeric identifier for the test case, unique across the entire vector set.| value| No
 | publicServerX| The X coordinate of the server's public key| value| Yes
- 
 | publicServerY| The Y coordinate of the server's public key| value| Yes
- 
 | publicIutX| The X coordinate of the iut's public key| value| No
-| 
 | publicIutY| The Y coordinate of the iut's public key| value| No
- 
 | z| The shared secret Z| value| No
 |===
-
-
-
 
 [[app-eccComponent-vs-ex]]
 ==== Example KAS ECC CDH-Component Test Vectors JSON Object
 
-The following is a example JSON object for KAS ECC CDH-Component test vectors
-                        sent from the ACVP server to the crypto module.
+The following is a example JSON object for KAS ECC CDH-Component test vectors sent from the ACVP server to the crypto module.
 
-[align=left,alt=,type=]
-....
-                            
+[source,json]
+----
 [{
-		"acvVersion": <acvp-version>
+		"acvVersion": "1.0"
 	},
 	{
 		"vsId": 1750,
@@ -185,97 +133,62 @@ The following is a example JSON object for KAS ECC CDH-Component test vectors
 		]
 	}
 ]
-            
-                        
-....
-
-
+----
 
 [[cdh_vector_responses]]
 === KAS CDH-Component Test Vector Responses
 
-After the ACVP client downloads and processes a vector set, it must send the
-                    response vectors back to the ACVP server. The following table describes the JSON
-                    object that represents a vector set response.
-
-
+After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
 [[vr_cdh_top_table]]
 ==== CDH Component Vector Set Response JSON Object
 
-[cols="<,<,<"]
-// . CDH Component Vector Set Response JSON Object
+.CDH Component Vector Set Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
 | acvVersion| Protocol version identifier| value
-
 | vsId| Unique numeric identifier for the vector set| value
- 
 | testGroups| Array of JSON objects that represent each test vector group. See <<vr_cdh_group_table>>| array
 |===
 
-
-
-The testGroups section is used to organize the ACVP client response in a similar
-                    manner to how it receives vectors. Several algorithms SHALL require the client
-                    to send back group level properties in their response. This structure helps
-                    accommodate that.
+The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
 
 [[vr_cdh_group_table]]
 ==== CDH Component Vector Set Group Response JSON Object
 
-[cols="<,<,<"]
-// . CDH Component Vector Set Group Response JSON Object
+.CDH Component Vector Set Group Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
 | tgId| The test group Id| value
-
-| tests| The tests associated to the group specified in tgId| value
+ tests| The tests associated to the group specified in tgId| value
 |===
 
-
-
-Each test group contains an array of one or more test cases. Each test case is a
-                    JSON object that represents a single test vector to be processed by the ACVP
-                    client. The following table describes the JSON elements for each DRBG test
-                    vector.
-
-
+Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DRBG test vector.
 
 [[vs_tr_table]]
 ==== CDH Component Test Case Results JSON Object
 
-[cols="<,<,<,<"]
-// . CDH Component Test Case Results JSON Object
+.CDH Component Test Case Results JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
-| tcId| Numeric identifier for the test case, unique across the entire vector
-                        set.| value| No
-
+| tcId| Numeric identifier for the test case, unique across the entire vector set.| value| No
 | publicIutX| x value of the IUT public key | value| No
- 
 | publicIutY| x value of the IUT public key | value| No
- 
 | z| Computed shared secret Z| value| No
 |===
-
-
-
 
 [[app-eccComponent-results-ex]]
 === Example KAS ECC CDH Component Test Results JSON Object
 
-The following is a example JSON object for KAS ECC CDH Component test results
-                    sent from the crypto module to the ACVP server.
+The following is a example JSON object for KAS ECC CDH Component test results sent from the crypto module to the ACVP server.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                        
 [{
-		"acvVersion": <acvp-version>
+		"acvVersion": "1.0"
 	},
 	{
 		"vsId": 1750,
@@ -309,7 +222,4 @@ The following is a example JSON object for KAS ECC CDH Component test results
 		]
 	}
 ]
-            
-                    
-....
-
+----

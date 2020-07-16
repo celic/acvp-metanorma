@@ -4,4 +4,5 @@
 
 The following key derivation functions *MAY* be advertised by the ACVP compliant cryptographic module:
 
-* KAS-ECC (Revision 1.0)
+* KAS-ECC / null / 1.0
+* KAS-ECC / Component / 1.0
