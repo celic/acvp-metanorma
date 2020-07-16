@@ -38,6 +38,22 @@ date::
 date.type:: published
 date.value:: 2019-07-01
 
+
+[%bibitem]
+=== FIPS 186-4 Digital Signature Standard (DSS)
+id:: FIPS186-4
+link::
+link.type:: src
+link.content:: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf
+contributor::
+contributor.role:: publisher
+contributor.organization.name:: National Institute of Standards and Technology
+contributor.organization.abbreviation:: NIST
+date::
+date.type:: published
+date.value:: 2013-07
+
+
 [%bibitem]
 === SP800-56Ar3 Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
 id:: SP800-56a
