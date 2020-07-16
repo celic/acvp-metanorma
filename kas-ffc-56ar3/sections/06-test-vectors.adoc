@@ -6,11 +6,8 @@ that use the same key size would be grouped together. The Test Group JSON object
 
 The test group for KAS/KTS FFC is as follows:
 
-
 [[vs_tg_table5]]
-
-[cols="<,<,<,<"]
-. Vector Group JSON Object
+.Vector Group JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
@@ -33,14 +30,12 @@ The test group for KAS/KTS FFC is as follows:
 | tests| The tests for the group.| Array of objects, See <<tvjs>>.| No
 |===
 
-
 [[kdfconfig]]
 ==== KDF Configuration JSON Schema
 
 Describes the KDF configuration for use under the test group.
 
-[cols="<,<,<,<"]
-. KdfConfiguration JSON Object
+.KdfConfiguration JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
@@ -60,8 +55,7 @@ Describes the KDF configuration for use under the test group.
 
 Describes the key confirmation MAC configuration for use under the test group.
 
-[cols="<,<,<,<,<"]
-. MacConfiguration JSON Object
+.MacConfiguration JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
@@ -70,18 +64,14 @@ Describes the key confirmation MAC configuration for use under the test group.
 | macLen| The number of bits to use for the MAC tag. | value | No
 |===
 
-
 [[tvjs]]
 === Test Case JSON Schema
 
 Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each KAS/KTS FFC test vector.
 
-
-
 [[vs_tc_table5]]
 
-[cols="<,<,<,<"]
-. Test Case JSON Object
+.Test Case JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
@@ -106,8 +96,7 @@ Each test group contains an array of one or more test cases. Each test case is a
 
 KDF specific options used for the test case.
 
-[cols="<,<,<,<"]
-. KDF Parameter JSON Object
+.KDF Parameter JSON Object
 |===
 | JSON Value| Description| JSON type| Optional
 
@@ -119,15 +108,13 @@ KDF specific options used for the test case.
 | label| The random "label" used for the test case when applicable to the fixedInfo pattern. | value| Yes
 |===
 
-
 [[app-vs-ex]]
 === Example Test Vectors JSON Object KAS-FFC
 
 The following is a example JSON object for KAS-FFC test vectors sent from the ACVP server to the crypto module.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+----                         
 {
   "vsId": 0,
   "algorithm": "KAS-FFC",
@@ -417,8 +404,4 @@ The following is a example JSON object for KAS-FFC test vectors sent from the AC
     }
   ]
 }
-            
-                    
-....
-
-
+----
