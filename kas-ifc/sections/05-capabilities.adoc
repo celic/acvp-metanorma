@@ -7,8 +7,7 @@ Some algorithm implementations rely on other cryptographic primitives. For examp
 
 [[rereqs_table]]
 
-[cols="<,<,<,<,<"]
-. Prerequisite Algorithms JSON Values
+.Prerequisite Algorithms JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -18,18 +17,14 @@ Some algorithm implementations rely on other cryptographic primitives. For examp
 |===
 
 
-
 [[cap_ex]]
 === KAS IFC Algorithm Capabilities JSON Values
 
 Each algorithm capability advertised is a self-contained JSON object using the following values.
 
-
-
 [[caps_table]]
 
-[cols="<,<,<,<,<"]
-. KAS ECC Capabilities JSON Values
+.KAS ECC Capabilities JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -44,7 +39,6 @@ Each algorithm capability advertised is a self-contained JSON object using the f
 
 Note: Some optional values are *REQUIRED* depending on the algorithm. Failure to provide these values will result in the ACVP server returning an error to the ACVP client during registration.
 
-
 [[supported_functions]]
 === Supported KAS IFC Functions
 
@@ -53,8 +47,6 @@ The following function types *MAY* be advertised by the ACVP compliant crypto mo
 * keyPairGen - IUT can perform keypair generation.
 
 * partialVal - IUT can perform partial public key validation ([SP800-56Br2] section 6.4.2.2).
-
-
 
 [[schemes]]
 === KAS IFC Schemes
@@ -84,11 +76,8 @@ KTS Schemes
 
 * KTS-OAEP-Party_V-confirmation - requires ktsMethod, macMethods
 
-
-
-[cols="<,<,<,<,<"]
 [[scheme_caps_table]]
-. KAS IFC Capabilities JSON Values
+.KAS IFC Capabilities JSON Values
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -105,10 +94,8 @@ KTS Schemes
 
 Note that *AT LEAST* one Key Generation method is required.  The following *MAY* be advertised by the ACVP compliant crypto module:
 
-
-[cols="<,<,<,<,<"]
 [[keygen_options_table]]
-. Key Generation Options
+.Key Generation Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -123,8 +110,7 @@ Note that *AT LEAST* one Key Generation method is required.  The following *MAY*
 [[keygenobjcap]]
 ====== KeyGenerationMethod Object Capabilities
 
-[cols="<,<,<,<,<"]
-. Key Generation Object Options
+.Key Generation Object Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -137,8 +123,7 @@ Note that *AT LEAST* one Key Generation method is required.  The following *MAY*
 
 Note that *AT LEAST* one KDF Method is required for KAS schemes.  The following *MAY* be advertised by the ACVP compliant crypto module:
 
-[cols="<,<,<,<,<"]
-. KDF Options
+.KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -149,8 +134,7 @@ Note that *AT LEAST* one KDF Method is required for KAS schemes.  The following 
 [[onestepkdf]]
 ====== One Step KDF Capabilities
 
-[cols="<,<,<,<,<"]
-. One Step KDF Options
+.One Step KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -159,11 +143,8 @@ Note that *AT LEAST* one KDF Method is required for KAS schemes.  The following 
 | encoding| The encoding type to use with fixedInfo construction.  Note concatenation is currently supported.  ASN.1 should be coming. | array of string| concatenation| No
 |===
 
-
-
-[cols="<,<,<,<,<"]
 [[auxfunc]]
-. AuxFunction Options
+.AuxFunction Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -174,8 +155,7 @@ Note that *AT LEAST* one KDF Method is required for KAS schemes.  The following 
 [[twostepkdf]]
 ====== Two Step KDF Capabilities
 
-[cols="<,<,<,<,<"]
-. Two Step KDF Options
+.Two Step KDF Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -185,9 +165,8 @@ Note that *AT LEAST* one KDF Method is required for KAS schemes.  The following 
 
 Note this capabilities object is very similar to the capability object from SP800-108.
 
-[cols="<,<,<,<,<"]
 [[twostepcapcap]]
-. TwoStepCapabilities Options
+.TwoStepCapabilities Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -209,8 +188,7 @@ Note this capabilities object is very similar to the capability object from SP80
 
 Note that this method is *REQUIRED* when testing KTS schemes.
 
-[cols="<,<,<,<,<"]
-. KTS Method Options
+.KTS Method Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -267,8 +245,7 @@ Evaluated as:
 
 Note that *AT LEAST* one mac method must be supplied when making use of Key Confirmation.
 
-[cols="<,<,<,<,<"]
-. MAC Method Options
+.MAC Method Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -290,8 +267,7 @@ Note that *AT LEAST* one mac method must be supplied when making use of Key Conf
 [[supmacopt]]
 ====== Supported MAC Options
 
-[cols="<,<,<,<,<"]
-. MAC Method Base Options
+.MAC Method Base Options
 |===
 | JSON Value| Description| JSON Type| Valid Values| Optional
 
@@ -299,16 +275,13 @@ Note that *AT LEAST* one mac method must be supplied when making use of Key Conf
 | macLen| The amount of bits to use as the tag from the MAC function.| integer| 64 - 512. | No
 |===
 
-
-
 [[app-reg-ex]]
 === Example KAS-IFC Registration
 
 The following is a example JSON object advertising support for KAS IFC.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+---- 
 {
   "algorithm": "KAS-IFC",
   "revision": "Sp800-56Br2",
@@ -406,17 +379,15 @@ The following is a example JSON object advertising support for KAS IFC.
     }
   }
 } 
-                    
-....
+----
 
 [[app-reg-ex1]]
 === Example KTS-IFC Registration
 
 The following is a example JSON object advertising support for KTS IFC.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+---- 
 {
   "algorithm": "KTS-IFC",
   "revision": "Sp800-56Br2",
@@ -480,19 +451,15 @@ The following is a example JSON object advertising support for KTS IFC.
     }
   }
 }
-                    
-....
-
+----
 
 [[generation_reqs_per_scheme]]
 == Generation Requirements per Party per Scheme
 
 The various schemes of KAS/KTS all have their own requirements as to keys and nonces per scheme, per party. The below table demonstrates those generation requirements:
 
-
-[cols="<,<,<,<,<,<,<,<"]
 [[scheme_generation_requirements]]
-. Required Party Generation Obligations
+.Required Party Generation Obligations
 |===
 | Scheme| KasMode| KasRole| KeyConfirmationRole| KeyConfirmationDirection| KeyPair| Nonce| Generates Cipher Text
 

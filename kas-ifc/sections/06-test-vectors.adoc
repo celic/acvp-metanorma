@@ -6,12 +6,8 @@ that use the same key size would be grouped together. The Test Group JSON object
 
 The test group for KAS/KTS IFC is as follows:
 
-
-
-
-[cols="<,<,<,<"]
 [[vs_tg_table5]]
-. Vector Group JSON Object
+.Vector Group JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -30,14 +26,12 @@ The test group for KAS/KTS IFC is as follows:
 | tests| The tests for the group.| Array of objects, See <<tvjs>>.| No
 |===
 
-
 [[kdfconfig]]
 ==== KDF Configuration JSON Schema
 
 Describes the KDF configuration for use under the test group.
 
-[cols="<,<,<,<"]
-. KdfConfiguration JSON Object
+.KdfConfiguration JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -57,8 +51,7 @@ Describes the KDF configuration for use under the test group.
 
 Describes the KTS configuration for use under the test group.
 
-[cols="<,<,<,<,<"]
-. KtsConfiguration JSON Object
+.KtsConfiguration JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -73,8 +66,7 @@ Describes the KTS configuration for use under the test group.
 
 Describes the key confirmation MAC configuration for use under the test group.
 
-[cols="<,<,<,<,<"]
-. MacConfiguration JSON Object
+.MacConfiguration JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -82,7 +74,6 @@ Describes the key confirmation MAC configuration for use under the test group.
 | keyLen| The number of bits to take from the DKM to use for the mac key in key confirmation. | value | No
 | macLen| The number of bits to use for the MAC tag. | value | No
 |===
-
 
 [[tvjs]]
 === Test Case JSON Schema
@@ -92,8 +83,7 @@ Each test group contains an array of one or more test cases. Each test case is a
 
 [[vs_tc_table5]]
 
-[cols="<,<,<,<"]
-. Test Case JSON Object
+.Test Case JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -128,8 +118,7 @@ Each test group contains an array of one or more test cases. Each test case is a
 
 KDF specific options used for the test case.
 
-[cols="<,<,<,<"]
-. KDF Parameter JSON Object
+.KDF Parameter JSON Object
 |===
 | JSON Value| Description| JSON Type| Optional
 
@@ -147,12 +136,11 @@ KDF specific options used for the test case.
 
 The following is a example JSON object for KAS-IFC test vectors sent from the ACVP server to the crypto module.
 
-[align=left,alt=,type=]
-....
-                        
+[source,json]
+---- 
 [
   {
-    "acvVersion": <acvp-version>
+    "acvVersion": "version"
   },
   {
     "vsId": 0,
@@ -867,21 +855,18 @@ The following is a example JSON object for KAS-IFC test vectors sent from the AC
     ]
   }
 ]
-                    
-....
-
+----
 
 [[app-vs-ex1]]
 === Example Test Vectors JSON Object KTS-IFC
 
 The following is a example JSON object for KTS-IFC test vectors sent from the ACVP server to the crypto module.
 
-[align=left,alt=,type=]
-....
-                       
+[source,json]
+---- 
 [
   {
-    "acvVersion": <acvp-version>
+    "acvVersion": "version"
   },
   {
     "vsId": 0,
@@ -1318,5 +1303,4 @@ The following is a example JSON object for KTS-IFC test vectors sent from the AC
     ]
   }
 ]
-
-....
+----

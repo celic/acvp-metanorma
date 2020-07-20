@@ -20,7 +20,6 @@ The tests described in this document have the intention of ensuring an implement
 
 [[requirements_covered_kas_ecc]]
 ==== KAS-IFC Requirements Covered
-
                         
 * SP 800-56Br2 - 5.1 Cryptographic Hash Functions.  SHA1, SHA2, and SHA3 hash functions *SHALL* be available for the various pieces of
 KAS/KTS requiring use of a hash function.
