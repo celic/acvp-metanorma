@@ -1,13 +1,13 @@
 = ACVP SSH Key Derivation Function JSON Specification
 :doctype: internet-draft
-:docname: acvp-kdf-ssh								
+:docname: acvp-kdf-ssh
 :name: draft-gold-acvp-kdf-ssh-1.0
 :abbrev: ACVP KDF SSH
 :status: informational
 :ipr: trust200902
 :submissionType: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2019-06-05
 :forename_initials: C. C.
 :lastname: Celi
@@ -18,7 +18,7 @@
 :code: 20899
 :country: United States of America
 :email: christopher.celi@nist.gov
-:role: editor				 
+:role: editor
 :docfile: draft-gold-acvp-sub-kdf135-ssh.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
@@ -26,7 +26,7 @@
 :keyword: acvp, crypto
 // Singular name of the algorithm
 :spec-algorithm: SP800-135 SSH KDF
-:algo-short-name: SSH KDF							   
+:algo-short-name: SSH KDF
 
 include::common/common-sections/00-abstract.adoc[]
 include::common/common-sections/01-intro.adoc[]
@@ -45,4 +45,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::ssh/sections/98-references.adoc[]
-include::ssh/sections/97-examples.adoc[]

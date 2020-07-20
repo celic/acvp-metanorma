@@ -31,8 +31,7 @@ Each test group contains an array of one or more test cases. Each test case is a
 
 Here is an abbreviated yet fully constructed example of the prompt.
 
-[align=left,alt=,type=]
-
+[source, json]
 ----
 {
     "vsId": 1,
