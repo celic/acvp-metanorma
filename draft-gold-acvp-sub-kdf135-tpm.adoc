@@ -1,14 +1,14 @@
 
 = ACVP TPM Key Derivation Function JSON Specification
 :doctype: internet-draft
-:docname: acvp-kdf-tpm								
+:docname: acvp-kdf-tpm
 :name: draft-gold-acvp-kdf-tpm-1.0
 :abbrev: ACVP KDF TPM
 :status: informational
 :ipr: trust200902
 :submissionType: independent
 :area: Internet
-:intended-series: info
+:intended-series: informational
 :revdate: 2018-08-01
 :forename_initials: B.F.
 :lastname: Fussell
@@ -19,7 +19,7 @@
 :code: 95134
 :country: United States of America
 :email: bfussell@cisco.com
-:role: editor				 
+:role: editor
 :docfile: draft-gold-acvp-sub-kdf135-tpm.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
@@ -27,12 +27,12 @@
 :keyword: acvp, crypto
 // Singular name of the algorithm
 :spec-algorithm: SP800-135 TPM KDF
-:algo-short-name: TPM KDF							   
+:algo-short-name: TPM KDF
 
 include::common/common-sections/00-abstract.adoc[]
 include::common/common-sections/01-intro.adoc[]
 include::common/common-sections/02-conventions.adoc[]
-// include::tpm/sections/03-supported.adoc[]
+include::tpm/sections/03-supported.adoc[]
 include::tpm/sections/04-testtypes.adoc[]
 include::common/common-sections/05-capabilities-description.adoc[]
 include::common/common-sections/051-prerequisites.adoc[]
@@ -46,4 +46,3 @@ include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
 include::tpm/sections/98-references.adoc[]
-include::tpm/sections/97-examples.adoc[]

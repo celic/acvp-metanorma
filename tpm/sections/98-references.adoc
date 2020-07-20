@@ -8,6 +8,8 @@
 [%bibitem]
 === Automatic Cryptographic Validation Protocol
 id:: ACVP
+docid::
+    id::: ACVP
 contributor::
 contributor.role:: author
 contributor.person.name.initial:: B.
@@ -36,6 +38,8 @@ date.value:: 2019-07-01
 [%bibitem]
 === SP800-135r1 Recommendation for Existing Application-Specific Key Derivation Functions
 id:: SP800-135
+docid::
+    id::: SP800-135
 link::
 link.type:: src
 link.content:: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-135r1.pdf
