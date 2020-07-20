@@ -1,0 +1,7 @@
+
+[#supported]
+== Supported KAS-IFCs
+
+The following key derivation functions *MAY* be advertised by the ACVP compliant cryptographic module:
+
+* KAS-IFC 

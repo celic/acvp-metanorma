@@ -1,0 +1,57 @@
+
+[[prereq_algs]]
+=== Required Prerequisite Algorithms for KDF135 TPM Validations
+
+Some KDF135 algorithm implementations rely on other cryptographic primitives.  For example, TPM uses an underlying SHA algorithm. Each of these underlying algorithm primitives *MUST* be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:
+
+
+[cols="<,<,<,<,<"]
+[[rereqs_table]]
+. Required Prerequisite Algorithms JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| algorithm| a prerequisite algorithm| value| HMAC, SHA| No
+| valValue| algorithm validation number| value| actual number or "same"| No
+| prereqAlgVal| prerequistie algorithm validation| object with algorithm and valValue properties| see above| Yes
+|===
+
+
+[[cap_ex]]
+=== KDF135 TPM Algorithm Capabilities JSON Values
+
+Each algorithm capability advertised is a self-contained JSON object using the following values.
+
+
+
+[cols="<,<,<,<,<"]
+[[caps_table]]
+. SP800-135 TPM KDF Algorithm Capabilities JSON Values
+|===
+| JSON Value| Description| JSON type| Valid Values| Optional
+
+| algorithm| The algorithm to be validated| value| kdf-components| No
+| algorithm| The KDF to be validated| value| See <<supported_algs>>| No
+| prereqVals| Prerequisite algorithm validations| array of prereqAlgVal objects| See <<prereq_algs>>| No
+|===
+
+
+Note: Some optional values are required depending on the algorithm.  Failure to provide these values will result in the ACVP server returning an error to the ACVP client during registration.
+
+
+[[supported_algs]]
+=== Supported SP800-135 KDF Algorithms
+
+The following SP800-135 KDF algorithms may be advertised by the ACVP compliant crypto module:
+
+          
+* IKEv1
+* IKEv2
+* TLS
+* ANSI X9.63
+* SSH
+* SRTP
+* SNMP
+* TPM
+
+    
