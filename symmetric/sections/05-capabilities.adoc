@@ -30,6 +30,7 @@ Each algorithm capability advertised is a self-contained JSON object and *SHALL*
 
 | algorithm| The block cipher algorithm and mode to be validated.| string
 | revision| The version of the testing methodology the IUT is requesting to validate against.| string
+| conformances| The additional conformance for the algorithm for a specific use-case | array of string
 | prereqVals| Prerequisite algorithm validations| array of prereqAlgVal objects described in <<prereqs_table>>
 | direction| The IUT processing direction| array of strings
 | keyLen| The supported key lengths in bits| array of integers
@@ -47,6 +48,8 @@ Each algorithm capability advertised is a self-contained JSON object and *SHALL*
 | overflowCounter| Indicates if the implementation can handle a counter exceeding the maximum value| boolean
 | incrementalCounter| Indicates if the implementation increments the counter (versus decrementing the counter)| boolean
 |===
+
+NOTE: The 'conformances' property is only valid for algorithms listed in <<conformances>>. The valid values in the array are also listed in that section. The array is always optional.
 
 NOTE: Some optional values are required depending on the algorithm. For example, AES-GCM requires ivLen, ivGen, ivGenMode, aadLen and tagLen. Failure to provide these values will result in the ACVP server returning an error to the ACVP client during registration.
 

@@ -35,4 +35,9 @@ The following block cipher algorithms *MAY* be advertised by the ACVP compliant 
 * ACVP-TDES-CTR
 * ACVP-TDES-KW
 
-            
+[[conformances]]
+=== Supported Conformances
+
+The following conformances *MAY* be advertised by the ACVP compliant cryptogrpahic module:
+
+* ACVP-AES-CCM conformance "ECMA" which expands upon AES-CCM and adheres to <<ECMA>>. This conformance changes the supported sizes to accomodate the specific sizes required by the use-case of the algorithm.
