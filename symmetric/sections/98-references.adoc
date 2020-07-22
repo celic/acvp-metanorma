@@ -219,3 +219,11 @@ date::
 date.type:: published
 date.value:: 2017
 
+[%bibitem]
+=== ECMA-368 High Rate Ultra Wideband PHY and MAC Standard
+id:: ECMA
+docid::
+  id::: ECMA
+link::
+link.type:: src
+link.content:: https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-368.pdf
