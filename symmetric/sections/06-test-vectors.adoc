@@ -128,7 +128,8 @@ Each test group *SHALL* contain an array of one or more test cases. Each test ca
 | key| Encryption key to use for AES| string (hex)
 | key1, key2, key3| Encryption keys to use for TDES| string (hex)
 | iv| IV to use| string (hex)
-| tweakValue| tweakValue used to form an IV for AES-XTS| string (hex)
+| tweakValue| tweakValue used to form an IV for AES-XTS when the tweakMode for the group is 'hex'| string (hex)
+| sequenceNumber| integer used to form an IV for AES-XTS when the tweakMode for the group is 'number'| integer
 | salt| The salt to use in AES-XPN (required for AES-XPN only)| string (hex)
 | pt| Plaintext to use| string (hex)
 | ct| Ciphertext to use| string (hex)
