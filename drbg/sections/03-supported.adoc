@@ -33,6 +33,7 @@ The "ACVP-ctrDRBG-TDES" mode shall only be used with the three-key option of the
 DRBG minimum/maximum values for several options such as minimum entropy and nonce, vary depending on the DRBG capabilities registered. The following table depicts those values
 
 [[supported_values]]
+.Supported DRBG Values
 |===
 | DRBG Algorithm | Mode | Derivation Function | Security Strength | Min Entropy | Max Entropy | Max PersoString | Max Addl String | Min Nonce
 
