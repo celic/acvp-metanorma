@@ -4,6 +4,7 @@
 
 Each SP800-108 KDF implementation relies on other cryptographic primitives. For example, the KDF must utilize an underlying MAC algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:
 
+.SP800-108 KDF Required Prerequisites
 |===
 | JSON Value | Description | JSON Type | Valid Values
 
@@ -18,6 +19,7 @@ Each SP800-108 KDF implementation relies on other cryptographic primitives. For 
 
 Each algorithm capability advertised is a self-contained JSON object using the following values.
 
+.SP800-108 KDF Algorithm Capabilities JSON Values
 |===
 | JSON Value | Description | JSON Type | Valid Values
 
@@ -47,6 +49,7 @@ Each KDF mode's capabilities are advertised as JSON objects.
 
 The complete list of KDF key generation capabilities may be advertised by the ACVP compliant crypto module:
 
+.KDF Mode Capabilities
 |===
 | JSON Value | Description | JSON Type | Valid Values
 
@@ -88,6 +91,7 @@ The following MAC functions *MAY* be advertised by an ACVP compliant client
 
 A registration *SHALL* use these properties
 
+.Registration Properties
 |===
 | JSON Property | Description | JSON Type | Valid Values
 
