@@ -48,7 +48,7 @@ An empty cell for a resource and HTTP Method combination denotes that the server
 
 [[uri_table]]
 [cols="<,<,<,<,<"]
-. Resources and their available operations
+.Resources and their Available Operations
 |===
 | Resource | GET (read) | POST (create) | PUT (update) | DELETE
 
