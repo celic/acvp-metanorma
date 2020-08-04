@@ -72,7 +72,7 @@ KAS Schemes
 
 KTS Schemes
 
-* KTS-OAEP-basic - requires ktsMethod, macMethods
+* KTS-OAEP-basic - requires ktsMethod
 
 * KTS-OAEP-Party_V-confirmation - requires ktsMethod, macMethods
 
