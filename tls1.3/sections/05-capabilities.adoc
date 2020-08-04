@@ -14,6 +14,7 @@ A registration *SHALL* use these properties
 | mode | Mode of the algorithm to be validated | string | "tls"
 | revision | ACVP Test version | string | "1.0"
 | hmacAlg | HMAC functions supported | array | See <<valid-hmac>>
+| runningMode | The supported key exchange modes for the KDF https://tools.ietf.org/html/rfc8446#section-2 | array | See <<valid-runningMode>>
 |===
 
 [#valid-hmac]
@@ -32,6 +33,15 @@ The following hash functions *MAY* be advertised by an ACVP compliant client und
 * SHA3-256
 * SHA3-384
 * SHA3-512
+
+[#valid-runningMode]
+==== Valid Running Modes
+
+The following hash functions *MAY* be advertised by an ACVP compliant client under the 'runningMode' property
+
+* PSK
+* DHE
+* PSK-DHE
 
 An example registration within an algorithm capability exchange looks like this
 
