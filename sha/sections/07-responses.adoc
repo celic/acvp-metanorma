@@ -8,7 +8,7 @@ After the ACVP client downloads and processes a vector set, it *SHALL* send the 
 [[vr_top_table]]
 
 [cols="<,<,<"]
-. Vector Set Response JSON Object
+.Vector Set Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
@@ -22,7 +22,7 @@ The testGroup Response section is used to organize the ACVP client response in a
 [[vr_group_table]]
 
 [cols="<,<,<"]
-. Vector Set Group Response JSON Object
+.Vector Set Group Response JSON Object
 |===
 | JSON Value| Description| JSON type
 
@@ -37,7 +37,7 @@ The following table describes the JSON elements for each test case object.
 [[vs_tr_table]]
 
 [cols="<,<,<"]
-. Test Case Results JSON Object
+.Test Case Results JSON Object
 |===
 | JSON Value| Description| JSON type
 
