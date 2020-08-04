@@ -10,6 +10,7 @@ The testGroups element at the top level in the test vector JSON object is an arr
 | tgId | Test group identifier | integer
 | testType | Test operations to be performed | string
 | hmacAlg | SHA version used | string
+| runningMode | The key exchange mode used | string
 | tests | Array of individual test cases | array
 |===
 
@@ -23,13 +24,15 @@ Each test group contains an array of one or more test cases. Each test case is a
 | JSON Value | Description | JSON Type
 
 | tcId | Test case identifier | integer
-| psk | Random pre-shared key | hex
-| dhe | Random Diffie-Hellman shared secret | hex
+| psk | Random pre-shared key, included for PSK and PSK-DHE running modes. | hex
+| dhe | Random Diffie-Hellman shared secret, included for DHE and PSK-DHE running modes. | hex
 | serverHelloRandom | Server hello random value | hex
 | clientHelloRandom | Client hello random value | hex
 | serverFinishedRandom | Server finished random value | hex
 | clientFinishedRandom | Client finished random value | hex
 |===
+
+Note that when the PSK or DHE are not included in the test case, it is assumed they are the digest size of the group's hash set to zero.  As an example, for a test group using SHA2-256, with a running mode of "DHE", the "PSK" would be represented by a BitString of 256 bits or 32 bytes, all being "0".
 
 Here is an abbreviated yet fully constructed example of the prompt.
 
@@ -45,8 +48,7 @@ Here is an abbreviated yet fully constructed example of the prompt.
         {
             "tgId": 1,
             "hmacAlg": "SHA-1",
-            "preMasterSecretLength": 384,
-            "keyBlockLength": 832,
+            "runningMode": "PSK-DHE",
             "tests": [{
                 "tcId": 1,
                 "psk": "8E80670FE8DC70BCB9AADAE8DE89D7796374D8E6931794CF12F99383E1256CC477E5",
