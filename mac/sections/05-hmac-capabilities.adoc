@@ -7,7 +7,7 @@
 Each algorithm capability advertised is a self-contained JSON object using the following values.
 
 [[hmac_caps_table2]]
-. HMAC Algorithm Capabilities JSON Values
+.HMAC Algorithm Capabilities JSON Values
 |===
 | JSON Value | Description | JSON type | Valid Values
 
@@ -36,7 +36,7 @@ Each algorithm capability advertised is a self-contained JSON object using the f
 The following HMAC algorithms contain specific individual properties:
 
 [[hmac_table_algInfo]]
-. Algorithms w/ block size and max MAC length.
+.Algorithms w/ block size and max MAC length.
 |===
 | Algorithm Value | Block Length | Max MAC Length
 
