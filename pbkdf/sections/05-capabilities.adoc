@@ -8,6 +8,7 @@ The {spec-algorithm} mode capabilities are advertised as JSON objects within the
 
 A registration *SHALL* use these properties
 
+.PBKDF Algorithm Capabilities JSON Values
 |===
 | JSON Property | Description | JSON Type | Valid Values
 
