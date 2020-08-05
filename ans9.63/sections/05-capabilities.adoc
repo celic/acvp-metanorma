@@ -8,6 +8,7 @@ The ANS x9.63 KDF mode capabilities are advertised as JSON objects within the 'c
 
 A registration *SHALL* use these properties
 
+.ANS x9.63 KDF Registration JSON Values
 |===
 | JSON Value | Description | JSON type | Valid Values
 
