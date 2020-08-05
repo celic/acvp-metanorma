@@ -7,6 +7,7 @@
 
 A registration *SHALL* use these properties
 
+.TLS Registration JSON Values
 |===
 | JSON Property | Description | JSON Type | Valid Values
 
