@@ -19,7 +19,7 @@
 :country: United States of America
 :email: russ.hammett@hii-tsd.com
 :role: editor
-:docfile: draft-gold-acvp-sub-kdf-tls-v1.3.adoc
+:docfile: draft-hammett-acvp-kdf-tls-v1.3.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
 :area: General

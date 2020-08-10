@@ -250,26 +250,11 @@ The demo server allows validation of the following algorithms (a superset of the
 * [SRTP](./draft-celi-acvp-kdf-srtp.txt) - [HTML](./draft-celi-acvp-kdf-srtp.html)
 * [SSH](./draft-celi-acvp-kdf-ssh.txt) - [HTML](./draft-celi-acvp-kdf-ssh.html)
 * [TLS](./draft-celi-acvp-kdf-tls.txt) - [HTML](./draft-celi-acvp-kdf-tls.html)
+* [TLS v1.3](./draft-hammett-acvp-kdf-tls-v1.3.txt) - [HTML](./draft-hammett-acvp-kdf-tls-v1.3.html)
 * [TPM](./draft-celi-acvp-kdf-tpm.txt) - [HTML](./draft-celi-acvp-kdf-tpm.html)
 * [ANSX9.63](./draft-celi-acvp-kdf-ansi-x963.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x963.html)
 * [ANSX9.42](./draft-celi-acvp-kdf-ansi-x942.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x942.html)
 * [PBKDF](./draft-celi-acvp-pbkdf.txt) - [HTML](./draft-celi-acvp-pbkdf.html)
-=======
-* [Counter KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [Feedback KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [Double Pipeline Iterator KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [IKEv1](./draft-gold-acvp-sub-kdf135-ikev1.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev1.html)
-* [IKEv2](./draft-gold-acvp-sub-kdf135-ikev2.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev2.html) 
-* [SNMP](./draft-gold-acvp-sub-kdf135-snmp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-snmp.html)
-* [SRTP](./draft-gold-acvp-sub-kdf135-srtp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-srtp.html)
-* [SSH](./acvp_sub_kdf135_ssh.txt) - [HTML](./acvp_sub_kdf135_ssh.html)
-* [TLS](./draft-gold-acvp-sub-kdf135-tls.txt) - [HTML](./draft-gold-acvp-sub-kdf135-tls.html)
-* [TLS v1.3](./draft-gold-acvp-sub-kdf-tls-v1.3.txt) - [HTML](./draft-gold-acvp-sub-kdf-tls-v1.3.html)
-* [TPM](./acvp_sub_kdf135_tpm.txt) - [HTML](./acvp_sub_kdf135_tpm.html)
-* [ANSX9.63](./draft-gold-acvp-sub-kdf135-x963.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x963.html)
-* [ANSX9.42](./draft-gold-acvp-sub-kdf135-x942.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x942.html)
-* [PBKDF](./draft-gold-acvp-sub-pbkdf.txt) - [HTML](./draft-gold-acvp-sub-pbkdf.html)
->>>>>>> 43384f56dd01670a4e03fda9def500877765d829
 
 ### Safe Primes
 * [SafePrimes KeyGen](./draft-hammett-acvp-safe-primes.txt) - [HTML](./draft-hammett-acvp-safe-primes.html) - DEMO only
@@ -294,16 +279,7 @@ You are expected to protect the key pair from unauthorized use and to notify NIS
 
 ```
 “***WARNING***WARNING***WARNING
-You are accessing a U.S. Government information system, which includes: 1) this computer, 
-2) this computer network, 3) all computers connected to this network, and 4) all devices 
-and storage media attached to this network or to a computer on this network. You understand 
-and consent to the following: you may access this information system for authorized use 
-only; you have no reasonable expectation of privacy regarding any communication of data 
-transiting or stored on this information system; at any time and for any lawful Government 
-purpose, the Government may monitor, intercept, and search and seize any communication or 
-data transiting or stored on this information system; and any communications or data 
-transiting or stored on this information system may be disclosed or used for any lawful 
-Government purpose.
+You are accessing a U.S. Government information system, which includes: 1) this computer, 2) this computer network, 3) all computers connected to this network, and 4) all devices and storage media attached to this network or to a computer on this network. You understand and consent to the following: you may access this information system for authorized use only; you have no reasonable expectation of privacy regarding any communication of data transiting or stored on this information system; at any time and for any lawful Government purpose, the Government may monitor, intercept, and search and seize any communication or data transiting or stored on this information system; and any communications or data transiting or stored on this information system may be disclosed or used for any lawful Government purpose.
 ***WARNING***WARNING***WARNING”
 ```
 
