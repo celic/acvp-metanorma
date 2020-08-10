@@ -6,6 +6,7 @@ The SRTP KDF mode capabilities are advertised as JSON objects within the 'capabi
 
 A registration *SHALL* use these properties
 
+.SRTP KDF Mode Capabilities JSON Values
 |===
 | JSON Value | Description | JSON Type | Valid Values
 

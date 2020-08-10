@@ -7,7 +7,7 @@ Test vector sets *MUST* contain one or many test groups, each sharing similar pr
 [[vs_tg_table]]
 
 [cols="<,<,<"]
-. Test Group JSON Object
+.Test Group JSON Object
 |===
 | JSON Value| Description| JSON type
 
@@ -24,7 +24,7 @@ Each test group *SHALL* contain an array of one or more test cases.  Each test c
 [[vs_tc_table]]
 
 [cols="<,<,<"]
-. Test Case JSON Object
+.Test Case JSON Object
 |===
 | JSON Value| Description| JSON type
 

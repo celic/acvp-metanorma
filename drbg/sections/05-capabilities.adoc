@@ -13,6 +13,7 @@ ACVP has default values for many of the input parameters for testing the DRBG al
 A registration *SHALL* use these properties within each object within the 'capabilities' array
 
 [[capabilities-table]]
+.Registration Capability Properties
 |===
 | JSON Value| Description| JSON type| Valid Values
 
@@ -28,6 +29,7 @@ A registration *SHALL* use these properties within each object within the 'capab
 Each DRBG algorithm capability advertised is a self-contained JSON object. The following JSON values are used for DRBG algorithm capabilities:
 
 [[caps-table]]
+.DRBG Algorithm Capabilities
 |===
 | JSON Value | Description | JSON type | Valid Values
 

@@ -3,6 +3,7 @@
 
 The testGroups element at the top level in the test vector JSON object is an array of test	groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped	together. The Test Group JSON object contains meta data that applies to all test vectors within	the group. The following table describes the {spec-algorithm} JSON elements of the Test Group JSON object
 
+.Test Group JSON Object
 |===
 | JSON Value | Description | JSON type
 
@@ -21,6 +22,7 @@ The 'tgId', 'testType' and 'tests' objects *MUST* appear in every test group ele
 
 Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each {spec-algorithm} test vector.
 
+.Test Case JSON Object
 |===
 | JSON Value | Description | JSON type
 

@@ -240,6 +240,7 @@ The demo server allows validation of the following algorithms (a superset of the
 * [KAS SSC FFC dhStatic Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
 
 ### KDFs
+<<<<<<< HEAD
 * [Counter KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
 * [Feedback KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
 * [Double Pipeline Iterator KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
@@ -253,6 +254,22 @@ The demo server allows validation of the following algorithms (a superset of the
 * [ANSX9.63](./draft-celi-acvp-kdf-ansi-x963.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x963.html)
 * [ANSX9.42](./draft-celi-acvp-kdf-ansi-x942.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x942.html)
 * [PBKDF](./draft-celi-acvp-pbkdf.txt) - [HTML](./draft-celi-acvp-pbkdf.html)
+=======
+* [Counter KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
+* [Feedback KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
+* [Double Pipeline Iterator KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
+* [IKEv1](./draft-gold-acvp-sub-kdf135-ikev1.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev1.html)
+* [IKEv2](./draft-gold-acvp-sub-kdf135-ikev2.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev2.html) 
+* [SNMP](./draft-gold-acvp-sub-kdf135-snmp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-snmp.html)
+* [SRTP](./draft-gold-acvp-sub-kdf135-srtp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-srtp.html)
+* [SSH](./acvp_sub_kdf135_ssh.txt) - [HTML](./acvp_sub_kdf135_ssh.html)
+* [TLS](./draft-gold-acvp-sub-kdf135-tls.txt) - [HTML](./draft-gold-acvp-sub-kdf135-tls.html)
+* [TLS v1.3](./draft-gold-acvp-sub-kdf-tls-v1.3.txt) - [HTML](./draft-gold-acvp-sub-kdf-tls-v1.3.html)
+* [TPM](./acvp_sub_kdf135_tpm.txt) - [HTML](./acvp_sub_kdf135_tpm.html)
+* [ANSX9.63](./draft-gold-acvp-sub-kdf135-x963.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x963.html)
+* [ANSX9.42](./draft-gold-acvp-sub-kdf135-x942.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x942.html)
+* [PBKDF](./draft-gold-acvp-sub-pbkdf.txt) - [HTML](./draft-gold-acvp-sub-pbkdf.html)
+>>>>>>> 43384f56dd01670a4e03fda9def500877765d829
 
 ### Safe Primes
 * [SafePrimes KeyGen](./draft-hammett-acvp-safe-primes.txt) - [HTML](./draft-hammett-acvp-safe-primes.html) - DEMO only

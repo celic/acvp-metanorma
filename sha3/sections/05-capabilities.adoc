@@ -7,7 +7,7 @@ Each SHA3 and SHAKE algorithm capability advertised *SHALL* be a self-contained 
 [[caps_table]]
 
 [cols="<,<,<"]
-. SHA3 and SHAKE Algorithm Capabilities JSON Values
+.SHA3 and SHAKE Algorithm Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type
 
@@ -24,7 +24,7 @@ The following grid outlines which properties are *REQUIRED*, as well as all the 
 [[property_grid]]
 
 [cols="<,<,<,<,<"]
-. SHA3 and SHAKE Capabilities Applicability Grid
+.SHA3 and SHAKE Capabilities Applicability Grid
 |===
 | algorithm| inBit| inEmpty| outputLen| outBit
 

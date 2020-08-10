@@ -4,6 +4,7 @@
 The testGroups element at the top level in the test vector JSON object is an array of test	groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped	together. The Test Group JSON object contains meta data that applies to all test vectors within	the group. The following table describes the {spec-algorithm} JSON elements of the Test Group JSON object
 
 [[prompt_group_table]]
+.Test Group JSON Object
 |===
 | JSON Value | Description | JSON type
 
@@ -25,6 +26,7 @@ The 'tgId', 'testType' and 'tests' objects *MUST* appear in every test group ele
 NOTE: 11 According to SP 800-90A <<SP800-90A>>, a DRBG implementation has two separate controls for determining the correct test procedure for handling addtional entropy and other data in providing prediction resistance assurances. Depending on the capabilities advertised by the predResistanceEnabled and reseedImplemented flags ACVP generates test data according to the following test scenarios:
 
 [[tests_table]]
+.Generated Test Data per Scenario
 |===
 | Prediction Resistance Assurance Options | Test Procedure
 
@@ -51,6 +53,7 @@ NOTE: 11 According to SP 800-90A <<SP800-90A>>, a DRBG implementation has two se
 Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each {spec-algorithm} test vector.
 
 [[cases_table]]
+.Test Case JSON Object
 |===
 | JSON Value | Description | JSON type
 
@@ -64,6 +67,7 @@ Each test group contains an array of one or more test cases. Each test case is a
 Each test group contains an array of one or more tests. Each test object contains an otherInput object, which is an array of objects, each with the intendedUse property indicating if the particular test data is to be used for reSeed or generate - see <<tests_table>>. Each test vector is a JSON object that represents a single test case to be processed by the ACVP client.  The following table describes the JSON elements for each DRBG predcition resistance test vector.
 
 [[other_input_table]]
+.DRBG Predictive Resistance JSON Elements
 |===
 | JSON Value | Description | JSON type
 

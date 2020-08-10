@@ -10,10 +10,8 @@ The testGroups element at the top level in the test vector JSON object is an arr
 
 | tgId | Test group identifier | integer
 | testType | Test operations to be performed | string
-| tlsVersion | The version of TLS used in the test group | string
-| hashAlg | SHA version used | string
-| preMasterSecretLength | Pre-master secret length in bits | integer
-| keyBlockLength | Key block length in bits | integer
+| hmacAlg | SHA version used | string
+| runningMode | The key exchange mode used | string
 | tests | Array of individual test cases | array
 |===
 
@@ -27,13 +25,16 @@ Each test group contains an array of one or more test cases. Each test case is a
 |===
 | JSON Value | Description | JSON Type
 
-| tcId | Test case idenfitier | integer
-| preMasterSecret | Pre-master secret value | hex
-| serverHelloRandom | Server Hello random value | hex
-| clientHelloRandom | Client Hello random value | hex
-| serverRandom | Server random value | hex
-| clientRandom | Client random value | hex
+| tcId | Test case identifier | integer
+| psk | Random pre-shared key, included for PSK and PSK-DHE running modes. | hex
+| dhe | Random Diffie-Hellman shared secret, included for DHE and PSK-DHE running modes. | hex
+| serverHelloRandom | Server hello random value | hex
+| clientHelloRandom | Client hello random value | hex
+| serverFinishedRandom | Server finished random value | hex
+| clientFinishedRandom | Client finished random value | hex
 |===
+
+Note that when the PSK or DHE are not included in the test case, it is assumed they are the digest size of the group's hash set to zero.  As an example, for a test group using SHA2-256, with a running mode of "DHE", the "PSK" would be represented by a BitString of 256 bits or 32 bytes, all being "0".
 
 Here is an abbreviated yet fully constructed example of the prompt.
 
@@ -48,20 +49,17 @@ Here is an abbreviated yet fully constructed example of the prompt.
     "testGroups": [
         {
             "tgId": 1,
-            "tlsVersion": "v1.0/1.1",
-            "hashAlg": "SHA-1",
-            "preMasterSecretLength": 384,
-            "keyBlockLength": 832,
-            "tests": [
-                {
-                    "tcId": 1,
-                    "clientHelloRandom": "00D5EDFC0A7D8B0913...",
-                    "serverHelloRandom": "14D06FC8F2792762BA...",
-                    "clientRandom": "DDFB77CB1304A0541C6CC07...",
-                    "serverRandom": "D59EB4E444005709409C572...",
-                    "preMasterSecret": "2F0D26CC2487169D83D9..."
-                }
-            ]
+            "hmacAlg": "SHA-1",
+            "runningMode": "PSK-DHE",
+            "tests": [{
+                "tcId": 1,
+                "psk": "8E80670FE8DC70BCB9AADAE8DE89D7796374D8E6931794CF12F99383E1256CC477E5",
+                "dhe": "8E80670FE8DC70BCB9AADAE8DE89D7796374D8E6931794CF12F99383E1256CC477E5",
+                "helloClientRandom": "8913680310B713246CC1E98F0704D51FD9612B083ED34BA0369ECB61D6213F70ABAE",
+                "helloServerRandom": "46E129DCC9A8163C91E30AEC0A5157EB17AF9D85E35C990AE15FBC1B57302F1A1080",
+                "finishedClientRandom": "9924F6C6247AAEA59586E36D17AEFE679264AA6592E106331F4FC3A32CE2DCAAF356",
+                "finishedServerRandom": "47E13D592B48F4864D55C6853F68B97A723268A087BE45DC0425D44095668953BD53"
+            }]
         }
     ]
 }

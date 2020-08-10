@@ -6,6 +6,7 @@ The ACVP server provides test vectors to the ACVP client, which are then process
 
 The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.
 
+.Top Level Test Vector JSON Elements
 |===
 | JSON Values | Description | JSON Type
 

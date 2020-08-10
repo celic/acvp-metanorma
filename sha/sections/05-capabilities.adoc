@@ -9,7 +9,7 @@ This section describes the constructs for advertising support of hash algorithms
 [[caps_table]]
 
 [cols="<,<,<"]
-. Hash Algorithm Capabilities JSON Values
+.Hash Algorithm Capabilities JSON Values
 |===
 | JSON Value| Description| JSON type
 

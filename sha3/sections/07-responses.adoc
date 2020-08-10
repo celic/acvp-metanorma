@@ -7,9 +7,9 @@ After the ACVP client downloads and processes a vector set, it *SHALL* send the 
 [[vr_top_table]]
 
 [cols="<,<,<"]
-. Vector Set Response JSON Object
+.Vector Set Response JSON Object
 |===
-| JSON Value| Description| JSON type
+| JSON Value| Description| JSON Type
 
 | acvVersion| Protocol version identifier| string
 | vsId| Unique numeric identifier for the vector set| integer
@@ -21,9 +21,9 @@ The testGroup Response section is used to organize the ACVP client response in a
 [[vr_group_table]]
 
 [cols="<,<,<"]
-. Vector Set Group Response JSON Object
+.Vector Set Group Response JSON Object
 |===
-| JSON Value| Description| JSON type
+| JSON Value| Description| JSON Type
 
 | tgId| The test group identifier| integer
 | tests| The tests associated to the group specified in tgId| array of testCase objects
@@ -35,9 +35,9 @@ The following table describes the JSON elements for each test case object.
 [[vs_tr_table]]
 
 [cols="<,<,<"]
-. Test Case Results JSON Object
+.Test Case Results JSON Object
 |===
-| JSON Value| Description| JSON type
+| JSON Value| Description| JSON Type
 
 | tcId| Numeric identifier for the test case, unique across the entire vector set.| integer
 | md| The IUT's digest response to a VOT or AFT| string (hex)

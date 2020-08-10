@@ -10,7 +10,7 @@ Each CMAC-TDES algorithm capability advertised is a self-contained JSON object u
 ==== CMAC-TDES Capability Details
 
 [[cmac_tdes_caps_table]]
-. CMAC-TDES Capabilities JSON Values
+.CMAC-TDES Capabilities JSON Values
 |===
 | JSON Value | Description | JSON type | Valid Values
 

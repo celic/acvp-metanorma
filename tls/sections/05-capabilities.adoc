@@ -2,13 +2,14 @@
 [#properties]
 === Property Registration
 
-The IKEv1 KDF mode capabilities are advertised as JSON objects within the 'capabilities_exchange' property.
+The TLS KDF mode capabilities are advertised as JSON objects within the 'capabilities_exchange' property.
 
 [#registration]
 === Registration Example
 
 A registration *SHALL* use these properties
 
+.TLS KDF Mode Capabilities JSON Values
 |===
 | JSON Property | Description | JSON Type | Valid Values
 

@@ -4,7 +4,6 @@
 
 After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.
 
-[[response_vector_set_table]]
 .Vector Set Response JSON Object
 |===
 | JSON Property | Description | JSON Type
@@ -16,18 +15,18 @@ After the ACVP client downloads and processes a vector set, it must send the res
 
 An example of this is the following
 
+[align=left,alt=,type=]
 [source, json]
 ----
 {
-	"acvVersion": "version",
-	"vsId": 1,
-	"testGroups": [ ... ]
+    "acvVersion": "version",
+    "vsId": 1,
+    "testGroups": [ ... ]
 }
 ----
 
 The testGroups section is used to organize the ACVP client response in a similar manner to how it receives vectors. Several algorithms *SHALL* require the client to send back group level properties in their response. This structure helps accommodate that.
 
-[[response_group_table]]
 .Vector Set Group Response JSON Object
 |===
 | JSON Property | Description | JSON Type
@@ -38,47 +37,38 @@ The testGroups section is used to organize the ACVP client response in a similar
 
 An example of this is the following
 
+[align=left,alt=,type=]
 [source, json]
 ----
 {
-	"tgId": 1,
-	"tests": [ ... ]
+    "tgId": 1,
+    "tests": [ ... ]
 }
 ----
 
 The following table describes the JSON object that represents a test case response for a {spec-algorithm}.
 
-[[response_case_table]]
 .Test Case Results JSON Object
 |===
 | JSON Property | Description | JSON Type
 
 | tcId | The test case identifier | integer
-| returnedBits | The outputted bits from the DRBG | hex
+| exporterMasterSecret | The exporter master secret | hex
 |===
 
 Here is an abbreviated example of the response
 
+[align=left,alt=,type=]
 [source, json]
 ----
 {
   "vsId": 1,
-  "algorithm": "ctrDRBG",
-  "revision": "1.0",
-  "testGroups": [
-    {
-      "tgId": 1,
-      "tests": [
-        {
-          "tcId": 1,
-          "returnedBits": "99F0D5740DCAA1ECC4E5329B38B..."
-        },
-        {
-          "tcId": 2,
-          "returnedBits": "62A458CA72C19316A1ECBC3211B..."
-        }
-      ]
-    }
-  ]
+  "testGroups": [{
+    "tgId": 1,
+    "tests": [{
+      "tcId": 1,
+      "exporterMasterSecret": "003E94E1A4D00FFF353C953FF881564489F1C313"
+    }]
+  }]
 }
 ----

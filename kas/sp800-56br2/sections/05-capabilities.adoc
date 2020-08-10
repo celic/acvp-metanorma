@@ -72,7 +72,7 @@ KAS Schemes
 
 KTS Schemes
 
-* KTS-OAEP-basic - requires ktsMethod, macMethods
+* KTS-OAEP-basic - requires ktsMethod
 
 * KTS-OAEP-Party_V-confirmation - requires ktsMethod, macMethods
 
@@ -211,13 +211,13 @@ Pattern candidates:
 substitutes "0123456789ABCDEF" in place of the field
 
 * uPartyInfo
-
-** uPartyId { || dkmNonce } { || c }
+  ** uPartyId { || ephemeralKey } { || ephemeralNonce } { || dkmNonce } { || c }
+    *** "optional" items such as ephemeralKey *MUST* be included when available for ACVP testing.
 
 * vPartyInfo
-
-** vPartyId { || dkmNonce } { || c }
-
+  ** vPartyId { || ephemeralKey } { || ephemeralNonce } { || dkmNonce } { || c }
+    *** "optional" items such as ephemeralKey *MUST* be included when available for ACVP testing.
+    
 * context
 
 ** Random value chosen by ACVP server to represent the context.

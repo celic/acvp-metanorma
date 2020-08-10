@@ -9,6 +9,7 @@ The IKEv1 KDF mode capabilities are advertised as JSON objects within the 'capab
 
 A registration *SHALL* use these properties
 
+.IKEv1 KDF Mode Capabilities JSON Values
 |===
 | JSON Property | Description | JSON Type | Valid Values
 

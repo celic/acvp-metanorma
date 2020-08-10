@@ -9,6 +9,7 @@ The SNMP KDF mode capabilities are advertised as JSON objects within the 'capabi
 
 A registration *SHALL* use these properties
 
+.SNMP KDF Mode Capabilities JSON Values
 |===
 | JSON Property | Description | JSON Type | Valid Values
 

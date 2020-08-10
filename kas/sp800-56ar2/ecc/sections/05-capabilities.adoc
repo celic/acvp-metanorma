@@ -265,11 +265,13 @@ Pattern candidates:
   ** uses the specified hex within "[]". literal[123456789ABCDEF] substitutes "123456789ABCDEF" in place of the field
                             
 * uPartyInfo 
-  ** uPartyId { || dkmNonce } 
+  ** uPartyId { || ephemeralKey } { || ephemeralNonce } { || dkmNonce } 
     *** dkmNonce is provided by party u for static schemes
+    *** "optional" items such as ephemeralKey *MUST* be included when available for ACVP testing.
                             
-* vPartyInfo 
+* vPartyInfo { || ephemeralKey } { || ephemeralNonce } 
   ** vPartyId
+    *** "optional" items such as ephemeralKey *MUST* be included when available for ACVP testing.
                           
 * counter 
   ** 32bit counter starting at "1" (0x00000001)
