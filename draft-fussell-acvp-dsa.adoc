@@ -1,7 +1,7 @@
 = ACVP DSA Algorithm JSON Specification
 :doctype: internet-draft
 :docname: acvp-dsa
-:name: draft-gold-acvp-sub-dsa-1.0
+:name: draft-fussell-acvp-dsa-1.0
 :abbrev: ACVP DSA
 :status: informational
 :ipr: trust200902

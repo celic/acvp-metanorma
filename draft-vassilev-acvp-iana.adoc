@@ -16,7 +16,7 @@
 :code: 20899
 :country: United States of America
 :email: apostol.vassilev@nist.gov
-:docfile: draft-gold-acvp-iana.adoc
+:docfile: draft-vassilev-acvp-iana.adoc
 :role: editor
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html

@@ -1,45 +1,52 @@
-= ACVP ANS x9.42 Key Derivation Function JSON Specification
+= ACVP Secure Hash Algorithm (SHA) JSON Specification
 :doctype: internet-draft
-:docname: acvp-x942
-:docnumber: draft-gold-acvp-sub-kdf135-x942-00
-:abbrev: ACVP ANS x9.42 KDF
+:docname: acvp-sha
+:docnumber: draft-ietf-acvp-sub-sha-01
+:abbrev: ACVP SHA
 :ipr: trust200902
 :submission-type: independent
 :area: Internet
 :intended-series: informational
-:revdate: 2019-06-05
-:fullname: Christopher Celi
+:revdate: 2018-11-01
+:forename_initials: C.C.
 :lastname: Celi
-:forename_initials: C. C.
+:fullname: Christopher Celi
 :organization: National Institute of Standards and Technology
 :street: 100 Bureau Drive
 :city: Gaithersburg
 :code: 20899
 :country: United States of America
 :email: christopher.celi@nist.gov
-:docfile: draft-celi-acvp-ans-x942.adoc
+:role: editor
+:docfile: draft-celi-acvp-sha.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
+:xrefstyle: full
+:area: General
+:keyword: acvp, crypto
 
 // Singular name of the algorithm
-:spec-algorithm: ANS x9.42 KDF
-:algo-short-name: ANS9.42
+:spec-algorithm: Secure Hash Algorithm (SHA)
+:algo-short-name: SHA
 
 include::common/common-sections/00-abstract.adoc[]
 include::common/common-sections/01-intro.adoc[]
 include::common/common-sections/02-conventions.adoc[]
-include::ans9.42/sections/03-supported.adoc[]
-include::ans9.42/sections/04-testtypes.adoc[]
+include::sha/sections/03-supported.adoc[]
+include::sha/sections/04-testtypes.adoc[]
+include::sha/sections/XX-requirements-covered.adoc[]
 include::common/common-sections/05-capabilities-description.adoc[]
 include::common/common-sections/051-prerequisites.adoc[]
-include::ans9.42/sections/05-capabilities.adoc[]
+include::sha/sections/05-capabilities.adoc[]
 include::common/common-sections/06-test-vector-intro.adoc[]
-include::ans9.42/sections/06-test-vectors.adoc[]
-include::ans9.42/sections/07-responses.adoc[]
+include::sha/sections/06-test-vectors.adoc[]
+include::sha/sections/07-responses.adoc[]
 include::common/common-sections/10-security.adoc[]
 include::common/common-sections/11-iana.adoc[]
 include::common/common-sections/99-acknowledgements.adoc[]
 
 // References must be given before appendixes
-include::ans9.42/sections/98-references.adoc[]
-// include::ans9.42/sections/97-examples.adoc[]
+include::sha/sections/98-references.adoc[]
+include::sha/sections/97-examples.adoc[]
+
+

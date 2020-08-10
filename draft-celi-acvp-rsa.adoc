@@ -19,7 +19,7 @@
 :country: United States of America
 :email: christopher.celi@nist.gov
 :role: editor
-:docfile: draft-gold-acvp-sub-rsa.adoc
+:docfile: draft-celi-acvp-rsa.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
 :area: General

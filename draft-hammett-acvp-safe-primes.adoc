@@ -19,7 +19,7 @@
 :country: United States of America
 :email: russell.hammett@nist.gov
 :role: editor
-:docfile: draft-gold-acvp-sub-safe-primes.adoc
+:docfile: draft-hammett-acvp-safe-primes.adoc
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
 :area: General

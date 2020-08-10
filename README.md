@@ -1,5 +1,5 @@
 # ACVP
-The [Automated Cryptographic Validation Protocol](./draft-gold-acvp-protocol-spec.html) (ACVP) is a protocol currently under development to support a new National Voluntary Laboratory Accreditation Program (NVLAP) testing scope at the [National Institute of Standards and Technology (NIST)](https://www.nist.gov).  
+The [Automated Cryptographic Validation Protocol](./draft-fussell-acvp-spec.html) (ACVP) is a protocol currently under development to support a new National Voluntary Laboratory Accreditation Program (NVLAP) testing scope at the [National Institute of Standards and Technology (NIST)](https://www.nist.gov).  
 
 All current information about ACVP may be found within this Github project. View the documents at https://usnistgov.github.io/ACVP/.
 
@@ -79,53 +79,53 @@ The development of an Automated Cryptographic Validation Protocol (ACVP) that en
 validation of standardized algorithm test evidence to facilitate the [modernization](https://csrc.nist.gov/Projects/Automated-Cryptographic-Validation-Testing) of [CAVP](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program#) and [CMVP](https://csrc.nist.gov/projects/cryptographic-module-validation-program).
 
 # Status
-The demo server (demo.acvts.nist.gov) supports ACVP version 1.0. All endpoints defined in the [protocol specification](./draft-gold-acvp-protocol-spec.html) are available.
+The demo server (demo.acvts.nist.gov) supports ACVP version 1.0. All endpoints defined in the [protocol specification](./draft-fussell-acvp-spec.html) are available.
 
 The demo server allows validation of the following algorithms (a superset of the algorithms available through the CAVS tool). NOT ALL OF THE ALGORITHMS AVAILABLE ON THE DEMO SERVER ARE NIST-APPROVED ALGORITHMS. The prod server supports a subset of the listed algorithms.
 
 ## Supported Algorithms
 
 ### Block Cipher Modes
-* [AES-CBC](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html) 
-* [AES-CFB1](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-CFB8](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-CFB128](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-CTR](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-ECB](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-GCM](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-GCM-SIV](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html) - DEMO only
-* [AES-KW](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-KWP](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-OFB](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-XPN](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-XTS](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-FF1](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-FF3-1](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html) - DEMO only
-* [TDES-CBC](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-CBCI](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-CFBP1](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-CFBP8](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-CFBP64](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-CTR](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html) 
-* [TDES-ECB](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-KW](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-OFB](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [TDES-OFBI](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
+* [AES-CBC](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html) 
+* [AES-CFB1](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-CFB8](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-CFB128](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-CTR](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-ECB](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-GCM](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-GCM-SIV](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html) - DEMO only
+* [AES-KW](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-KWP](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-OFB](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-XPN](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-XTS](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-FF1](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-FF3-1](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html) - DEMO only
+* [TDES-CBC](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-CBCI](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-CFBP1](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-CFBP8](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-CFBP64](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-CTR](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html) 
+* [TDES-ECB](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-KW](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-OFB](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [TDES-OFBI](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
 
 ### Secure Hash
-* [SHA-1](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-224](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-256](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-384](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-512](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-512/224](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA-512/256](./draft-gold-acvp-sub-sha.txt) - [HTML](./draft-gold-acvp-sub-sha.html)
-* [SHA3-224](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
-* [SHA3-256](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
-* [SHA3-384](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
-* [SHA3-512](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
-* [SHAKE-128](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
-* [SHAKE-256](./draft-gold-acvp-sub-sha3.txt) - [HTML](./draft-gold-acvp-sub-sha3.html)
+* [SHA-1](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-224](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-256](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-384](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-512](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-512/224](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA-512/256](./draft-celi-acvp-sha.txt) - [HTML](./draft-celi-acvp-sha.html)
+* [SHA3-224](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
+* [SHA3-256](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
+* [SHA3-384](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
+* [SHA3-512](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
+* [SHAKE-128](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
+* [SHAKE-256](./draft-celi-acvp-sha3.txt) - [HTML](./draft-celi-acvp-sha3.html)
 
 ### XOFs
 * [cSHAKE-128](./draft-celi-acvp-xof-00.txt) - [HTML](./draft-celi-acvp-xof-00.html)
@@ -138,134 +138,134 @@ The demo server allows validation of the following algorithms (a superset of the
 * [TupleHash-256](./draft-celi-acvp-xof-00.txt) - [HTML](./draft-celi-acvp-xof-00.html)
 
 ### Message Authentication
-* [AES-GMAC](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [AES-CCM](./draft-gold-acvp-sub-block-ciph.txt) - [HTML](./draft-gold-acvp-sub-block-ciph.html)
-* [CMAC-AES](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [CMAC-TDES](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA-1](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-224](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-256](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-384](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-512](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-512/224](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA2-512/256](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA3-224](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA3-256](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA3-384](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
-* [HMAC-SHA3-512](./draft-gold-acvp-sub-mac.txt) - [HTML](./draft-gold-acvp-sub-mac.html)
+* [AES-GMAC](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [AES-CCM](./draft-celi-acvp-symmetric.txt) - [HTML](./draft-celi-acvp-symmetric.html)
+* [CMAC-AES](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [CMAC-TDES](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA-1](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-224](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-256](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-384](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-512](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-512/224](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA2-512/256](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA3-224](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA3-256](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA3-384](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
+* [HMAC-SHA3-512](./draft-fussell-acvp-mac.txt) - [HTML](./draft-fussell-acvp-mac.html)
 
 ### DRBG
-* [ctrDRBG-AES-128](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
-* [ctrDRBG-AES-192](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
-* [ctrDRBG-AES-256](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
-* [ctrDRBG-TDES](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
-* [HASH DRBG](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
-* [HMAC DRBG](./draft-gold-acvp-sub-drbg.txt) - [HTML](./draft-gold-acvp-sub-drbg.html)
+* [ctrDRBG-AES-128](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
+* [ctrDRBG-AES-192](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
+* [ctrDRBG-AES-256](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
+* [ctrDRBG-TDES](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
+* [HASH DRBG](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
+* [HMAC DRBG](./draft-vassilev-acvp-drbg.txt) - [HTML](./draft-vassilev-acvp-drbg.html)
 
 ### Digital Signature
-* [RSA mode: keyGen](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [RSA mode: sigGen](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [RSA mode: sigVer](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [RSA mode: signatureComponent](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [RSA mode: decryptionComponent](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [RSA mode: legacySigVer](./draft-gold-acvp-sub-rsa.txt) - [HTML](./draft-gold-acvp-sub-rsa.html)
-* [ECDSA mode: sigGenComponent](./draft-gold-acvp-sub-ecdsa.txt) - [HTML](./draft-gold-acvp-sub-ecdsa.html)
-* [ECDSA mode: keyGen](./draft-gold-acvp-sub-ecdsa.txt) - [HTML](./draft-gold-acvp-sub-ecdsa.html)
-* [ECDSA mode: keyVer](./draft-gold-acvp-sub-ecdsa.txt) - [HTML](./draft-gold-acvp-sub-ecdsa.html)
-* [ECDSA mode: sigGen](./draft-gold-acvp-sub-ecdsa.txt) - [HTML](./draft-gold-acvp-sub-ecdsa.html) 
-* [ECDSA mode: sigVer](./draft-gold-acvp-sub-ecdsa.txt) - [HTML](./draft-gold-acvp-sub-ecdsa.html)
-* [DSA mode: keyGen](./draft-gold-acvp-sub-dsa.txt) - [HTML](./draft-gold-acvp-sub-dsa.html)
-* [DSA mode: sigVer](./draft-gold-acvp-sub-dsa.txt) - [HTML](./draft-gold-acvp-sub-dsa.html)
-* [DSA mode: sigGen](./draft-gold-acvp-sub-dsa.txt) - [HTML](./draft-gold-acvp-sub-dsa.html)
-* [DSA mode: pqgGen](./draft-gold-acvp-sub-dsa.txt) - [HTML](./draft-gold-acvp-sub-dsa.html)
-* [DSA mode: pqgVer](./draft-gold-acvp-sub-dsa.txt) - [HTML](./draft-gold-acvp-sub-dsa.html)
-* [EDDSA mode: keyGen](./draft-gold-acvp-sub-eddsa.txt) - [HTML](./draft-gold-acvp-sub-eddsa.html) - DEMO only
-* [EDDSA mode: keyVer](./draft-gold-acvp-sub-eddsa.txt) - [HTML](./draft-gold-acvp-sub-eddsa.html) - DEMO only
-* [EDDSA mode: sigGen](./draft-gold-acvp-sub-eddsa.txt) - [HTML](./draft-gold-acvp-sub-eddsa.html) - DEMO only
-* [EDDSA mode: sigVer](./draft-gold-acvp-sub-eddsa.txt) - [HTML](./draft-gold-acvp-sub-eddsa.html) - DEMO only
+* [RSA mode: keyGen](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [RSA mode: sigGen](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [RSA mode: sigVer](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [RSA mode: signatureComponent](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [RSA mode: decryptionComponent](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [RSA mode: legacySigVer](./draft-celi-acvp-rsa.txt) - [HTML](./draft-celi-acvp-rsa.html)
+* [ECDSA mode: sigGenComponent](./draft-fussell-acvp-ecdsa.txt) - [HTML](./draft-fussell-acvp-ecdsa.html)
+* [ECDSA mode: keyGen](./draft-fussell-acvp-ecdsa.txt) - [HTML](./draft-fussell-acvp-ecdsa.html)
+* [ECDSA mode: keyVer](./draft-fussell-acvp-ecdsa.txt) - [HTML](./draft-fussell-acvp-ecdsa.html)
+* [ECDSA mode: sigGen](./draft-fussell-acvp-ecdsa.txt) - [HTML](./draft-fussell-acvp-ecdsa.html) 
+* [ECDSA mode: sigVer](./draft-fussell-acvp-ecdsa.txt) - [HTML](./draft-fussell-acvp-ecdsa.html)
+* [DSA mode: keyGen](./draft-fussell-acvp-dsa.txt) - [HTML](./draft-fussell-acvp-dsa.html)
+* [DSA mode: sigVer](./draft-fussell-acvp-dsa.txt) - [HTML](./draft-fussell-acvp-dsa.html)
+* [DSA mode: sigGen](./draft-fussell-acvp-dsa.txt) - [HTML](./draft-fussell-acvp-dsa.html)
+* [DSA mode: pqgGen](./draft-fussell-acvp-dsa.txt) - [HTML](./draft-fussell-acvp-dsa.html)
+* [DSA mode: pqgVer](./draft-fussell-acvp-dsa.txt) - [HTML](./draft-fussell-acvp-dsa.html)
+* [EDDSA mode: keyGen](./draft-celi-acvp-eddsa.txt) - [HTML](./draft-celi-acvp-eddsa.html) - DEMO only
+* [EDDSA mode: keyVer](./draft-celi-acvp-eddsa.txt) - [HTML](./draft-celi-acvp-eddsa.html) - DEMO only
+* [EDDSA mode: sigGen](./draft-celi-acvp-eddsa.txt) - [HTML](./draft-celi-acvp-eddsa.html) - DEMO only
+* [EDDSA mode: sigVer](./draft-celi-acvp-eddsa.txt) - [HTML](./draft-celi-acvp-eddsa.html) - DEMO only
 
 ### Key Agreement
-* [KAS ECC ephemeralUnified](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC fullMqv](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC fullUnified](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC onePassDh](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC onePassMqv](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC OnePassUnified](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC staticUnified](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS ECC CDH-Component](./draft-gold-acvp-sub-kas-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc.html)
-* [KAS FFC dhHybrid1](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS FFC mqv2](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html) 
-* [KAS FFC dhEphem](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS FFC dhHybridOneFlow](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS FFC mqv1](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS FFC dhOneFlow](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS FFC dhStatic](./draft-gold-acvp-sub-kas-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc.html)
-* [KAS ECC ephemeralUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC fullMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC fullUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC onePassDh Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC onePassMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC OnePassUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS ECC staticUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ecc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhHybrid1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC mqv2 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html)  - DEMO only
-* [KAS FFC dhEphem Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhHybridOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC mqv1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS FFC dhStatic Sp800-56Ar3](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.txt) - [HTML](./draft-gold-acvp-sub-kas-ffc-Sp800-56Ar3.html) - DEMO only
-* [KAS IFC KAS1-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS IFC KAS1-Party_V-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS IFC KAS2-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS IFC KAS2-bilateral-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS IFC KAS2-Party_U-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS IFC KAS2-Party_V-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KTS IFC KTS-OAEP-basic](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KTS IFC KTS-OAEP-Party_V-confirmation](./acvp_sub_kas_ifc.txt) - [HTML](./acvp_sub_kas_ifc.html) - DEMO only
-* [KAS KDF OneStep Sp800-56Cr1](./draft-gold-acvp-sub-kas-kdf-onestep-Sp800-56Cr1.txt) - [HTML](./draft-gold-acvp-sub-kas-kdf-onestep-Sp800-56Cr1.html) - DEMO only
-* [KAS KDF TwoStep Sp800-56Cr1](./draft-gold-acvp-sub-kas-kdf-twostep-Sp800-56Cr1.txt) - [HTML](./draft-gold-acvp-sub-kas-kdf-twostep-Sp800-56Cr1.html) - DEMO only
-* [KAS SSC ECC ephemeralUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC fullMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC fullUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC onePassDh Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC onePassMqv Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC OnePassUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC ECC staticUnified Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ecc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ecc.html) - DEMO only
-* [KAS SSC FFC dhHybrid1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
-* [KAS SSC FFC mqv2 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html)  - DEMO only
-* [KAS SSC FFC dhEphem Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
-* [KAS SSC FFC dhHybridOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
-* [KAS SSC FFC mqv1 Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
-* [KAS SSC FFC dhOneFlow Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
-* [KAS SSC FFC dhStatic Sp800-56Ar3](./draft-gold-acvp-sub-kas-ssc-ffc.txt) - [HTML](./draft-gold-acvp-sub-kas-ssc-ffc.html) - DEMO only
+* [KAS ECC ephemeralUnified](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC fullMqv](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC fullUnified](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC onePassDh](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC onePassMqv](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC OnePassUnified](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC staticUnified](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS ECC CDH-Component](./draft-fussell-acvp-kas-ecc.txt) - [HTML](./draft-fussell-acvp-kas-ecc.html)
+* [KAS FFC dhHybrid1](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS FFC mqv2](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html) 
+* [KAS FFC dhEphem](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS FFC dhHybridOneFlow](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS FFC mqv1](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS FFC dhOneFlow](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS FFC dhStatic](./draft-fussell-acvp-kas-ffc.txt) - [HTML](./draft-fussell-acvp-kas-ffc.html)
+* [KAS ECC ephemeralUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC fullMqv Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC fullUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC onePassDh Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC onePassMqv Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC OnePassUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS ECC staticUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ecc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ecc-sp800-56ar3.html) - DEMO only
+* [KAS FFC dhHybrid1 Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS FFC mqv2 Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html)  - DEMO only
+* [KAS FFC dhEphem Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS FFC dhHybridOneFlow Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS FFC mqv1 Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS FFC dhOneFlow Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS FFC dhStatic Sp800-56Ar3](./draft-hammett-acvp-kas-ffc-sp800-56ar3.txt) - [HTML](./draft-hammett-acvp-kas-ffc-sp800-56ar3.html) - DEMO only
+* [KAS IFC KAS1-basic](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS IFC KAS1-Party_V-confirmation](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS IFC KAS2-basic](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS IFC KAS2-bilateral-confirmation](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS IFC KAS2-Party_U-confirmation](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS IFC KAS2-Party_V-confirmation](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KTS IFC KTS-OAEP-basic](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KTS IFC KTS-OAEP-Party_V-confirmation](./draft-hammett-acvp-kas-ifc.txt) - [HTML](./draft-hammett-acvp-kas-ifc.html) - DEMO only
+* [KAS KDF OneStep Sp800-56Cr1](./draft-hammett-acvp-kas-kdf-onestep.txt) - [HTML](./draft-hammett-acvp-kas-kdf-onestep.html) - DEMO only
+* [KAS KDF TwoStep Sp800-56Cr1](./draft-hammett-acvp-kas-kdf-twostep.txt) - [HTML](./draft-hammett-acvp-kas-kdf-twostep.html) - DEMO only
+* [KAS SSC ECC ephemeralUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC fullMqv Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC fullUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC onePassDh Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC onePassMqv Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC OnePassUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC ECC staticUnified Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ecc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ecc.html) - DEMO only
+* [KAS SSC FFC dhHybrid1 Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
+* [KAS SSC FFC mqv2 Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html)  - DEMO only
+* [KAS SSC FFC dhEphem Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
+* [KAS SSC FFC dhHybridOneFlow Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
+* [KAS SSC FFC mqv1 Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
+* [KAS SSC FFC dhOneFlow Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
+* [KAS SSC FFC dhStatic Sp800-56Ar3](./draft-hammett-acvp-kas-ssc-ffc.txt) - [HTML](./draft-hammett-acvp-kas-ssc-ffc.html) - DEMO only
 
 ### KDFs
-* [Counter KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [Feedback KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [Double Pipeline Iterator KDF](./draft-gold-acvp-sub-kdf108.txt) - [HTML](./draft-gold-acvp-sub-kdf108.html)
-* [IKEv1](./draft-gold-acvp-sub-kdf135-ikev1.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev1.html)
-* [IKEv2](./draft-gold-acvp-sub-kdf135-ikev2.txt) - [HTML](./draft-gold-acvp-sub-kdf135-ikev2.html) 
-* [SNMP](./draft-gold-acvp-sub-kdf135-snmp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-snmp.html)
-* [SRTP](./draft-gold-acvp-sub-kdf135-srtp.txt) - [HTML](./draft-gold-acvp-sub-kdf135-srtp.html)
-* [SSH](./acvp_sub_kdf135_ssh.txt) - [HTML](./acvp_sub_kdf135_ssh.html)
-* [TLS](./draft-gold-acvp-sub-kdf135-tls.txt) - [HTML](./draft-gold-acvp-sub-kdf135-tls.html)
-* [TPM](./acvp_sub_kdf135_tpm.txt) - [HTML](./acvp_sub_kdf135_tpm.html)
-* [ANSX9.63](./draft-gold-acvp-sub-kdf135-x963.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x963.html)
-* [ANSX9.42](./draft-gold-acvp-sub-kdf135-x942.txt) - [HTML](./draft-gold-acvp-sub-kdf135-x942.html)
-* [PBKDF](./draft-gold-acvp-sub-pbkdf.txt) - [HTML](./draft-gold-acvp-sub-pbkdf.html)
+* [Counter KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
+* [Feedback KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
+* [Double Pipeline Iterator KDF](./draft-celi-acvp-kbkdf.txt) - [HTML](./draft-celi-acvp-kbkdf.html)
+* [IKEv1](./draft-celi-acvp-kdf-ikev1.txt) - [HTML](./draft-celi-acvp-kdf-ikev1.html)
+* [IKEv2](./draft-celi-acvp-kdf-ikev2.txt) - [HTML](./draft-celi-acvp-kdf-ikev2.html) 
+* [SNMP](./draft-celi-acvp-kdf-snmp.txt) - [HTML](./draft-celi-acvp-kdf-snmp.html)
+* [SRTP](./draft-celi-acvp-kdf-srtp.txt) - [HTML](./draft-celi-acvp-kdf-srtp.html)
+* [SSH](./draft-celi-acvp-kdf-ssh.txt) - [HTML](./draft-celi-acvp-kdf-ssh.html)
+* [TLS](./draft-celi-acvp-kdf-tls.txt) - [HTML](./draft-celi-acvp-kdf-tls.html)
+* [TPM](./draft-celi-acvp-kdf-tpm.txt) - [HTML](./draft-celi-acvp-kdf-tpm.html)
+* [ANSX9.63](./draft-celi-acvp-kdf-ansi-x963.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x963.html)
+* [ANSX9.42](./draft-celi-acvp-kdf-ansi-x942.txt) - [HTML](./draft-celi-acvp-kdf-ansi-x942.html)
+* [PBKDF](./draft-celi-acvp-pbkdf.txt) - [HTML](./draft-celi-acvp-pbkdf.html)
 
 ### Safe Primes
-* [SafePrimes KeyGen](./draft-gold-acvp-sub-safe-primes.txt) - [HTML](./draft-gold-acvp-sub-safe-primes.html) - DEMO only
-* [SafePrimes KeyVer](./draft-gold-acvp-sub-safe-primes.txt) - [HTML](./draft-gold-acvp-sub-safe-primes.html) - DEMO only
+* [SafePrimes KeyGen](./draft-hammett-acvp-safe-primes.txt) - [HTML](./draft-hammett-acvp-safe-primes.html) - DEMO only
+* [SafePrimes KeyVer](./draft-hammett-acvp-safe-primes.txt) - [HTML](./draft-hammett-acvp-safe-primes.html) - DEMO only
 
 The prod server supports all of the above except for the EdDSA variants, AES-FF3-1, KAS/KTS-IFC, and AES-GCM-SIV. Some of these algorithms have NIST SP800 series drafts in progress and will be available on the prod server when the draft becomes a standard. 
 
 ## Current 1.0 Support
-Please check the [protocol specification](./draft-gold-acvp-protocol-spec.html) for details on how to access the available resources. 
+Please check the [protocol specification](./draft-fussell-acvp-spec.html) for details on how to access the available resources. 
 
 # Accessing the demo server
 
-To access the demo server one needs a TLS credential **and** a one-time password (OTP). The [protocol specification](./draft-gold-acvp-protocol-spec.html) and other development information are available in this repository. You may want to use the companion [ACVP client](https://github.com/cisco/libacvp) to jump-start your work. 
+To access the demo server one needs a TLS credential **and** a one-time password (OTP). The [protocol specification](./draft-fussell-acvp-spec.html) and other development information are available in this repository. You may want to use the companion [ACVP client](https://github.com/cisco/libacvp) to jump-start your work. 
 
 To set expectations, since this is a demo system, it will be in a state of flux and any all data on the system is considered temporary and may be reset to accommodate development of the Automated Cryptographic Validation Protocol (ACVP) service. We will try to keep the demo service relatively stable, but we plan to update it as we continue to add new algorithms and capabilities.
 

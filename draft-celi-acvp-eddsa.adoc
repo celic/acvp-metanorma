@@ -2,7 +2,7 @@
 = ACVP EdDSA Algorithm JSON Specification
 :doctype: internet-draft
 :docname: acvp-eddsa
-:name: draft-gold-acvp-sub-eddsa-1.0
+:name: draft-celi-acvp-eddsa-1.0
 :abbrev: ACVP EdDSA
 :status: informational
 :ipr: trust200902
@@ -19,7 +19,7 @@
 :code: 20899
 :country: United States of America
 :email: christopher.celi@nist.gov
-:docfile: draft-gold-acvp-sub-eddsa.adoc
+:docfile: draft-celi-acvp-eddsa.adoc
 :role: editor
 :mn-document-class: ietf
 :mn-output-extensions: xml,rfc,txt,html
