@@ -26,6 +26,7 @@ jobs:
           LANGUAGE: C.UTF-8
         run: |
           make clean all publish
+        working-directory: ./src
       - uses: actions/upload-artifact@master
         with:
           name: documents
