@@ -40,7 +40,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@v1
       with:
-        name: documents
+        name: ./src/documents
     - name: Deploy to GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
