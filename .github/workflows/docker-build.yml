@@ -30,7 +30,7 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: documents
-          path: documents
+          path: ./src/documents
 
   deploy-gh-pages:
     if: github.ref == 'refs/heads/master'
@@ -40,7 +40,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@v1
       with:
-        name: ./src/documents
+        name: documents
     - name: Deploy to GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
