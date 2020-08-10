@@ -1,0 +1,4428 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft ">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>ACVP DSA Algorithm JSON Specification</title>
+<meta content="Barry Fussell" name="author">
+<meta content="xml2rfc 2.47.0" name="generator">
+<meta name="ietf.draft">
+<link href="draft-fussell-acvp-dsa.rfc.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necssary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre, code {
+  background-color: #f9f9f9;
+  font-family: 'Roboto Mono', monospace;
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The follwing is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre, code {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+pre.sourcecode,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact informatio look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background sligthtly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: avoid-page;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottim margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the comact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">ACVP DSA</td>
+<td class="right">August 2020</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Fussell</td>
+<td class="center">Expires 11 February 2021</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft"></dd>
+<dt class="label-">:</dt>
+<dd></dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2020-08-10" class="published">10 August 2020</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2021-02-11">11 February 2021</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">B. Fussell, <span class="editor">Ed.</span>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">ACVP DSA Algorithm JSON Specification</h1>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 11 February 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2020 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-abstract" class="xref">Abstract</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-terms-and-definitions" class="xref">Terms and definitions</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-supported-dsa-algorithms" class="xref">Supported DSA Algorithms</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-supported-conformances-for-" class="xref">Supported Conformances for DSA Algorithms</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-test-types-and-test-coverag" class="xref">Test Types and Test Coverage</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-test-types" class="xref">Test Types</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-test-coverage" class="xref">Test Coverage</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-requirements-covered" class="xref">Requirements Covered</a><a href="#section-toc.1-1.6.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-requirements-not-covered" class="xref">Requirements Not Covered</a><a href="#section-toc.1-1.6.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-capabilities-registration" class="xref">Capabilities Registration</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-prerequisites" class="xref">Prerequisites</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-required-prerequisite-algor" class="xref">Required Prerequisite Algorithms for DSA Validations</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-dsa-algorithm-capabilities-" class="xref">DSA Algorithm Capabilities Registration</a><a href="#section-toc.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="xref">7.4</a>.  <a href="#name-dsa-pqggen-mode-capabilitie" class="xref">DSA pqgGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="xref">7.5</a>.  <a href="#name-dsa-pqgver-mode-capabilitie" class="xref">DSA pqgVer Mode Capabilities</a><a href="#section-toc.1-1.7.2.5.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.7.2.5.2.1">
+                    <p id="section-toc.1-1.7.2.5.2.1.1"><a href="#section-7.5.1" class="xref">7.5.1</a>.  <a href="#name-dsa-keygen-mode-capabilitie" class="xref">DSA keyGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.5.2.2">
+                    <p id="section-toc.1-1.7.2.5.2.2.1"><a href="#section-7.5.2" class="xref">7.5.2</a>.  <a href="#name-dsa-siggen-mode-capabilitie" class="xref">DSA sigGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.7.2.5.2.3">
+                    <p id="section-toc.1-1.7.2.5.2.3.1"><a href="#section-7.5.3" class="xref">7.5.3</a>.  <a href="#name-dsa-sigver-mode-capabilitie" class="xref">DSA sigVer Mode Capabilities</a><a href="#section-toc.1-1.7.2.5.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-test-vectors" class="xref">Test Vectors</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-test-vectors-2" class="xref">Test Vectors</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-dsa-pqggen-test-vectors" class="xref">DSA pqgGen Test Vectors</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.1.2.1">
+                    <p id="section-toc.1-1.9.2.1.2.1.1"><a href="#section-9.1.1" class="xref">9.1.1</a>.  <a href="#name-dsa-pqggen-test-groups-json" class="xref">DSA pqgGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.1.2.2">
+                    <p id="section-toc.1-1.9.2.1.2.2.1"><a href="#section-9.1.2" class="xref">9.1.2</a>.  <a href="#name-dsa-pqggen-test-case-json-s" class="xref">DSA pqgGen Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-dsa-pqgver-test-vectors" class="xref">DSA pqgVer Test Vectors</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.2.2.1">
+                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-9.2.1" class="xref">9.2.1</a>.  <a href="#name-dsa-pqgver-test-groups-json" class="xref">DSA pqgVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.2.2.2">
+                    <p id="section-toc.1-1.9.2.2.2.2.1"><a href="#section-9.2.2" class="xref">9.2.2</a>.  <a href="#name-dsa-pqgver-test-case-json-s" class="xref">DSA pqgVer Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-dsa-keygen-test-vectors" class="xref">DSA keyGen Test Vectors</a><a href="#section-toc.1-1.9.2.3.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.3.2.1">
+                    <p id="section-toc.1-1.9.2.3.2.1.1"><a href="#section-9.3.1" class="xref">9.3.1</a>.  <a href="#name-dsa-keygen-test-groups-json" class="xref">DSA keyGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.3.2.2">
+                    <p id="section-toc.1-1.9.2.3.2.2.1"><a href="#section-9.3.2" class="xref">9.3.2</a>.  <a href="#name-dsa-keygen-test-case-json-s" class="xref">DSA keyGen Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="xref">9.4</a>.  <a href="#name-dsa-siggen-test-vectors" class="xref">DSA sigGen Test Vectors</a><a href="#section-toc.1-1.9.2.4.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.4.2.1">
+                    <p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1" class="xref">9.4.1</a>.  <a href="#name-dsa-siggen-test-groups-json" class="xref">DSA sigGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.4.2.2">
+                    <p id="section-toc.1-1.9.2.4.2.2.1"><a href="#section-9.4.2" class="xref">9.4.2</a>.  <a href="#name-dsa-siggen-test-case-json-s" class="xref">DSA sigGen Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="xref">9.5</a>.  <a href="#name-dsa-sigver-test-vectors" class="xref">DSA sigVer Test Vectors</a><a href="#section-toc.1-1.9.2.5.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.9.2.5.2.1">
+                    <p id="section-toc.1-1.9.2.5.2.1.1"><a href="#section-9.5.1" class="xref">9.5.1</a>.  <a href="#name-dsa-sigver-test-groups-json" class="xref">DSA sigVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="compact toc ulEmpty" id="section-toc.1-1.9.2.5.2.2">
+                    <p id="section-toc.1-1.9.2.5.2.2.1"><a href="#section-9.5.2" class="xref">9.5.2</a>.  <a href="#name-dsa-sigver-test-case-json-s" class="xref">DSA sigVer Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-test-vector-responses" class="xref">Test Vector Responses</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+<ul class="compact toc ulEmpty">
+<li class="compact toc ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-dsa-pqggen-test-vector-resp" class="xref">DSA PQGGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-dsa-pqgver-test-vector-resp" class="xref">DSA PQGVer Test Vector Responses</a><a href="#section-toc.1-1.10.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-dsa-keygen-test-vector-resp" class="xref">DSA KeyGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.10.2.4">
+                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="xref">10.4</a>.  <a href="#name-dsa-siggen-test-vector-resp" class="xref">DSA SigGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="compact toc ulEmpty" id="section-toc.1-1.10.2.5">
+                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="xref">10.5</a>.  <a href="#name-dsa-sigver-test-vector-resp" class="xref">DSA SigVer Test Vector Responses</a><a href="#section-toc.1-1.10.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="xref">12</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="xref">13</a>. <a href="#name-normative-references" class="xref">Normative references</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="compact toc ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="section-1">
+      <h2 id="name-acknowledgements">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+      </h2>
+<div id="_d0978fc1-2ea6-4e55-8c0f-120752596a44">
+<p id="section-1-1">There are no acknowledgements.<a href="#section-1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="abstract">
+<section id="section-2">
+      <h2 id="name-abstract">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-abstract" class="section-name selfRef">Abstract</a>
+      </h2>
+<div id="_c75deb8d-0c28-4dc9-989b-facae15b4e05">
+<p id="section-2-1">This document defines the JSON schema for testing FIPS 186-4 DSA implementations with the ACVP specification.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="introduction">
+<section id="section-3">
+      <h2 id="name-introduction">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<div id="_567161cf-080b-40b2-978b-3177f25bde67">
+<p id="section-3-1">The Automated Crypto Validation Protocol (ACVP) defines a mechanism to automatically verify the cryptographic implementation of a software or hardware crypto module. The ACVP specification defines how a crypto module communicates with an ACVP server, including crypto capabilities negotiation, session management, authentication, vector processing and more. The ACVP specification does not define algorithm specific JSON constructs for performing the crypto validation. A series of ACVP sub-specifications define the constructs for testing individual crypto algorithms. Each sub-specification addresses a specific class of crypto algorithms. This sub-specification defines the JSON constructs for testing FIPS 186-4 DSA implementations using ACVP.<a href="#section-3-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="conventions">
+<section id="section-4">
+      <h2 id="name-terms-and-definitions">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-terms-and-definitions" class="section-name selfRef">Terms and definitions</a>
+      </h2>
+<div id="_27494b93-afa2-4b3f-876d-906408d2787e">
+<p id="section-4-1">No terms and definitions are listed in this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="supported">
+<section id="section-5">
+      <h2 id="name-supported-dsa-algorithms">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-supported-dsa-algorithms" class="section-name selfRef">Supported DSA Algorithms</a>
+      </h2>
+<div id="_07a3ffa3-7971-4a7d-aeeb-fa7e2485f0e5">
+<p id="section-5-1">The following DSA algorithm / mode / revision combinations <span class="bcp14">MAY</span> be advertised by the ACVP compliant cryptographic module:<a href="#section-5-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5-2.1">
+          <div id="_e9efe1f3-4069-4c82-a42b-bf8a149e01ec">
+<p id="section-5-2.1.1">DSA / keyGen / 1.0<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.2">
+          <div id="_16044df5-d389-42be-97be-aec8e60a2812">
+<p id="section-5-2.2.1">DSA / pqgGen / 1.0<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.3">
+          <div id="_f1475633-bfbd-4d31-80b7-13e015c86115">
+<p id="section-5-2.3.1">DSA / pqgVer / 1.0<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.4">
+          <div id="_c2b24d82-d5e9-46b2-b4b7-3fc649fa7fe9">
+<p id="section-5-2.4.1">DSA / sigGen / 1.0<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.5">
+          <div id="_c2a6d6e1-d656-4d4f-8dc7-c9586df8ce2b">
+<p id="section-5-2.5.1">DSA / sigVer / 1.0<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+      </ul>
+<div id="supported_conformances">
+<section id="section-5.1">
+        <h3 id="name-supported-conformances-for-">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-supported-conformances-for-" class="section-name selfRef">Supported Conformances for DSA Algorithms</a>
+        </h3>
+<div id="_868fa69a-baac-451d-93fc-5b4859827206">
+<p id="section-5.1-1">The following DSA algorithms <span class="bcp14">MAY</span> claim conformance to <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5.1-2.1">
+            <div id="_5dd94448-435c-4ec2-a26c-43ba8054913c">
+<p id="section-5.1-2.1.1">DSA / SigGen / 1.0<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-5.1-2.2">
+            <div id="_8f40a494-38ca-47cf-a524-6b92a29e0512">
+<p id="section-5.1-2.2.1">DSA / SigVer / 1.0<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="testtypes">
+<section id="section-6">
+      <h2 id="name-test-types-and-test-coverag">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-test-types-and-test-coverag" class="section-name selfRef">Test Types and Test Coverage</a>
+      </h2>
+<div id="ttypes">
+<section id="section-6.1">
+        <h3 id="name-test-types">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-test-types" class="section-name selfRef">Test Types</a>
+        </h3>
+<div id="_ea307a7f-0a4c-4729-b3cf-2dcdafaf64be">
+<p id="section-6.1-1">The ACVP server performs a set of tests on the specified DSA algorithm in order to assess the correctness and robustness of the implementation. A typical ACVP validation session <span class="bcp14">SHALL</span> require multiple tests to be performed for every supported permutation of DSA capabilities. This section describes the design of the tests used to validate implementations of the DSA algorithms.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.1">
+            <div id="_f4b8a7ef-0099-466c-83fb-fb81536e0255">
+<p id="section-6.1-2.1.1">DSA / keyGen / 1.0 "AFT" - Algorithm Functional Test. The IUT is REQUIRED for each test case provided, to generate a key pair based on a generated group level PQG. This information is then communicated to the ACVP server and validated.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.2">
+            <div id="_0fbf1ce9-3e1d-4288-984c-0488bcac4344">
+<p id="section-6.1-2.2.1">DSA / pqgGen / 1.0 "GDT" - Generated Data Test. The IUT in this test mode is <span class="bcp14">REQUIRED</span> to generate PQ or G as a response to the ACVP provided test vector set.<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.3">
+            <div id="_0330c928-d870-406a-8bdb-c9138b6d59ca">
+<p id="section-6.1-2.3.1">DSA / pqgVer / 1.0 "GDT" - Generated Data Test. In this test mode, the ACVP server is <span class="bcp14">REQUIRED</span> to generate domain parameters for transmission  to the IUT. The IUT is expected to evaluate the validity of the domain parameters.<a href="#section-6.1-2.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.4">
+            <div id="_eb98d3ba-143f-4f9c-824b-fa6179c24b39">
+<p id="section-6.1-2.4.1">DSA / sigGen / 1.0 "AFT" - Algorithm Functional Test. This testing mode expects the IUT to generate valid signatures based on the ACVP provided message. The IUT communicates the PQG, public key, and signature to the ACVP server, and the signature is then validated.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.5">
+            <div id="_ef5fb459-e83b-463a-8bf3-fd5b402a4501">
+<p id="section-6.1-2.5.1">DSA / sigVer / 1.0 "AFT" - Algorithm Functional Test. The ACVP server generates a series of signatures to communicate to the IUT. The IUT is <span class="bcp14">REQUIRED</span> to determine the validity of the signature given the PQG, key, and message.<a href="#section-6.1-2.5.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        </ul>
+</section>
+</div>
+<div id="test_coverage">
+<section id="section-6.2">
+        <h3 id="name-test-coverage">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-test-coverage" class="section-name selfRef">Test Coverage</a>
+        </h3>
+<div id="_f61408e6-f88e-4a97-a874-16c7f2e86fab">
+<p id="section-6.2-1">The tests described in this document have the intention of ensuring an implementation is conformant to <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span> and <span>[<a href="#SP800-89" class="xref">SP800-89</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+</div>
+<div id="requirements_covered">
+<section id="section-6.2.1">
+          <h4 id="name-requirements-covered">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-requirements-covered" class="section-name selfRef">Requirements Covered</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-1.1">
+              <div id="_bf392aa5-3372-4989-9fc0-59e87577636c">
+<p id="section-6.2.1-1.1.1">FIPS186-4 Section 3 General Discussion. Domain parameter generation, key generation, signature generation, and signature validation are all within scope of ACVP server testing.<a href="#section-6.2.1-1.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.1-1.2">
+              <div id="_0b4d483e-642e-4725-8ad5-ae7c4efee646">
+<p id="section-6.2.1-1.2.1">FIPS186-4 Section 4 The Digital Signature Algorithm (DSA). The ACVP server provides a means of the generation and validation of domain parameters. The ACVP server is <span class="bcp14">SHALL</span> support a variety of parameter sizes/hash function for creation and delivery to/from the IUT. The ACVP server <span class="bcp14">SHALL</span> allow for the testing of the validity of domain parameters.  Key pair generation testing <span class="bcp14">SHALL</span> be provided by the ACVP server. Both Signature Generation and Validation testing mechanmisms <span class="bcp14">SHALL</span> be provided by the ACVP server.<a href="#section-6.2.1-1.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.1-1.3">
+              <div id="_f2ea9c52-4139-41d6-a229-813aacfe89e1">
+<p id="section-6.2.1-1.3.1">SP800-106 Section 3 Randomized Hashing and Section 4 Digital Signatures Using Randomized Hashing.  The IUT <span class="bcp14">SHALL</span> be provided or provide a random value that should be used to "randomize" a message prior to signing and/or verifying an original message.<a href="#section-6.2.1-1.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          </ul>
+</section>
+</div>
+<div id="requirements_not_covered">
+<section id="section-6.2.2">
+          <h4 id="name-requirements-not-covered">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-requirements-not-covered" class="section-name selfRef">Requirements Not Covered</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-1.1">
+              <div id="_784ba99d-ce0e-4121-a734-23349a8eaefb">
+<p id="section-6.2.2-1.1.1">FIPS186-4 Section 3 General Discussion. Assurances of private key secrecy and ownership <span class="bcp14">SHALL NOT</span> be within scope of ACVP testing.<a href="#section-6.2.2-1.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.2-1.2">
+              <div id="_ec5c0fb5-cefe-46ab-bcec-b4e19fc4896c">
+<p id="section-6.2.2-1.2.1">FIPS186-4 Section 4 The Digital Signature Algorithm (DSA). The IUT's selection of parameter sizes and hash functions <span class="bcp14">SHALL NOT</span> be within scope of ACVP server testing.  Though the ACVP server <span class="bcp14">SHALL</span> support a variety of parameter sizes/hash functions, the IUT's selection of these is out of scope of testing. The ACVP server <span class="bcp14">MAY</span> provide testing for the validity of domain parameters, but testing <span class="bcp14">SHALL NOT</span> provide assurances the IUT has validated a set of domain parameters prior to their use. Domain parameter and key pair management <span class="bcp14">SHALL NOT</span> be within scope of ACVP testing.<a href="#section-6.2.2-1.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.2-1.3">
+              <div id="_12fe67ad-4d72-4478-9812-0c6bb5338ee0">
+<p id="section-6.2.2-1.3.1">SP800-106 Section 3.3 The Random Value. DSA, ECDSA, and RSA have random values generated as per their signing process, this random value can be used as the input to the message randomization function, doing so however is out of scope of this testing.<a href="#section-6.2.2-1.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="capabilities">
+<section id="section-7">
+      <h2 id="name-capabilities-registration">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-capabilities-registration" class="section-name selfRef">Capabilities Registration</a>
+      </h2>
+<div id="_fd35cae0-4cd7-4447-9910-626544069e02">
+<p id="section-7-1">ACVP requires crypto modules to register their capabilities. This allows the crypto module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process.  This section describes the constructs for advertising support of DSA algorithms to the ACVP server.<a href="#section-7-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_28a94070-f878-4513-bf04-84b9526c2011">
+<p id="section-7-2">The algorithm capabilities <span class="bcp14">MUST</span> be advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value is an array, where each array element is an individual JSON object defined in this section. The 'algorithms' value is part of the 'capability_exchange' element of the ACVP JSON registration message. See the ACVP specification <span>[<a href="#ACVP" class="xref">ACVP</a>]</span> for more details on the registration message.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</div>
+<div id="prerequisites">
+<section id="section-7.1">
+        <h3 id="name-prerequisites">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-prerequisites" class="section-name selfRef">Prerequisites</a>
+        </h3>
+<div id="_68e2b094-3d13-4923-b1d7-fdb87a8e9b46">
+<p id="section-7.1-1">Each algorithm implementation <span class="bcp14">MAY</span> rely on other cryptographic primitives. For example, RSA Signature algorithms depend on an underlying hash function. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_4a74a713-8704-4692-bf5b-b9a1dfb6c82d">
+<p id="section-7.1-2">Prerequisites, if applicable, <span class="bcp14">MUST</span> be submitted in the registration as the <code>prereqVals</code> JSON property array inside each element of the <code>algorithms</code> array. Each element in the <code>prereqVals</code> array <span class="bcp14">MUST</span> contain the following properties<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-prerequisite-properties"></span><div id="_aeedb77a-fd66-4d95-b628-0e42616ea5e1">
+<table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-prerequisite-properties" class="selfRef">Prerequisite Properties</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">a prerequisite algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">valValue</td>
+              <td class="text-left" rowspan="1" colspan="1">algorithm validation number</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_5f760ba2-1eea-4c1b-aceb-0edb7989ca2c">
+<p id="section-7.1-4">A "valValue" of "same" <span class="bcp14">SHALL</span> be used to indicate that the prerequisite is being met by a different algorithm in the capability exchange in the same registration.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_b7185f00-b0d9-4e97-8485-731225003f6c">
+<p id="section-7.1-5">An example description of prerequisites within a single algorithm capability exchange looks like this<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_e2964afd-c6bc-4bb3-a002-939488c5d084">
+<figure id="figure-1">
+          <div id="section-7.1-6.1">
+<pre class="sourcecode lang-json">"prereqVals":
+[
+  {
+    "algorithm": "Alg1",
+    "valValue": "Val-1234"
+  },
+  {
+    "algorithm": "Alg2",
+    "valValue": "same"
+  }
+]</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="prereq_algs">
+<section id="section-7.2">
+        <h3 id="name-required-prerequisite-algor">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-required-prerequisite-algor" class="section-name selfRef">Required Prerequisite Algorithms for DSA Validations</a>
+        </h3>
+<div id="_13680b04-c43b-42f1-b6f4-b49d9d8910f9">
+<p id="section-7.2-1">Each DSA implementation relies on other cryptographic primitives. For example, DSA uses an underlying SHA algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-required-dsa-prerequisite-a"></span><div id="rereqs_table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-required-dsa-prerequisite-a" class="selfRef">Required DSA Prerequisite Algorithms JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+              <th class="text-left" rowspan="1" colspan="1">algorithm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">a prerequisite algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">DRBG, SHA, SHA_OPT2</td>
+              <td class="text-left" rowspan="1" colspan="1">valValue</td>
+              <td class="text-left" rowspan="1" colspan="1">algorithm validation number</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">actual number or "same"</td>
+              <td class="text-left" rowspan="1" colspan="1">prereqAlgVal</td>
+              <td class="text-left" rowspan="1" colspan="1">prerequistie algorithm validation</td>
+              <td class="text-left" rowspan="1" colspan="1">object with algorithm and valValue properties</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">see above</td>
+              <td class="text-left" rowspan="1" colspan="1">prereqVals</td>
+              <td class="text-left" rowspan="1" colspan="1">prerequistie algorithm validations</td>
+              <td class="text-left" rowspan="1" colspan="1">array of prereqAlgVal objects</td>
+              <td class="text-left" rowspan="1" colspan="1">see above</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="dsa_caps_reg">
+<section id="section-7.3">
+        <h3 id="name-dsa-algorithm-capabilities-">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-dsa-algorithm-capabilities-" class="section-name selfRef">DSA Algorithm Capabilities Registration</a>
+        </h3>
+<div id="_2a6016a6-b354-4e6b-9899-df7a3aa915f3">
+<p id="section-7.3-1">Each algorithm capability advertised is a self-contained JSON object using the following values.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-algorithm-capabilities-j"></span><div id="caps_table">
+<table class="center" id="table-3">
+          <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-dsa-algorithm-capabilities-j" class="selfRef">DSA Algorithm Capabilities JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm under test</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">"DSA"</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">mode</td>
+              <td class="text-left" rowspan="1" colspan="1">The DSA mode to be validated</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">"pqgGen", "pqgVer", "keyGen", "sigGen", "sigVer"</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">revision</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm testing revision to use.</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">"1.0"</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">prereqVals</td>
+              <td class="text-left" rowspan="1" colspan="1">prerequistie algorithm validations</td>
+              <td class="text-left" rowspan="1" colspan="1">array of prereqAlgVal objects</td>
+              <td class="text-left" rowspan="1" colspan="1">See  <a href="#prereq_algs" class="xref">Section 7.2</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">capabilities</td>
+              <td class="text-left" rowspan="1" colspan="1">array of JSON objects, each with fields pertaining to the global DSA mode indicated above and identified uniquely by the combination of the DSA "mode" and indicated properties</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of JSON objects</td>
+              <td class="text-left" rowspan="1" colspan="1">See  <a href="#mode_pqggen" class="xref">Section 7.4</a>, <a href="#mode_pqgver" class="xref">Section 7.5</a>, <a href="#mode_keygen" class="xref">Section 7.5.1</a>, <a href="#mode_siggen" class="xref">Section 7.5.2</a> or <a href="#mode_sigver" class="xref">Section 7.5.3</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">conformances</td>
+              <td class="text-left" rowspan="1" colspan="1">Used to denote the optional conformances that can apply to specific modes of DSA.</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of strings</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#supported_conformances" class="xref">Section 5.1</a>
+</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="mode_pqggen">
+<section id="section-7.4">
+        <h3 id="name-dsa-pqggen-mode-capabilitie">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-dsa-pqggen-mode-capabilitie" class="section-name selfRef">DSA pqgGen Mode Capabilities</a>
+        </h3>
+<div id="_59fe76c6-e60f-4980-a5d2-e55ffe8eab8d">
+<p id="section-7.4-1">The DSA / pqgGen / 1.0 mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_bb18b0db-3d04-463f-93b0-d4699471055e">
+<p id="section-7.4-2">Each DSA / pqgGen / 1.0 mode capability set is advertised as a self-contained JSON object.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_1dc8a289-d261-421a-bef1-01fb8d6e6fd1">
+<p id="section-7.4-3">The complete list of DSA PQ and G generation capabilities may be advertised by the ACVP compliant crypto module:<a href="#section-7.4-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqggen-capabilities-jso"></span><div id="pqgGen_table">
+<table class="center" id="table-4">
+          <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-dsa-pqggen-capabilities-jso" class="selfRef">DSA pqgGen Capabilities JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">l</td>
+              <td class="text-left" rowspan="1" colspan="1">The length in bits of the field and the length in bits of prime p.</td>
+              <td class="text-left" rowspan="1" colspan="1">value</td>
+              <td class="text-left" rowspan="1" colspan="1">2048, or 3072</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">n</td>
+              <td class="text-left" rowspan="1" colspan="1">The length in bits of q which is a prime factor of (p-1).</td>
+              <td class="text-left" rowspan="1" colspan="1">value</td>
+              <td class="text-left" rowspan="1" colspan="1">224, or 256 when L is 2048. Otherwise 256.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">pqGen</td>
+              <td class="text-left" rowspan="1" colspan="1">The methods supported to generate p and q.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"probable", "provable"}.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">gGen</td>
+              <td class="text-left" rowspan="1" colspan="1">The methods supported to generate g.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"unverifiable", "canonical"}.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+              <td class="text-left" rowspan="1" colspan="1">The hash functions supported when generating p, q and g.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256"}. Note that the digest size of the hash function <span class="bcp14">MUST</span> be equal to or greater than N.</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_34968721-6d0f-4cde-8375-001e4685acd0">
+<p id="section-7.4-5">An example of the DSA / pqgGen / 1.0 registration is the following<a href="#section-7.4-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_06eddde9-ac3f-41c8-a2f3-be342dbba3b2">
+<figure id="figure-2">
+          <div id="section-7.4-6.1">
+<pre class="sourcecode lang-json">{
+  "algorithm": "DSA",
+  "mode": "pqgGen",
+  "revision": "1.0",
+  "prereqVals": [
+    {
+      "algorithm": "SHA",
+      "valValue": "123456"
+    },
+    {
+      "algorithm": "DRBG",
+      "valValue": "123456"
+    }
+  ],
+  "capabilities": [
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 2048,
+      "n": 224,
+      "hashAlg": [
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 2048,
+      "n": 256,
+      "hashAlg": [
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 3072,
+      "n": 256,
+      "hashAlg": [
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/256"
+      ]
+    }
+  ]
+}</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_pqgver">
+<section id="section-7.5">
+        <h3 id="name-dsa-pqgver-mode-capabilitie">
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-dsa-pqgver-mode-capabilitie" class="section-name selfRef">DSA pqgVer Mode Capabilities</a>
+        </h3>
+<div id="_cb135f13-11e5-4f23-99da-a58c819192ce">
+<p id="section-7.5-1">The DSA / pqgVer / 1.0 mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_c90cad7b-2d64-412b-91c6-16a77efee542">
+<p id="section-7.5-2">Each DSA / pqgVer / 1.0 mode capability set is advertised as a self-contained JSON object.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_6a46a52b-3d12-4a87-ae64-737734a9fb3a">
+<p id="section-7.5-3">The complete list of DSA P, Q and G verification capabilities may be advertised by the ACVP compliant crypto module:<a href="#section-7.5-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqgver-capabilities-jso"></span><div id="pqgVer_table">
+<table class="center" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-dsa-pqgver-capabilities-jso" class="selfRef">DSA pqgVer Capabilities JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">l</td>
+              <td class="text-left" rowspan="1" colspan="1">The length in bits of the field and the length in bits of prime p.</td>
+              <td class="text-left" rowspan="1" colspan="1">value</td>
+              <td class="text-left" rowspan="1" colspan="1">1024, 2048, or 3072</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">n</td>
+              <td class="text-left" rowspan="1" colspan="1">The length in bits of q which is a prime factor of (p-1).</td>
+              <td class="text-left" rowspan="1" colspan="1">value</td>
+              <td class="text-left" rowspan="1" colspan="1">160 when L is 1024. 224, or 256 when L is 2048. Otherwise 256.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">pqGen</td>
+              <td class="text-left" rowspan="1" colspan="1">The methods supported to generate p and q.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"probable", "provable"}.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">gGen</td>
+              <td class="text-left" rowspan="1" colspan="1">The methods supported to generate g.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"unverifiable", "canonical"}.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+              <td class="text-left" rowspan="1" colspan="1">The hash functions supported when generating p, q and g.</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+              <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA-1", "SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256"}. Note that the digest size of the hash function MUST be equal to or greater than N.</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_3ad628ff-380b-4fdc-9b70-50a29a571d63">
+<p id="section-7.5-5">An example of the DSA / pqgVer / 1.0 registration is the following<a href="#section-7.5-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_eecaf02c-25f4-440b-9e1f-44242611dde0">
+<figure id="figure-3">
+          <div id="section-7.5-6.1">
+<pre class="sourcecode lang-json">{
+  "algorithm": "DSA",
+  "mode": "pqgVer",
+  "revision": "1.0",
+  "prereqVals": [
+    {
+      "algorithm": "SHA",
+      "valValue": "123456"
+    },
+    {
+      "algorithm": "DRBG",
+      "valValue": "123456"
+    }
+  ],
+  "capabilities": [
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 1024,
+      "n": 160,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 2048,
+      "n": 224,
+      "hashAlg": [
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 2048,
+      "n": 256,
+      "hashAlg": [
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "pqGen": [
+        "probable",
+        "provable"
+      ],
+      "gGen": [
+        "unverifiable",
+        "canonical"
+      ],
+      "l": 3072,
+      "n": 256,
+      "hashAlg": [
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/256"
+      ]
+    }
+  ]
+}</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a></figcaption></figure>
+</div>
+<div id="mode_keygen">
+<section id="section-7.5.1">
+          <h4 id="name-dsa-keygen-mode-capabilitie">
+<a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-dsa-keygen-mode-capabilitie" class="section-name selfRef">DSA keyGen Mode Capabilities</a>
+          </h4>
+<div id="_9493b684-99d4-4905-b557-7295ebd4675b">
+<p id="section-7.5.1-1">The DSA / keyGen / 1.0 mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_9687405b-c00f-4915-969b-4c583a137f9a">
+<p id="section-7.5.1-2">Each DSA / keyGen / 1.0 mode capability set is advertised as a self-contained JSON object.<a href="#section-7.5.1-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_5d586119-1f5f-4c90-88b7-a95d5cf9e21d">
+<p id="section-7.5.1-3">The complete list of DSA key generation capabilities may be advertised by the ACVP compliant crypto module:<a href="#section-7.5.1-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-keygen-capabilities-jso"></span><div id="keyGen_table">
+<table class="center" id="table-6">
+            <caption>
+<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#name-dsa-keygen-capabilities-jso" class="selfRef">DSA keyGen Capabilities JSON Values</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of the field and the length in bits of prime p.</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">2048, or 3072</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of q which is a prime factor of (p-1).</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">224, or 256 when L is 2048. Otherwise 256.</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_78a785b6-97ce-4e6f-9e43-e91355f6509c">
+<p id="section-7.5.1-5">An example of this is the following<a href="#section-7.5.1-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_e65fee8b-d6e9-4b9a-bcb5-3077fe5d8ae2">
+<figure id="figure-4">
+            <div id="section-7.5.1-6.1">
+<pre class="sourcecode lang-json">{
+  "algorithm": "DSA",
+  "mode": "keyGen",
+  "revision": "1.0",
+  "prereqVals": [
+    {
+      "algorithm": "SHA",
+      "valValue": "123456"
+    },
+    {
+      "algorithm": "DRBG",
+      "valValue": "123456"
+    }
+  ],
+  "capabilities": [
+    {
+      "n": 224,
+      "l": 2048
+    },
+    {
+      "n": 256,
+      "l": 2048
+    },
+    {
+      "n": 256,
+      "l": 3072
+    }
+  ]
+}</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_siggen">
+<section id="section-7.5.2">
+          <h4 id="name-dsa-siggen-mode-capabilitie">
+<a href="#section-7.5.2" class="section-number selfRef">7.5.2. </a><a href="#name-dsa-siggen-mode-capabilitie" class="section-name selfRef">DSA sigGen Mode Capabilities</a>
+          </h4>
+<div id="_9059915d-cabf-4ad6-87c7-bae1d2b85cb6">
+<p id="section-7.5.2-1">The DSA / sigGen / 1.0 mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.5.2-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_08c758bc-26b4-49ff-98a4-0739cf4b52d3">
+<p id="section-7.5.2-2">Each DSA / sigGen / 1.0 mode capability set is advertised as a self-contained JSON object.<a href="#section-7.5.2-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_b27451aa-c293-432c-9c78-d30d3ab08f1d">
+<p id="section-7.5.2-3">The complete list of DSA signature generation capabilities may be advertised by the ACVP compliant crypto module:<a href="#section-7.5.2-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-siggen-capabilities-jso"></span><div id="sigGen_table">
+<table class="center" id="table-7">
+            <caption>
+<a href="#table-7" class="selfRef">Table 7</a>:
+<a href="#name-dsa-siggen-capabilities-jso" class="selfRef">DSA sigGen Capabilities JSON Values</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of the field and the length in bits of prime p.</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">2048, or 3072</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of q which is a prime factor of (p-1).</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">224, or 256 when L is 2048. Otherwise 256.</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message.</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+                <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224","SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256"}.</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_cc75395c-ae88-4cbd-8064-7c15eb631e1e">
+<p id="section-7.5.2-5">An example of this is the following<a href="#section-7.5.2-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_3b7466f1-f84a-45af-b937-723c38221c6b">
+<figure id="figure-5">
+            <div id="section-7.5.2-6.1">
+<pre class="sourcecode lang-json">{
+  "algorithm": "DSA",
+  "mode": "sigGen",
+  "revision": "1.0",
+  "prereqVals": [
+    {
+      "algorithm": "SHA",
+      "valValue": "123456"
+    },
+    {
+      "algorithm": "DRBG",
+      "valValue": "123456"
+    }
+  ],
+  "capabilities": [
+    {
+      "n": 224,
+      "l": 2048,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "n": 256,
+      "l": 2048,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "n": 256,
+      "l": 3072,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    }
+  ],
+  "conformances": [
+    "SP800-106"
+  ]
+}</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_sigver">
+<section id="section-7.5.3">
+          <h4 id="name-dsa-sigver-mode-capabilitie">
+<a href="#section-7.5.3" class="section-number selfRef">7.5.3. </a><a href="#name-dsa-sigver-mode-capabilitie" class="section-name selfRef">DSA sigVer Mode Capabilities</a>
+          </h4>
+<div id="_ca15b05b-9963-49c6-8ccc-f8e4d8f4e310">
+<p id="section-7.5.3-1">The DSA / sigVer / 1.0 mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.5.3-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_ea48e950-9710-4cdc-86c1-73b4a87d58eb">
+<p id="section-7.5.3-2">Each DSA / sigVer / 1.0 mode capability set is advertised as a self-contained JSON object.<a href="#section-7.5.3-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_3387a1dd-0f65-47cc-b41a-77e7451ee128">
+<p id="section-7.5.3-3">The complete list of DSA signature verification capabilities may be advertised by the ACVP compliant crypto module:<a href="#section-7.5.3-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-sigver-capabilities-jso"></span><div id="sigVer_table">
+<table class="center" id="table-8">
+            <caption>
+<a href="#table-8" class="selfRef">Table 8</a>:
+<a href="#name-dsa-sigver-capabilities-jso" class="selfRef">DSA sigVer Capabilities JSON Values</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of the field and the length in bits of prime p.</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">1024, 2048, or 3072</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">The length in bits of q which is a prime factor of (p-1).</td>
+                <td class="text-left" rowspan="1" colspan="1">value</td>
+                <td class="text-left" rowspan="1" colspan="1">160 when L is 1024. 224, or 256 when L is2048. Otherwise 256.</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash functions supported when verifying a message.</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+                <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA-1","SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256"}.</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_f1adaa85-aae5-4e04-b22a-eaf6a67979a6">
+<p id="section-7.5.3-5">An example of this is the following<a href="#section-7.5.3-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_b62aa719-30a8-4710-91ab-d84324dbc43b">
+<figure id="figure-6">
+            <div id="section-7.5.3-6.1">
+<pre class="sourcecode lang-json">{
+  "algorithm": "DSA",
+  "mode": "sigVer",
+  "revision": "1.0",
+  "prereqVals": [
+    {
+      "algorithm": "SHA",
+      "valValue": "123456"
+    },
+    {
+      "algorithm": "DRBG",
+      "valValue": "123456"
+    }
+  ],
+  "capabilities": [
+    {
+      "n": 160,
+      "l": 1024,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "n": 224,
+      "l": 2048,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "n": 256,
+      "l": 2048,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    },
+    {
+      "n": 256,
+      "l": 3072,
+      "hashAlg": [
+        "SHA-1",
+        "SHA2-224",
+        "SHA2-256",
+        "SHA2-384",
+        "SHA2-512",
+        "SHA2-512/224",
+        "SHA2-512/256"
+      ]
+    }
+  ],
+  "conformances": [
+    "SP800-106"
+  ]
+}</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="test-vectors">
+<section id="section-8">
+      <h2 id="name-test-vectors">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<div id="_24f9fa68-1233-4188-a000-73a61e055a50">
+<p id="section-8-1">The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation test session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual algorithm defined during the capability exchange. This section describes the JSON schema for a test vector set used with FIPS 186-4 DSA algorithms.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_6f761f04-8fcb-4141-acae-7dabe9542527">
+<p id="section-8-2">The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.<a href="#section-8-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-top-level-test-vector-json-"></span><div id="_9496ae60-d897-438b-98a4-2b3cd574a9e5">
+<table class="center" id="table-9">
+        <caption>
+<a href="#table-9" class="selfRef">Table 9</a>:
+<a href="#name-top-level-test-vector-json-" class="selfRef">Top Level Test Vector JSON Elements</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Values</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol version identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique numeric vector set identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">Algorithm defined in the capability exchange</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">mode</td>
+            <td class="text-left" rowspan="1" colspan="1">Mode defined in the capability exchange</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">revision</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol test revision selected</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">Array of test groups containing test data, see <a href="#tgjs" class="xref">Section 9</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_13cd37e3-49fd-431c-a595-370305bab3e4">
+<p id="section-8-4">An example of this would look like this<a href="#section-8-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_81dbd7c3-9cc0-4075-befb-967bb52a13f8">
+<figure id="figure-7">
+        <div id="section-8-5.1">
+<pre class="sourcecode lang-json">{
+  "acvVersion": "version",
+  "vsId": 1,
+  "algorithm": "Alg1",
+  "mode": "Mode1",
+  "revision": "Revision1.0",
+  "testGroups": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="tgjs">
+<section id="section-9">
+      <h2 id="name-test-vectors-2">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-test-vectors-2" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<div id="_41038c72-ccf4-4f18-8928-ea237bcd84b2">
+<p id="section-9-1">The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual crypto algorithm, such as DSA / SigGen / 1.0 etc. This section describes the JSON schema for a test vector set used with DSA crypto algorithms.<a href="#section-9-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_5362ffe3-8328-4143-9083-5775132f8b82">
+<p id="section-9-2">The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.<a href="#section-9-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-vector-set-json-object"></span><div id="dsa_vs_top_table">
+<table class="center" id="table-10">
+        <caption>
+<a href="#table-10" class="selfRef">Table 10</a>:
+<a href="#name-dsa-vector-set-json-object" class="selfRef">DSA Vector Set JSON Object</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol version identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique numeric identifier for the vector set</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">The algorithm used for the test vectors</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">mode</td>
+            <td class="text-left" rowspan="1" colspan="1">The mode used for the test vectors</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">revision</td>
+            <td class="text-left" rowspan="1" colspan="1">The algorithm testing revision to use</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">Array of test group JSON objects, which are defined in <a href="#dsa_pqggen_tgjs" class="xref">Section 9.1.1</a>, <a href="#dsa_pqgver_tgjs" class="xref">Section 9.2.1</a>, <a href="#dsa_keygen_tgjs" class="xref">Section 9.3.1</a>, <a href="#dsa_siggen_tgjs" class="xref">Section 9.4.1</a>, or <a href="#dsa_sigver_tgjs" class="xref">Section 9.5.1</a> depending on the algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="dsa_pqggen_test_vectors">
+<section id="section-9.1">
+        <h3 id="name-dsa-pqggen-test-vectors">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-dsa-pqggen-test-vectors" class="section-name selfRef">DSA pqgGen Test Vectors</a>
+        </h3>
+<div id="dsa_pqggen_tgjs">
+<section id="section-9.1.1">
+          <h4 id="name-dsa-pqggen-test-groups-json">
+<a href="#section-9.1.1" class="section-number selfRef">9.1.1. </a><a href="#name-dsa-pqggen-test-groups-json" class="section-name selfRef">DSA pqgGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_f3d6498c-319f-453d-83ed-d7f347e951b2">
+<p id="section-9.1.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.1.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_4c6469fe-8a9c-4a49-a36d-2680feeb7e22">
+<p id="section-9.1.1-2">The test group for DSA / pqgGen / * is as follows:<a href="#section-9.1.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqggen-test-group-json-"></span><div id="dsa_pqggen_vs_tg_table">
+<table class="center" id="table-11">
+            <caption>
+<a href="#table-11" class="selfRef">Table 11</a>:
+<a href="#name-dsa-pqggen-test-group-json-" class="selfRef">DSA PQGGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tgId</td>
+                <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime modulus p</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime divisor q</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">pqMode</td>
+                <td class="text-left" rowspan="1" colspan="1">The specific pq generation mode used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">gMode</td>
+                <td class="text-left" rowspan="1" colspan="1">The specific g generation mode used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash algorithm used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#dsa_pqggen_tvjs" class="xref">Section 9.1.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="dsa_pqggen_tvjs">
+<section id="section-9.1.2">
+          <h4 id="name-dsa-pqggen-test-case-json-s">
+<a href="#section-9.1.2" class="section-number selfRef">9.1.2. </a><a href="#name-dsa-pqggen-test-case-json-s" class="section-name selfRef">DSA pqgGen Test Case JSON Schema</a>
+          </h4>
+<div id="_c9ff08e8-3eb3-4ba3-8075-00ed9ac77f37">
+<p id="section-9.1.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / pqgGen / 1.0 test vector.<a href="#section-9.1.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqggen-test-case-json-o"></span><div id="dsa_pqggen_vs_tc_table">
+<table class="center" id="table-12">
+            <caption>
+<a href="#table-12" class="selfRef">Table 12</a>:
+<a href="#name-dsa-pqggen-test-case-json-o" class="selfRef">DSA PQGGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">p</td>
+                <td class="text-left" rowspan="1" colspan="1">The prime modulus</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">q</td>
+                <td class="text-left" rowspan="1" colspan="1">The prime divisor of p - 1</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">domainSeed</td>
+                <td class="text-left" rowspan="1" colspan="1">The seed used to generate p and q in the probable method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">index</td>
+                <td class="text-left" rowspan="1" colspan="1">The index value provided to the g generator in the canonical method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_df069fe9-a735-4d4d-bcb5-2eece6574aa2">
+<aside id="section-9.1.2-3">
+            <p id="section-9.1.2-3.1">NOTE  1: For groups generating a p and q value, only the 'tcId' property will be present. It is the client's responsibility to generate a valid p and q pair with the specified properties using the specified generation method from <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-9.1.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_7f4b2db9-4fe8-440d-a889-7b80d938ebdd">
+<aside id="section-9.1.2-4">
+            <p id="section-9.1.2-4.1">NOTE  2: For groups generating a g value, using the "unverifiable" method, only the 'tcId', 'p' and 'q' will be provided. For groups generating a g value using the "canonical" method, an additional 'domainSeed' and 'index' will be provided. For more information about these generation methods see Appendix A in <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-9.1.2-4.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_4504ec27-0406-48f7-af22-1811d4100450">
+<p id="section-9.1.2-5">The following is an example JSON object sent from the server to the client for DSA / pqgGen / 1.0.<a href="#section-9.1.2-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_ae8b1fb1-df00-4c70-b446-de9d1aa09b2b">
+<figure id="figure-8">
+            <div id="section-9.1.2-6.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "DSA",
+        "mode": "pqgGen",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA2-224",
+                "pqMode": "probable",
+                "testType": "GDT",
+                "tests": [
+                    {
+                        "tcId": 1,
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA2-384",
+                "pqMode": "provable",
+                "testType": "GDT",
+                "tests": [
+                    {
+                        "tcId": 2,
+                    }
+                ]
+            },
+            {
+                "tgId": 3,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA2-224",
+                "testType": "GDT",
+                "gMode": "unverifiable",
+                "tests": [
+                    {
+                      "tcId": 3,
+                      "p": "B9D5DEC1F8541708F...",
+                      "q": "9F3FCC1DA20ACCD5C..."
+                    }
+                ]
+            },
+            {
+                "tgId": 4,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA2-224",
+                "testType": "GDT",
+                "gMode": "canonical",
+                "tests": [
+                    {
+                      "tcId": 4,
+                      "p": "CACDDA5F26C38B7EF...",
+                      "q": "A4D538BAE42A35316...",
+                      "domainSeed": "E8A171F4...",
+                      "index": "AD"
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="dsa_pqgver_test_vectors">
+<section id="section-9.2">
+        <h3 id="name-dsa-pqgver-test-vectors">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-dsa-pqgver-test-vectors" class="section-name selfRef">DSA pqgVer Test Vectors</a>
+        </h3>
+<div id="dsa_pqgver_tgjs">
+<section id="section-9.2.1">
+          <h4 id="name-dsa-pqgver-test-groups-json">
+<a href="#section-9.2.1" class="section-number selfRef">9.2.1. </a><a href="#name-dsa-pqgver-test-groups-json" class="section-name selfRef">DSA pqgVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_fe6412b0-77ad-4ffc-931e-ae01182a8aaa">
+<p id="section-9.2.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.2.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_6d6248aa-3a40-42c8-8141-07691fb2651c">
+<p id="section-9.2.1-2">The test group for DSA / pqgVer / * is as follows:<a href="#section-9.2.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqgver-test-group-json-"></span><div id="dsa_pqgver_vs_tg_table">
+<table class="center" id="table-13">
+            <caption>
+<a href="#table-13" class="selfRef">Table 13</a>:
+<a href="#name-dsa-pqgver-test-group-json-" class="selfRef">DSA PQGVer Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tgId</td>
+                <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime modulus p</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime divisor q</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">pqMode</td>
+                <td class="text-left" rowspan="1" colspan="1">The specific pq generation mode used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">gMode</td>
+                <td class="text-left" rowspan="1" colspan="1">The specific g generation mode used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash algorithm used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#dsa_pqgver_tvjs" class="xref">Section 9.2.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="dsa_pqgver_tvjs">
+<section id="section-9.2.2">
+          <h4 id="name-dsa-pqgver-test-case-json-s">
+<a href="#section-9.2.2" class="section-number selfRef">9.2.2. </a><a href="#name-dsa-pqgver-test-case-json-s" class="section-name selfRef">DSA pqgVer Test Case JSON Schema</a>
+          </h4>
+<div id="_697fe456-4f57-40a0-b9ca-d5ca3c738864">
+<p id="section-9.2.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / pqgVer / 1.0 test vector.<a href="#section-9.2.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqgver-test-case-json-o"></span><div id="dsa_pqgver_vs_tc_table">
+<table class="center" id="table-14">
+            <caption>
+<a href="#table-14" class="selfRef">Table 14</a>:
+<a href="#name-dsa-pqgver-test-case-json-o" class="selfRef">DSA PQGVer Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">p</td>
+                <td class="text-left" rowspan="1" colspan="1">The prime modulus</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">q</td>
+                <td class="text-left" rowspan="1" colspan="1">The prime divisor of p - 1</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">domainSeed</td>
+                <td class="text-left" rowspan="1" colspan="1">The seed used to generate p and q in the probable method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">counter</td>
+                <td class="text-left" rowspan="1" colspan="1">The counter used to generate p and q in the probable method</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">pSeed</td>
+                <td class="text-left" rowspan="1" colspan="1">The seed used to generate p in the provable method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qSeed</td>
+                <td class="text-left" rowspan="1" colspan="1">The seed used to generate q in the provable method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">pCounter</td>
+                <td class="text-left" rowspan="1" colspan="1">The counter used to generate p in the provable method</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qCounter</td>
+                <td class="text-left" rowspan="1" colspan="1">The counter used to generate q in the provable method</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">g</td>
+                <td class="text-left" rowspan="1" colspan="1">The generator</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">h</td>
+                <td class="text-left" rowspan="1" colspan="1">The index value provided to the g generator in the unverifiable method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">index</td>
+                <td class="text-left" rowspan="1" colspan="1">The index value provided to the g generator in the canonical method</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_42704b75-1212-4aec-8d97-af760db761ff">
+<aside id="section-9.2.2-3">
+            <p id="section-9.2.2-3.1">NOTE  1: For groups verifying a p and q value using the "probable" method, only the 'tcId', 'p', 'q', 'domainSeed' and 'counter' properties will be present.<a href="#section-9.2.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_203c2d45-dde3-4518-b39d-ad6d8559abab">
+<aside id="section-9.2.2-4">
+            <p id="section-9.2.2-4.1">NOTE  2: For groups verifying a p and q value using the "provable" method, only the 'tcId', 'p', 'q', 'pCounter', 'qCounter', 'pSeed' and 'qSeed' properties will be present.<a href="#section-9.2.2-4.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_e6c7540f-4aee-4ae2-b3f0-7d3b3dea0808">
+<aside id="section-9.2.2-5">
+            <p id="section-9.2.2-5.1">NOTE  3: For groups verifying a g value using the "unverifiable" method, only the 'tcId', 'p', 'q', 'g', 'h', and 'domainSeed' properties will be present.<a href="#section-9.2.2-5.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_5ca7d6a0-1e8b-44cc-bee5-36c190bf1fac">
+<aside id="section-9.2.2-6">
+            <p id="section-9.2.2-6.1">NOTE  4: For groups verifying a g value using the "canonical" method, only the 'tcId', 'p', 'q', 'g', and 'index' properties will be present.<a href="#section-9.2.2-6.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_ea4a7bed-78ab-40ca-985e-3fbb995c58ae">
+<p id="section-9.2.2-7">The following is an example JSON object sent from the server to the client for DSA / pqgVer / 1.0.<a href="#section-9.2.2-7" class="pilcrow">¶</a></p>
+</div>
+<div id="_c6bdb6f6-0561-41b9-a100-29de38f231e2">
+<figure id="figure-9">
+            <div id="section-9.2.2-8.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "DSA",
+        "mode": "pqgVer",
+        "revision": "1.0",
+        "testGroups": [
+          {
+            "tgId": 1,
+            "l": 1024,
+            "n": 160,
+            "hashAlg": "SHA-1",
+            "testType": "GDT",
+            "pqMode": "probable",
+            "tests": [
+              {
+                "tcId": 1,
+                "p": "9D9269AC94DB5003355...",
+                "q": "C5C97FD66D441234E78...",
+                "domainSeed": "259947680F...",
+                "counter": 309
+              },
+            ]
+          },
+          {
+            "tgId": 2,
+            "l": 1024,
+            "n": 160,
+            "hashAlg": "SHA-1",
+            "testType": "GDT",
+            "pqMode": "provable",
+            "tests": [
+              {
+                "tcId": 36,
+                "p": "4BDC98F8302E24CEDCE...",
+                "q": "A00C3FEAF8F56910DA5...",
+                "pCounter": 1874,
+                "qCounter": 115,
+                "pSeed": "C4967615C4E1391...",
+                "qSeed": "C4967615C4E1391..."
+              },
+            ]
+          },
+          {
+            "tgId": 3,
+            "l": 1024,
+            "n": 160,
+            "hashAlg": "SHA-1",
+            "testType": "GDT",
+            "gMode": "unverifiable",
+            "tests": [
+              {
+                "tcId": 211,
+                "p": "A1648B0F29F5D38DA507...",
+                "q": "9BCF7E1625844A88EABB...",
+                "g": "0FB0987B157E12F15D78...",
+                "h": "02",
+                "domainSeed": "D9F63E102A9..."
+              },
+            ]
+          },
+          {
+            "tgId": 4,
+            "l": 1024,
+            "n": 160,
+            "hashAlg": "SHA-1",
+            "testType": "GDT",
+            "gMode": "canonical",
+            "tests": [
+              {
+                "tcId": 246,
+                "p": "9A1B46A4498962D12FDE...",
+                "q": "B70E07662CADF2A41914...",
+                "g": "45659A0B48B5B581E5CA...",
+                "index": "45"
+              },
+            ]
+          }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="dsa_keygen_test_vectors">
+<section id="section-9.3">
+        <h3 id="name-dsa-keygen-test-vectors">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-dsa-keygen-test-vectors" class="section-name selfRef">DSA keyGen Test Vectors</a>
+        </h3>
+<div id="dsa_keygen_tgjs">
+<section id="section-9.3.1">
+          <h4 id="name-dsa-keygen-test-groups-json">
+<a href="#section-9.3.1" class="section-number selfRef">9.3.1. </a><a href="#name-dsa-keygen-test-groups-json" class="section-name selfRef">DSA keyGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_b0dfda04-dd05-4042-9a38-fdb7dbb89c71">
+<p id="section-9.3.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.3.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_64d23d73-b995-4ecb-9e2f-0d9dc57b7452">
+<p id="section-9.3.1-2">The test group for DSA / keyGen / * is as follows:<a href="#section-9.3.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-keygen-test-group-json-"></span><div id="dsa_keygen_vs_tg_table">
+<table class="center" id="table-15">
+            <caption>
+<a href="#table-15" class="selfRef">Table 15</a>:
+<a href="#name-dsa-keygen-test-group-json-" class="selfRef">DSA KeyGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tgId</td>
+                <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime modulus p</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime divisor q</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#dsa_keygen_tvjs" class="xref">Section 9.3.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="dsa_keygen_tvjs">
+<section id="section-9.3.2">
+          <h4 id="name-dsa-keygen-test-case-json-s">
+<a href="#section-9.3.2" class="section-number selfRef">9.3.2. </a><a href="#name-dsa-keygen-test-case-json-s" class="section-name selfRef">DSA keyGen Test Case JSON Schema</a>
+          </h4>
+<div id="_f9829187-7486-4b3d-b22e-ec0fe9703748">
+<p id="section-9.3.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / keyGen / 1.0 test vector.<a href="#section-9.3.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-keygen-test-case-json-o"></span><div id="dsa_keygen_vs_tc_table">
+<table class="center" id="table-16">
+            <caption>
+<a href="#table-16" class="selfRef">Table 16</a>:
+<a href="#name-dsa-keygen-test-case-json-o" class="selfRef">DSA KeyGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_ab7916b0-4e4a-4e46-b7c1-a66753f03ea5">
+<aside id="section-9.3.2-3">
+            <p id="section-9.3.2-3.1">NOTE: The client is responsible for generating domain parameters and a key to be verified by the server.<a href="#section-9.3.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_e9fb952c-c3d6-49b2-8480-b5657514f82b">
+<p id="section-9.3.2-4">The following is an example JSON object sent from the server to the client for DSA / keyGen / 1.0.<a href="#section-9.3.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_62a1bae9-f0f0-4f28-8983-94519fb40868">
+<figure id="figure-10">
+            <div id="section-9.3.2-5.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "DSA",
+        "mode": "keyGen",
+        "revision": "1.0",
+        "testGroups": [
+          {
+            "tgId": 1,
+            "l": 2048,
+            "n": 224,
+            "tests": [
+              {
+                "tcId": 1
+              },
+            ]
+          }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="dsa_siggen_test_vectors">
+<section id="section-9.4">
+        <h3 id="name-dsa-siggen-test-vectors">
+<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-dsa-siggen-test-vectors" class="section-name selfRef">DSA sigGen Test Vectors</a>
+        </h3>
+<div id="dsa_siggen_tgjs">
+<section id="section-9.4.1">
+          <h4 id="name-dsa-siggen-test-groups-json">
+<a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-dsa-siggen-test-groups-json" class="section-name selfRef">DSA sigGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_ceb6ffbe-6f4d-4264-9b6d-f2b46cbd97be">
+<p id="section-9.4.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.4.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_32b67578-931a-4ecb-958a-6aa3e45c0a71">
+<p id="section-9.4.1-2">The test group for DSA / sigGen / * is as follows:<a href="#section-9.4.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-siggen-test-group-json-"></span><div id="dsa_siggen_vs_tg_table">
+<table class="center" id="table-17">
+            <caption>
+<a href="#table-17" class="selfRef">Table 17</a>:
+<a href="#name-dsa-siggen-test-group-json-" class="selfRef">DSA SigGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tgId</td>
+                <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime modulus p</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime divisor q</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash algorithm used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">conformance</td>
+                <td class="text-left" rowspan="1" colspan="1">Signifies all test cases within the group should utilize random message hashing as described in &lt;SP800-106&gt;&gt;.</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#dsa_siggen_tvjs" class="xref">Section 9.4.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="dsa_siggen_tvjs">
+<section id="section-9.4.2">
+          <h4 id="name-dsa-siggen-test-case-json-s">
+<a href="#section-9.4.2" class="section-number selfRef">9.4.2. </a><a href="#name-dsa-siggen-test-case-json-s" class="section-name selfRef">DSA sigGen Test Case JSON Schema</a>
+          </h4>
+<div id="_1ee7a1a2-ba1d-409e-9457-0c7127333e57">
+<p id="section-9.4.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / sigGen / 1.0 test vector.<a href="#section-9.4.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-siggen-test-case-json-o"></span><div id="dsa_siggen_vs_tc_table">
+<table class="center" id="table-18">
+            <caption>
+<a href="#table-18" class="selfRef">Table 18</a>:
+<a href="#name-dsa-siggen-test-case-json-o" class="selfRef">DSA SigGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">message</td>
+                <td class="text-left" rowspan="1" colspan="1">The message used to generate signature or verify signature</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_737a3b7e-f419-4539-be24-5ad04d5b77b2">
+<p id="section-9.4.2-3">The following is an example JSON object sent from the server to the client for DSA / sigGen / 1.0.<a href="#section-9.4.2-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_d1b51784-cc25-4d0c-ae99-f20b7a92561d">
+<figure id="figure-11">
+            <div id="section-9.4.2-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "DSA",
+        "mode": "sigGen",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA-1",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "message": "C1FEBB069145F..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "l": 2048,
+                "n": 224,
+                "hashAlg": "SHA-1",
+                "conformance": "SP800-106",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "message": "C1FEBB069145F..."
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="dsa_sigver_test_vectors">
+<section id="section-9.5">
+        <h3 id="name-dsa-sigver-test-vectors">
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-dsa-sigver-test-vectors" class="section-name selfRef">DSA sigVer Test Vectors</a>
+        </h3>
+<div id="dsa_sigver_tgjs">
+<section id="section-9.5.1">
+          <h4 id="name-dsa-sigver-test-groups-json">
+<a href="#section-9.5.1" class="section-number selfRef">9.5.1. </a><a href="#name-dsa-sigver-test-groups-json" class="section-name selfRef">DSA sigVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_82ec3fb8-9f6c-4a04-ba24-b611ae76ff51">
+<p id="section-9.5.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.5.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_607e0c3f-0d34-44b3-8e39-cbd7f2960ce8">
+<p id="section-9.5.1-2">The test group for DSA / sigVer / * is as follows:<a href="#section-9.5.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-sigver-test-group-json-"></span><div id="dsa_sigver_vs_tg_table">
+<table class="center" id="table-19">
+            <caption>
+<a href="#table-19" class="selfRef">Table 19</a>:
+<a href="#name-dsa-sigver-test-group-json-" class="selfRef">DSA SigVer Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tgId</td>
+                <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">l</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime modulus p</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">n</td>
+                <td class="text-left" rowspan="1" colspan="1">Length in bits of prime divisor q</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">p</td>
+                <td class="text-left" rowspan="1" colspan="1">Domain parameter P</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">q</td>
+                <td class="text-left" rowspan="1" colspan="1">Domain parameter Q</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">g</td>
+                <td class="text-left" rowspan="1" colspan="1">Domain parameter G</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">The hash algorithm used in the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">conformance</td>
+                <td class="text-left" rowspan="1" colspan="1">Signifies all test cases within the group should utilize random message hashing as described in &lt;SP800-106&gt;&gt;.</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#dsa_sigver_tvjs" class="xref">Section 9.5.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="dsa_sigver_tvjs">
+<section id="section-9.5.2">
+          <h4 id="name-dsa-sigver-test-case-json-s">
+<a href="#section-9.5.2" class="section-number selfRef">9.5.2. </a><a href="#name-dsa-sigver-test-case-json-s" class="section-name selfRef">DSA sigVer Test Case JSON Schema</a>
+          </h4>
+<div id="_9f9031e7-4244-4aa5-866b-0c13f03b0bf5">
+<p id="section-9.5.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / sigVer / 1.0 test vector.<a href="#section-9.5.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-sigver-test-case-json-o"></span><div id="dsa_sigver_vs_tc_table">
+<table class="center" id="table-20">
+            <caption>
+<a href="#table-20" class="selfRef">Table 20</a>:
+<a href="#name-dsa-sigver-test-case-json-o" class="selfRef">DSA SigVer Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">message</td>
+                <td class="text-left" rowspan="1" colspan="1">The message used to generate signature or verify signature</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in &lt;SP800-106&gt;&gt;.</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value's bit length.</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">r</td>
+                <td class="text-left" rowspan="1" colspan="1">The signature component R</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">s</td>
+                <td class="text-left" rowspan="1" colspan="1">The signature component S</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">y</td>
+                <td class="text-left" rowspan="1" colspan="1">The public key component Y</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_84b74875-43e3-4c96-80d8-0c26c7b3846b">
+<aside id="section-9.5.2-3">
+            <p id="section-9.5.2-3.1">NOTE: The 'randomValue' and 'randomValueLen' properties are only present if the 'conformance' property of the group is set to "SP800-106".<a href="#section-9.5.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_7894ac7f-49ef-464a-bb6f-86762f6bed61">
+<p id="section-9.5.2-4">The following is an example JSON object sent from the server to the client for DSA / sigVer / 1.0.<a href="#section-9.5.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_490d1a99-4fec-435b-bc65-e478eddfc4bb">
+<figure id="figure-12">
+            <div id="section-9.5.2-5.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "DSA",
+        "mode": "sigVer",
+        "revision": "1.0",
+        "testGroups": [
+          {
+            "tgId": 1,
+            "l": 1024,
+            "n": 160,
+            "p": "A48828B4A4E149C2D1FC66F108D370A2A9E87...",
+            "q": "D3C53E62338D4231E42FA9683175C404FBF52...",
+            "g": "7BDDD6B8E9B4667397B278F98F446C418EF1A...",
+            "hashAlg": "SHA-1",
+            "tests": [
+              {
+                "tcId": 1,
+                "message": "1A128C1A61091CE52A8B89D69A3...",
+                "y": "A3A2F1AFC3091204B7D7ED3617A80E0FD...",
+                "r": "C390851DE10669399308D9F401B0286AA...",
+                "s": "26BE6EFDCD2ED6946BFCFE2D396AB3A2E..."
+              },
+            ]
+          },
+          {
+            "tgId": 2,
+            "l": 1024,
+            "n": 160,
+            "p": "66F108D370A2A9E87DBD49BC09A27017621A...",
+            "q": "1F855467465A653D2245B7E31C910A18EF79...",
+            "g": "F098ACF73BFC43B1B5E7BFB065FBBDDD6B8E...",
+            "hashAlg": "SHA-1",
+            "conformance": "SP800-106",
+            "tests": [
+              {
+                "tcId": 2,
+                "message": "A0F409909E31C2C23BB7A24B8103F11F...",
+                "randomValue": "DB0D25A72C8DEFA0F409909E31C2..."
+                "randomValueLen": 1024,
+                "y": "A3A284CB56F3A0EF37749B5EA4D2EC824ED5E7EAD481BE520B...",
+                "r": "15FE6F6DAEFD42CD5FA7444221CB545BB0CDB95DC9D76E0...",
+                "s": "B9AF193E6832934537B0B05D177BA8F7DA48D9DD84D27B8AFE9..."
+              },
+            ]
+          }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="responses">
+<section id="section-10">
+      <h2 id="name-test-vector-responses">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-test-vector-responses" class="section-name selfRef">Test Vector Responses</a>
+      </h2>
+<div id="_20f05870-650e-4810-b7d4-9bb5ef7f2fad">
+<p id="section-10-1">After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.<a href="#section-10-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-response-json-object"></span><div id="response_table">
+<table class="center" id="table-21">
+        <caption>
+<a href="#table-21" class="selfRef">Table 21</a>:
+<a href="#name-response-json-object" class="selfRef">Response JSON Object</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">The ACVP version used</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">The vector set identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">The test group objects in the response, see <a href="#response_group_table" class="xref">Table 22</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_91820647-dfe3-4e59-aaa2-8ee4c5139198">
+<p id="section-10-3">An example of this is the following<a href="#section-10-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_5c559390-2a72-4dcc-be8f-1ace4d4cd930">
+<figure id="figure-13">
+        <div id="section-10-4.1">
+<pre class="sourcecode lang-json">{
+    "acvVersion": "version",
+    "vsId": 1,
+    "testGroups": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a></figcaption></figure>
+</div>
+<div id="_3049e835-3f4f-41b0-80a1-dac920f18ec4">
+<p id="section-10-5">The 'testGroups' section is used to organize the ACVP client response in a similar manner to how it distributes vectors. Some algorithm / mode / revision combinations might require that additional test group properties are provided in the response.<a href="#section-10-5" class="pilcrow">¶</a></p>
+</div>
+<span id="name-response-group-objects"></span><div id="response_group_table">
+<table class="center" id="table-22">
+        <caption>
+<a href="#table-22" class="selfRef">Table 22</a>:
+<a href="#name-response-group-objects" class="selfRef">Response Group Objects</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">tgId</td>
+            <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">tests</td>
+            <td class="text-left" rowspan="1" colspan="1">The test case objects in the response, depending on the algorithm see <a href="#dsa_pqggen_vs_tr_table" class="xref">Table 24</a>, <a href="#dsa_pqgver_vs_tr_table" class="xref">Table 26</a>, <a href="#dsa_keygen_vs_tr_table" class="xref">Table 28</a>, <a href="#dsa_siggen_vs_tr_table" class="xref">Table 30</a> or <a href="#dsa_sigver_vs_tr_table" class="xref">Table 32</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_f11510b3-9a5f-4256-adbc-d57cd8b59b3e">
+<p id="section-10-7">An example of this is the following<a href="#section-10-7" class="pilcrow">¶</a></p>
+</div>
+<div id="_f801d56f-b306-4472-9481-c9e6f84f89ca">
+<figure id="figure-14">
+        <div id="section-10-8.1">
+<pre class="sourcecode">{
+    "tgId": 1,
+    "tests": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a></figcaption></figure>
+</div>
+<div id="dsa_pqggen_vector_responses">
+<section id="section-10.1">
+        <h3 id="name-dsa-pqggen-test-vector-resp">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-dsa-pqggen-test-vector-resp" class="section-name selfRef">DSA PQGGen Test Vector Responses</a>
+        </h3>
+<div id="_118c0a78-9aa4-469e-9be2-328d7da0b3dd">
+<p id="section-10.1-1">The test groups for DSA / pqgGen / 1.0 contain public key properties. The groups can be described using the following table.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqggen-test-group-respo"></span><div id="dsa_pqggen_group_table">
+<table class="center" id="table-23">
+          <caption>
+<a href="#table-23" class="selfRef">Table 23</a>:
+<a href="#name-dsa-pqggen-test-group-respo" class="selfRef">DSA PQGGen Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_996d18b8-6624-4ec3-a29c-4f917ac0289e">
+<p id="section-10.1-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / pqgGen / 1.0 test vector.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqggen-test-case-respon"></span><div id="dsa_pqggen_vs_tr_table">
+<table class="center" id="table-24">
+          <caption>
+<a href="#table-24" class="selfRef">Table 24</a>:
+<a href="#name-dsa-pqggen-test-case-respon" class="selfRef">DSA PQGGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">p</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime modulus</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">q</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime divisor of p - 1</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">g</td>
+              <td class="text-left" rowspan="1" colspan="1">The generator</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">domainSeed</td>
+              <td class="text-left" rowspan="1" colspan="1">The seed used to generate p and q in the probable method</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">counter</td>
+              <td class="text-left" rowspan="1" colspan="1">The counter used to generate p and q in the probable method</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">pSeed</td>
+              <td class="text-left" rowspan="1" colspan="1">The seed used to generate p in the provable method</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qSeed</td>
+              <td class="text-left" rowspan="1" colspan="1">The seed used to generate q in the provable method</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">pCounter</td>
+              <td class="text-left" rowspan="1" colspan="1">The counter used to generate p in the provable method</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qCounter</td>
+              <td class="text-left" rowspan="1" colspan="1">The counter used to generate q in the provable method</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_967caf58-c03c-47ad-8a40-a320fbdd5e8f">
+<aside id="section-10.1-5">
+          <p id="section-10.1-5.1">NOTE  1: The properties 'p', 'q', 'domainSeed' and 'counter' are only required in test groups generating p and q using the probable generation method in <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>. An example of this is 'tgId' 1 in the following example.<a href="#section-10.1-5.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_3efa7d70-6734-4b32-9f54-a0ea4708dfda">
+<aside id="section-10.1-6">
+          <p id="section-10.1-6.1">NOTE  2: The properties 'p', 'q', 'domainSeed', 'pSeed', 'qSeed', 'pCounter' and 'qCounter' are only required in test groups generating p and q using the provable generation method in <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>. An example of this is 'tgId' 2 in the following example.<a href="#section-10.1-6.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_c2b6a511-cdbb-49e1-9b40-65a29dc66b23">
+<aside id="section-10.1-7">
+          <p id="section-10.1-7.1">NOTE  3: The property 'g' is only required in test groups generating g under both allowed modes of generation, canonical and unverifiable. An example of this is 'tgId' 3 and 4 in the following example.<a href="#section-10.1-7.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_b4fec9ef-86bf-4ac4-84c5-7ba81112a8bd">
+<p id="section-10.1-8">The following is an example JSON test vector response object for DSA / pqgGen / 1.0.<a href="#section-10.1-8" class="pilcrow">¶</a></p>
+</div>
+<div id="_054cbbd5-6e6f-4fc1-9993-0730d9346f16">
+<figure id="figure-15">
+          <div id="section-10.1-9.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+              "tgId": 1,
+              "tests": [
+                {
+                  "tcId": 1,
+                  "p":"E0BB55A249993FE4...",
+                  "q":"C0074BDDC42F22F5...",
+                  "domainSeed":"01AA98A...",
+                  "counter":379
+                }
+              ]
+            },
+            {
+              "tgId": 2,
+              "tests": [
+                {
+                  "tcId": 2,
+                  "p":"84B73C1CE8E8C10F8...",
+                  "q":"A0B7917C9020F2332...",
+                  "domainSeed":"98179EF2...",
+                  "pSeed":"98179EF2D7FD0...",
+                  "qSeed":"98179EF2D7FD0...",
+                  "pCounter":596,
+                  "qCounter":255
+                }
+              ]
+            },
+            {
+              "tgId": 3,
+              "tests": [
+                {
+                  "tcId": 3,
+                  "g": "01098AD5E87869EF..."
+                }
+              ]
+            },
+            {
+              "tgId": 4,
+              "tests": [
+                {
+                  "tcId": 4,
+                  "g": "5C4AB5D4C901A375..."
+                }
+              ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="dsa_pqgver_vector_responses">
+<section id="section-10.2">
+        <h3 id="name-dsa-pqgver-test-vector-resp">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-dsa-pqgver-test-vector-resp" class="section-name selfRef">DSA PQGVer Test Vector Responses</a>
+        </h3>
+<div id="_f49aae01-d258-44ea-bc99-07e0c027aa7f">
+<p id="section-10.2-1">The test groups for DSA / pqgVer / 1.0 contain public key properties. The groups can be described using the following table.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqgver-test-group-respo"></span><div id="dsa_pqgver_group_table">
+<table class="center" id="table-25">
+          <caption>
+<a href="#table-25" class="selfRef">Table 25</a>:
+<a href="#name-dsa-pqgver-test-group-respo" class="selfRef">DSA PQGVer Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_8767a0d5-423f-451f-b691-4bba6a6452f4">
+<p id="section-10.2-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / pqgVer / 1.0 test vector.<a href="#section-10.2-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-pqgver-test-case-respon"></span><div id="dsa_pqgver_vs_tr_table">
+<table class="center" id="table-26">
+          <caption>
+<a href="#table-26" class="selfRef">Table 26</a>:
+<a href="#name-dsa-pqgver-test-case-respon" class="selfRef">DSA PQGVer Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">testPassed</td>
+              <td class="text-left" rowspan="1" colspan="1">Whether or not the pq pair or g verified</td>
+              <td class="text-left" rowspan="1" colspan="1">boolean</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_5fb1bd66-6a5f-475e-84f0-d0b56ac7b84a">
+<p id="section-10.2-5">The following is an example JSON test vector response object for DSA / pqgVer / 1.0.<a href="#section-10.2-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_85285096-d67c-4123-b712-2176cc3125f1">
+<figure id="figure-16">
+          <div id="section-10.2-6.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+          {
+            "tgId": 1,
+            "tests": [
+              {
+                "tcId": 1,
+                "testPassed": false,
+              }
+            ]
+          },
+          {
+            "tgId": 2,
+            "tests": [
+              {
+                "tcId": 36,
+                "testPassed": false,
+              }
+            ]
+          },
+          {
+            "tgId": 3,
+            "tests": [
+              {
+                "tcId": 211,
+                "testPassed": true,
+              }
+            ]
+          },
+          {
+            "tgId": 4,
+            "tests": [
+              {
+                "tcId": 246,
+                "testPassed": true,
+              }
+            ]
+          }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="dsa_keygen_vector_responses">
+<section id="section-10.3">
+        <h3 id="name-dsa-keygen-test-vector-resp">
+<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-dsa-keygen-test-vector-resp" class="section-name selfRef">DSA KeyGen Test Vector Responses</a>
+        </h3>
+<div id="_5dc3a7ea-e3bc-48ed-a5e1-deacd04c7946">
+<p id="section-10.3-1">The test groups for DSA / keyGen / 1.0 contain public key properties. The groups can be described using the following table.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-keygen-test-group-respo"></span><div id="dsa_keygen_group_table">
+<table class="center" id="table-27">
+          <caption>
+<a href="#table-27" class="selfRef">Table 27</a>:
+<a href="#name-dsa-keygen-test-group-respo" class="selfRef">DSA KeyGen Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">p</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime modulus</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">q</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime divisor of p - 1</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">g</td>
+              <td class="text-left" rowspan="1" colspan="1">The generator</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_cfe05358-ead2-41b3-805b-5575c97dc3ba">
+<p id="section-10.3-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / keyGen / 1.0 test vector.<a href="#section-10.3-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-keygen-test-case-respon"></span><div id="dsa_keygen_vs_tr_table">
+<table class="center" id="table-28">
+          <caption>
+<a href="#table-28" class="selfRef">Table 28</a>:
+<a href="#name-dsa-keygen-test-case-respon" class="selfRef">DSA KeyGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">x</td>
+              <td class="text-left" rowspan="1" colspan="1">The private key component X</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">y</td>
+              <td class="text-left" rowspan="1" colspan="1">The public key component Y</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_5f233362-838e-460d-bc01-f61c183bebfa">
+<p id="section-10.3-5">The following is an example JSON test vector response object for DSA / keyGen / 1.0.<a href="#section-10.3-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_bd2abdd5-c7af-41fe-8e41-5d5ae55fd553">
+<figure id="figure-17">
+          <div id="section-10.3-6.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+          {
+            "tgId": 1,
+            "p": "9D75F12AD16C09A618F3D25...",
+            "q": "F9146BFEC592547B8C69737...",
+            "g": "96A7DD911D076093EBBA4D9...",
+            "tests": [
+              {
+                "tcId": 1,
+                "x": "6316A9021906CB3F9F6...",
+                "y": "8520DE9F113D659F708..."
+              }
+            ]
+          }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="dsa_siggen_vector_responses">
+<section id="section-10.4">
+        <h3 id="name-dsa-siggen-test-vector-resp">
+<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-dsa-siggen-test-vector-resp" class="section-name selfRef">DSA SigGen Test Vector Responses</a>
+        </h3>
+<div id="_19ae98cb-f990-4a9c-bed2-29f30ce43f87">
+<p id="section-10.4-1">The test groups for DSA / sigGen / 1.0 contain public key properties. The groups can be described using the following table.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-siggen-test-group-respo"></span><div id="dsa_siggen_group_table">
+<table class="center" id="table-29">
+          <caption>
+<a href="#table-29" class="selfRef">Table 29</a>:
+<a href="#name-dsa-siggen-test-group-respo" class="selfRef">DSA SigGen Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">p</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime modulus</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">q</td>
+              <td class="text-left" rowspan="1" colspan="1">The prime divisor of p - 1</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">g</td>
+              <td class="text-left" rowspan="1" colspan="1">The generator</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">y</td>
+              <td class="text-left" rowspan="1" colspan="1">The public key component Y</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_55ecc0a6-b727-4fe7-9f91-81f38396d575">
+<p id="section-10.4-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / sigGen / 1.0 test vector.<a href="#section-10.4-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-siggen-test-case-respon"></span><div id="dsa_siggen_vs_tr_table">
+<table class="center" id="table-30">
+          <caption>
+<a href="#table-30" class="selfRef">Table 30</a>:
+<a href="#name-dsa-siggen-test-case-respon" class="selfRef">DSA SigGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">r</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component R</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">s</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component S</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in &lt;SP800-106&gt;&gt;.</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value's bit length.</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_71ca5b0a-645b-45b1-b37c-d2e7e6b5ccac">
+<aside id="section-10.4-5">
+          <p id="section-10.4-5.1">NOTE: The properties 'randomValue' and 'randomValueLen' are only required for groups that had the 'conformance' property set to "SP800-106".<a href="#section-10.4-5.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_6d8d695f-e84b-4671-a667-0a7c330c7aea">
+<p id="section-10.4-6">The following is an example JSON test vector response object for DSA / sigGen / 1.0.<a href="#section-10.4-6" class="pilcrow">¶</a></p>
+</div>
+<div id="_e5b8b686-3ee9-42c4-8266-b2957dc75998">
+<figure id="figure-18">
+          <div id="section-10.4-7.1">
+<pre class="sourcecode lang-json">[
+  {
+    "acvVersion": &lt;acv-version&gt;
+  },
+  {
+    "vsId": 1564,
+    "testGroups": [
+      {
+        "tgId": 1,
+        "p": "C8DC6C77CC31ADAE68F3221D59C7...",
+        "q": "B1B7BCF2467F8CC46FCDD2A41327...",
+        "g": "6C07130A6F6D05AAC9350936EE06...",
+        "y": "79143F63ECCC06B3D35C61DA2FB8...",
+        "tests": [
+          {
+            "tcId": 1,
+            "r": "4E7F70A92EC0E6871E2EA278...",
+            "s": "641A74C54A0B642DED9FE6EE..."
+          }
+        ]
+      },
+      {
+        "tgId": 2,
+        "p": "77CC31ADAE68F3221D59C75538F6...",
+        "q": "82E17546E564816AFB54987C879A...",
+        "g": "B1303035FE460CEBF21DDA00CC08...",
+        "y": "D699C3B6E150E60443BA461C2564...",
+        "tests": [
+          {
+            "tcId": 2,
+            "r": "4E7F70A92EC0E6871E2EA275...",
+            "s": "641A74C54A0B642DED9FE6EE...",
+            "randomValue": "23678643ACB728...",
+            "randomValueLen": 1024
+          }
+        ]
+      }
+    ]
+  }
+]</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="dsa_sigver_vector_responses">
+<section id="section-10.5">
+        <h3 id="name-dsa-sigver-test-vector-resp">
+<a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-dsa-sigver-test-vector-resp" class="section-name selfRef">DSA SigVer Test Vector Responses</a>
+        </h3>
+<div id="_6468a20e-df67-4b39-a7a3-3bff2478aab1">
+<p id="section-10.5-1">The test groups for DSA / sigVer / 1.0 contain public key properties. The groups can be described using the following table.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-sigver-test-group-respo"></span><div id="dsa_sigver_group_table">
+<table class="center" id="table-31">
+          <caption>
+<a href="#table-31" class="selfRef">Table 31</a>:
+<a href="#name-dsa-sigver-test-group-respo" class="selfRef">DSA SigVer Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_570deedd-5e5f-4c32-a512-572795ab7e61">
+<p id="section-10.5-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each DSA / sigVer / 1.0 test vector.<a href="#section-10.5-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-dsa-sigver-test-case-respon"></span><div id="dsa_sigver_vs_tr_table">
+<table class="center" id="table-32">
+          <caption>
+<a href="#table-32" class="selfRef">Table 32</a>:
+<a href="#name-dsa-sigver-test-case-respon" class="selfRef">DSA SigVer Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">testPassed</td>
+              <td class="text-left" rowspan="1" colspan="1">Whether or not the pq pair or g verified</td>
+              <td class="text-left" rowspan="1" colspan="1">boolean</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_d0b5dbc0-7630-4911-aa34-b5c306f4b76b">
+<p id="section-10.5-5">The following is an example JSON test vector response object for DSA / sigVer / 1.0.<a href="#section-10.5-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_5d42a48d-6dbf-43a7-bb85-5fd4676b2463">
+<figure id="figure-19">
+          <div id="section-10.5-6.1">
+<pre class="sourcecode lang-json">[
+  {
+    "acvVersion": &lt;acvp-version&gt;
+  },
+  {
+    "vsId": 1564,
+    "testGroups": [
+      {
+        "tgId": 1,
+        "tests": [
+          {
+            "tcId": 1,
+            "testPassed": true
+          },
+          {
+            "tcId": 2,
+            "testPassed": true
+          }
+        ]
+      }
+    ]
+  }
+]</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="security">
+<section id="section-11">
+      <h2 id="name-security-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<div id="_41c927cf-ff8c-462c-a478-d981642c4994">
+<p id="section-11-1">There are no additional security considerations outside of those outlined in the ACVP document.<a href="#section-11-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="iana">
+<section id="section-12">
+      <h2 id="name-iana-considerations">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="_ff62beee-b102-4fce-a97d-d2cc0f36fb00">
+<p id="section-12-1">This document does not require any action by IANA.<a href="#section-12-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="normref">
+<section id="section-13">
+      <h2 id="name-normative-references">
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-normative-references" class="section-name selfRef">Normative references</a>
+      </h2>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+      <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="refContent">IETF RFC 2119</span>, <span class="seriesInfo">IETF RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7991">[RFC7991]</dt>
+      <dd>
+<span class="refAuthor">Hoffman, P.</span>, <span class="refTitle">"The "xml2rfc" Version 3 Vocabulary"</span>, <span class="refContent">IETF RFC 7991</span>, <span class="seriesInfo">IETF RFC 7991</span>, <span class="seriesInfo">DOI 10.17487/RFC7991</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7991">https://www.rfc-editor.org/info/rfc7991</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="refContent">IETF RFC 8174</span>, <span class="seriesInfo">IETF RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ACVP">[ACVP]</dt>
+      <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Automatic Cryptographic Validation Protocol"</span>, <span class="refContent">ACVP ACVP</span>, <time datetime="2019" class="refDate">2019</time>. </dd>
+<dd class="break"></dd>
+<dt id="FIPS186-4">[FIPS186-4]</dt>
+      <dd>
+<span class="refTitle">"FIPS Pub 186-4"</span>, <span class="refContent">FIPS186 FIPS186-4</span>. </dd>
+<dd class="break"></dd>
+<dt id="SP800-89">[SP800-89]</dt>
+      <dd>
+<span class="refTitle">"SP800-89"</span>, <span class="refContent">SP800 SP800-89</span>. </dd>
+<dd class="break"></dd>
+<dt id="SP800-106">[SP800-106]</dt>
+    <dd>
+<span class="refTitle">"SP800-106"</span>, <span class="refContent">SP800 SP800-106</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="section-appendix.a">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Barry Fussell (<span class="role">editor</span>)</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bfussell@cisco.com" class="email">bfussell@cisco.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>

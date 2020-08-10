@@ -1,0 +1,4204 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft ">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>ACVP ECDSA Algorithm JSON Specification</title>
+<meta content="Barry Fussell" name="author">
+<meta content="xml2rfc 2.47.0" name="generator">
+<meta name="ietf.draft">
+<link href="draft-fussell-acvp-ecdsa.rfc.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necssary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre, code {
+  background-color: #f9f9f9;
+  font-family: 'Roboto Mono', monospace;
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The follwing is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre, code {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+pre.sourcecode,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact informatio look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background sligthtly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: avoid-page;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottim margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the comact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">ACVP ECDSA</td>
+<td class="right">August 2020</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Fussell</td>
+<td class="center">Expires 11 February 2021</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft"></dd>
+<dt class="label-">:</dt>
+<dd></dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2020-08-10" class="published">10 August 2020</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2021-02-11">11 February 2021</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">B. Fussell, <span class="editor">Ed.</span>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">ACVP ECDSA Algorithm JSON Specification</h1>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 11 February 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2020 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-abstract" class="xref">Abstract</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-terms-and-definitions" class="xref">Terms and definitions</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-supported-ecdsa-algorithms" class="xref">Supported ECDSA Algorithms</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-supported-conformances-for-" class="xref">Supported Conformances for ECDSA Algorithms</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-test-types-and-test-coverag" class="xref">Test Types and Test Coverage</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-test-types" class="xref">Test Types</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-test-coverage" class="xref">Test Coverage</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-requirements-covered" class="xref">Requirements Covered</a><a href="#section-toc.1-1.6.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-requirements-not-covered" class="xref">Requirements Not Covered</a><a href="#section-toc.1-1.6.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-capabilities-registration" class="xref">Capabilities Registration</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-prerequisites" class="xref">Prerequisites</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-required-prerequisite-algor" class="xref">Required Prerequisite Algorithms for ECDSA Validations</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-ecdsa-algorithm-registratio" class="xref">ECDSA Algorithm Registration Properties</a><a href="#section-toc.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.1">
+                    <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="xref">7.3.1</a>.  <a href="#name-the-keygen-mode-capabilitie" class="xref">The KeyGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.2">
+                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="xref">7.3.2</a>.  <a href="#name-the-keyver-mode-capabilitie" class="xref">The KeyVer Mode Capabilities</a><a href="#section-toc.1-1.7.2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.3">
+                    <p id="section-toc.1-1.7.2.3.2.3.1"><a href="#section-7.3.3" class="xref">7.3.3</a>.  <a href="#name-the-siggen-mode-capabilitie" class="xref">The SigGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.4">
+                    <p id="section-toc.1-1.7.2.3.2.4.1"><a href="#section-7.3.4" class="xref">7.3.4</a>.  <a href="#name-the-sigver-mode-capabilitie" class="xref">The SigVer Mode Capabilities</a><a href="#section-toc.1-1.7.2.3.2.4.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.5">
+                    <p id="section-toc.1-1.7.2.3.2.5.1"><a href="#section-7.3.5" class="xref">7.3.5</a>.  <a href="#name-the-deterministic-ecdsa-sig" class="xref">The Deterministic ECDSA SigGen Mode Capabilities</a><a href="#section-toc.1-1.7.2.3.2.5.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-test-vectors" class="xref">Test Vectors</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-test-vectors-2" class="xref">Test Vectors</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-ecdsa-keygen-test-vectors" class="xref">ECDSA KeyGen Test Vectors</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.1.2.1">
+                    <p id="section-toc.1-1.9.2.1.2.1.1"><a href="#section-9.1.1" class="xref">9.1.1</a>.  <a href="#name-ecdsa-keygen-test-groups-js" class="xref">ECDSA KeyGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.1.2.2">
+                    <p id="section-toc.1-1.9.2.1.2.2.1"><a href="#section-9.1.2" class="xref">9.1.2</a>.  <a href="#name-ecdsa-keygen-test-groups-jso" class="xref">ECDSA KeyGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-ecdsa-keyver-test-vectors" class="xref">ECDSA KeyVer Test Vectors</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2.2.1">
+                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-9.2.1" class="xref">9.2.1</a>.  <a href="#name-ecdsa-keyver-test-groups-js" class="xref">ECDSA KeyVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2.2.2">
+                    <p id="section-toc.1-1.9.2.2.2.2.1"><a href="#section-9.2.2" class="xref">9.2.2</a>.  <a href="#name-ecdsa-keyver-test-groups-jso" class="xref">ECDSA KeyVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-ecdsa-siggen-test-vectors" class="xref">ECDSA SigGen Test Vectors</a><a href="#section-toc.1-1.9.2.3.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.3.2.1">
+                    <p id="section-toc.1-1.9.2.3.2.1.1"><a href="#section-9.3.1" class="xref">9.3.1</a>.  <a href="#name-ecdsa-siggen-test-groups-js" class="xref">ECDSA SigGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.3.2.2">
+                    <p id="section-toc.1-1.9.2.3.2.2.1"><a href="#section-9.3.2" class="xref">9.3.2</a>.  <a href="#name-ecdsa-siggen-test-groups-jso" class="xref">ECDSA SigGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="xref">9.4</a>.  <a href="#name-ecdsa-sigver-testvectors" class="xref">ECDSA SigVer TestVectors</a><a href="#section-toc.1-1.9.2.4.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.4.2.1">
+                    <p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1" class="xref">9.4.1</a>.  <a href="#name-ecdsa-sigver-test-groups-js" class="xref">ECDSA SigVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.4.2.2">
+                    <p id="section-toc.1-1.9.2.4.2.2.1"><a href="#section-9.4.2" class="xref">9.4.2</a>.  <a href="#name-ecdsa-sigver-test-groups-jso" class="xref">ECDSA SigVer Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="xref">9.5</a>.  <a href="#name-deterministic-ecdsa-siggen-t" class="xref">Deterministic ECDSA SigGen Test Vectors</a><a href="#section-toc.1-1.9.2.5.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.5.2.1">
+                    <p id="section-toc.1-1.9.2.5.2.1.1"><a href="#section-9.5.1" class="xref">9.5.1</a>.  <a href="#name-deterministic-ecdsa-siggen-te" class="xref">Deterministic ECDSA SigGen Test Groups JSON Schema</a><a href="#section-toc.1-1.9.2.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.5.2.2">
+                    <p id="section-toc.1-1.9.2.5.2.2.1"><a href="#section-9.5.2" class="xref">9.5.2</a>.  <a href="#name-detecdsa-siggen-test-case-j" class="xref">detECDSA SigGen Test Case JSON Schema</a><a href="#section-toc.1-1.9.2.5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-test-vector-responses" class="xref">Test Vector Responses</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-ecdsa-keygen-test-vector-re" class="xref">ECDSA KeyGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-ecdsa-keyver-test-vector-re" class="xref">ECDSA KeyVer Test Vector Responses</a><a href="#section-toc.1-1.10.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-ecdsa-siggen-test-vector-re" class="xref">ECDSA SigGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.10.2.4">
+                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="xref">10.4</a>.  <a href="#name-ecdsa-sigver-test-vector-re" class="xref">ECDSA SigVer Test Vector Responses</a><a href="#section-toc.1-1.10.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.10.2.5">
+                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="xref">10.5</a>.  <a href="#name-deterministic-ecdsa-siggen-test-" class="xref">Deterministic ECDSA SigGen Test Vector Responses</a><a href="#section-toc.1-1.10.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="xref">12</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="xref">13</a>. <a href="#name-normative-references" class="xref">Normative references</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="section-1">
+      <h2 id="name-acknowledgements">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+      </h2>
+<div id="_900c2c23-95b9-4413-854b-ea296e141be0">
+<p id="section-1-1">There are no acknowledgements.<a href="#section-1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="abstract">
+<section id="section-2">
+      <h2 id="name-abstract">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-abstract" class="section-name selfRef">Abstract</a>
+      </h2>
+<div id="_43d60730-75af-49a6-9447-b4e313ca6872">
+<p id="section-2-1">This document defines the JSON schema for testing FIPS PUB 186 ECDSA implementations with the ACVP specification.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="introduction">
+<section id="section-3">
+      <h2 id="name-introduction">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<div id="_26cece33-aae4-4b77-bbc3-c186c8516cd7">
+<p id="section-3-1">The Automated Crypto Validation Protocol (ACVP) defines a mechanism to automatically verify the cryptographic implementation of a software or hardware crypto module. The ACVP specification defines how a crypto module communicates with an ACVP server, including crypto capabilities negotiation, session management, authentication, vector processing and more. The ACVP specification does not define algorithm specific JSON constructs for performing the crypto validation. A series of ACVP sub-specifications define the constructs for testing individual crypto algorithms. Each sub-specification addresses a specific class of crypto algorithms. This sub-specification defines the JSON constructs for testing FIPS PUB 186 ECDSA implementations using ACVP.<a href="#section-3-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="conventions">
+<section id="section-4">
+      <h2 id="name-terms-and-definitions">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-terms-and-definitions" class="section-name selfRef">Terms and definitions</a>
+      </h2>
+<div id="_fa4c6dae-3e59-4dfb-89af-705c2a3032a0">
+<p id="section-4-1">No terms and definitions are listed in this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="supported">
+<section id="section-5">
+      <h2 id="name-supported-ecdsa-algorithms">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-supported-ecdsa-algorithms" class="section-name selfRef">Supported ECDSA Algorithms</a>
+      </h2>
+<div id="_dbf3f455-5a26-45db-83b8-dc5279cbae8d">
+<p id="section-5-1">The following ECDSA algorithms <span class="bcp14">MAY</span> be advertised by the ACVP compliant cryptographic module. The list is in the form "algorithm / mode / revision".<a href="#section-5-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5-2.1">
+          <div id="_681e6057-84cf-461c-9b47-69440abe870e">
+<p id="section-5-2.1.1">ECDSA / KeyGen / 1.0<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.2">
+          <div id="_2e29012f-e8ea-4784-ad38-b1904cf7d534">
+<p id="section-5-2.2.1">ECDSA / KeyVer / 1.0<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.3">
+          <div id="_8561b77c-c769-4ed1-9452-fa29a1284e80">
+<p id="section-5-2.3.1">ECDSA / SigGen / 1.0<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.4">
+          <div id="_a9f0822a-71ba-4a08-a709-fda04eef8c1e">
+<p id="section-5-2.4.1">ECDSA / SigVer / 1.0<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.5">
+          <div id="_464e3926-04be-46b9-8837-090de5512c59">
+<p id="section-5-2.5.1">ECDSA / KeyGen / FIPS186-5<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.6">
+          <div id="_943f8bf6-f814-4b1d-81e4-5f23c8572c49">
+<p id="section-5-2.6.1">ECDSA / KeyVer / FIPS186-5<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.7">
+          <div id="_1eaa9014-8a88-436d-abcf-9cc10a1c0089">
+<p id="section-5-2.7.1">ECDSA / SigGen / FIPS186-5<a href="#section-5-2.7.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.8">
+          <div id="_5294e6c2-94c8-45cd-b12b-ef779786fd11">
+<p id="section-5-2.8.1">ECDSA / SigVer / FIPS186-5<a href="#section-5-2.8.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        <li class="normal" id="section-5-2.9">
+          <div id="_31a51b2d-1845-4402-bcdc-0249b073adfb">
+<p id="section-5-2.9.1">DetECDSA / SigGen / FIPS186-5<a href="#section-5-2.9.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+      </ul>
+<div id="supported_conformances">
+<section id="section-5.1">
+        <h3 id="name-supported-conformances-for-">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-supported-conformances-for-" class="section-name selfRef">Supported Conformances for ECDSA Algorithms</a>
+        </h3>
+<div id="_8a00fba0-ebdd-4511-a654-f8b1b4933def">
+<p id="section-5.1-1">The following ECDSA algorithms <span class="bcp14">MAY</span> claim conformance to <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5.1-2.1">
+            <div id="_a69c7063-2447-4557-bc2e-07ca839c8ef5">
+<p id="section-5.1-2.1.1">ECDSA / SigGen / 1.0<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-5.1-2.2">
+            <div id="_4013451d-4be3-447e-b2f2-c500919d450a">
+<p id="section-5.1-2.2.1">ECDSA / SigVer / 1.0<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-5.1-2.3">
+            <div id="_1a07e27d-f3c1-45d0-aa40-92bfaf47bcf0">
+<p id="section-5.1-2.3.1">ECDSA / SigGen / FIPS186-5<a href="#section-5.1-2.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-5.1-2.4">
+            <div id="_07a8044d-755b-4db5-82a7-af6c53a1815b">
+<p id="section-5.1-2.4.1">ECDSA / SigVer / FIPS186-5<a href="#section-5.1-2.4.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-5.1-2.5">
+            <div id="_6838f84c-3199-4ed3-8d5b-ac84e53fbb4e">
+<p id="section-5.1-2.5.1">DetECDSA / SigGen / FIPS186-5<a href="#section-5.1-2.5.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="testtypes">
+<section id="section-6">
+      <h2 id="name-test-types-and-test-coverag">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-test-types-and-test-coverag" class="section-name selfRef">Test Types and Test Coverage</a>
+      </h2>
+<div id="ttypes">
+<section id="section-6.1">
+        <h3 id="name-test-types">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-test-types" class="section-name selfRef">Test Types</a>
+        </h3>
+<div id="_3b99769e-6ff3-4a39-adf1-b70fb22d4478">
+<p id="section-6.1-1">The ACVP server performs a set of tests on the specified ECDSA algorithm in order to assess the correctness and robustness of the implementation. A typical ACVP validation session <span class="bcp14">SHALL</span> require multiple tests to be performed for every supported permutation of ECDSA capabilities. This section describes the design of the tests used to validate implementations of the ECDSA algorithms.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.1">
+            <div id="_e1a4b9cf-a044-496c-acc1-03ab81aa927d">
+<p id="section-6.1-2.1.1">ECDSA / KeyGen / * "AFT" - Algorithm Functional Test. The IUT is <span class="bcp14">REQUIRED</span> for each test case provided, to generate a key pair based on an approved curve. This information is then communicated to the ACVP server and validated.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.2">
+            <div id="_622b28fa-75e4-4bdd-8800-3907b66661c8">
+<p id="section-6.1-2.2.1">ECDSA / KeyVer / * "AFT" - Algorithm Functional Test. The ACVP server is <span class="bcp14">REQUIRED</span> to generate a series of keys based on the IUT provided NIST curve(s). The keys generated by the server <span class="bcp14">MAY</span> or <strong>MAY NOT</strong> be valid, the IUT is <span class="bcp14">REQUIRED</span> to determine if the keys provided in the test cases are valid or invalid keys as they relate to the curve.<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.3">
+            <div id="_0ce7b255-9b4a-4100-b4a8-b08420682d95">
+<p id="section-6.1-2.3.1">ECDSA / SigGen / * "AFT" - Algorithm Functional Test. This testing mode expects the IUT to generate valid signatures based on the ACVP provided message. The signature is then validated with the ACVP server given the IUT's communicated curve, public key, and signature.<a href="#section-6.1-2.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.4">
+            <div id="_08347992-27f1-46cd-b7f0-e60768ddef8d">
+<p id="section-6.1-2.4.1">ECDSA / SigVer / * "AFT" - Algorithm Functional Test. The ACVP server generates a series of signatures to communicate to the IUT. The IUT is <span class="bcp14">REQUIRED</span> to determine the validity of the signature given the curve, key, and message.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          <li class="normal" id="section-6.1-2.5">
+            <div id="_56b0603f-1805-4b5a-9f71-7777f2be6858">
+<p id="section-6.1-2.5.1">DetECDSA / SigGen / FIPS186-5 "AFT" - Algorithm Functional Test. This testing mode expects the IUT to generate valid signatures based on the ACVP provided message. The signature is then validated with the ACVP server given the IUT's communicated curve, public key, and signature. The random value used in the signature is generated according to the Deterministic ECDSA algorithm in <span>[<a href="#FIPS186-5" class="xref">FIPS186-5</a>]</span>.<a href="#section-6.1-2.5.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+        </ul>
+</section>
+</div>
+<div id="test_coverage">
+<section id="section-6.2">
+        <h3 id="name-test-coverage">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-test-coverage" class="section-name selfRef">Test Coverage</a>
+        </h3>
+<div id="_4e600125-8d94-4f71-b787-c42bf01b8a73">
+<p id="section-6.2-1">The tests described in this document have the intention of ensuring an implementation is conformant to <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>, <span>[<a href="#FIPS186-5" class="xref">FIPS186-5</a>]</span>, <span>[<a href="#SP800-89" class="xref">SP800-89</a>]</span>, and <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+</div>
+<div id="requirements_covered">
+<section id="section-6.2.1">
+          <h4 id="name-requirements-covered">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-requirements-covered" class="section-name selfRef">Requirements Covered</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-1.1">
+              <div id="_7a86e7fd-5bbd-41c0-a989-87782a3d177a">
+<p id="section-6.2.1-1.1.1">FIPS 186-4 - Section 3. General Discussion. Domain parameter generation, key generation, signature generation, and signature validation are all within scope of ACVP server testing.<a href="#section-6.2.1-1.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.1-1.2">
+              <div id="_5f6de2f5-0568-4b41-ae66-ed32728b9f36">
+<p id="section-6.2.1-1.2.1">FIPS 186-4 - Section 6. The Eliliptic Curve Digital Signature Algorithm (ECDSA). The ACVP server <span class="bcp14">SHALL</span> allow testing with the recommended NIST curves. The ACVP server <span class="bcp14">SHALL</span> support a variety of curves/hash function for creation and delivery to/from the IUT. Key pair generation/verification testing <span class="bcp14">SHALL</span> be provided by the ACVP server. Both Signature Generation and Validation testing mechanmisms <span class="bcp14">SHALL</span> be provided by the ACVP server.<a href="#section-6.2.1-1.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.1-1.3">
+              <div id="_f6818e75-92ea-4dcb-b404-f920f3c520e5">
+<p id="section-6.2.1-1.3.1">SP800-106 - Sections 3. Randomized Hashing and 4. Digital Signatures Using Randomized Hashing. The IUT <span class="bcp14">SHALL</span> be provided or provide a random value that should be used to "randomize" a message prior to signing and/or verifying an original message.<a href="#section-6.2.1-1.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          </ul>
+</section>
+</div>
+<div id="requirements_not_covered">
+<section id="section-6.2.2">
+          <h4 id="name-requirements-not-covered">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-requirements-not-covered" class="section-name selfRef">Requirements Not Covered</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-1.1">
+              <div id="_1e34b91a-139d-49ec-8889-2e435050f021">
+<p id="section-6.2.2-1.1.1">FIPS 186-4 - Section 3. General Discussion. Assurances of private key secrecy and ownership <span class="bcp14">SHALL NOT</span> be within scope of ACVP testing.<a href="#section-6.2.2-1.1.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.2-1.2">
+              <div id="_21c1b486-814d-40e6-9bf8-91d96252fc3a">
+<p id="section-6.2.2-1.2.1">FIPS 186-4 - Section 6. The Elliptic Curve Digital Signature Algorithm (ECDSA). Though the ACVP server <span class="bcp14">SHALL</span> support a variety of parameter sizes/hash functions, the IUT's selection of these is out of scope of testing. The ACVP server <span class="bcp14">SHALL NOT</span> provide testing for the validity of domain parameters as testing is (currently) limited to approved NIST curves. Testing <span class="bcp14">SHALL NOT</span> provide assurances the IUT has validated a set of domain parameters prior to their use. Domain parameter and key pair management <span class="bcp14">SHALL NOT</span> be within scope of ACVP testing.<a href="#section-6.2.2-1.2.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+            <li class="normal" id="section-6.2.2-1.3">
+              <div id="_49e5c91e-835f-42e6-9c85-11d23fd3ac96">
+<p id="section-6.2.2-1.3.1">SP800-106 - Section 3.3. The Random Value. DSA, ECDSA, and RSA have random values generated as per their signing process, this random value can be used as the input to the message randomization function, doing so however is out of scope of this testing.<a href="#section-6.2.2-1.3.1" class="pilcrow">¶</a></p>
+</div>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="capabilities">
+<section id="section-7">
+      <h2 id="name-capabilities-registration">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-capabilities-registration" class="section-name selfRef">Capabilities Registration</a>
+      </h2>
+<div id="_40300d1c-ef71-4c24-9955-bc89cd1847cc">
+<p id="section-7-1">ACVP requires crypto modules to register their capabilities. This allows the crypto module to advertise support for specific algorithms, notifying the ACVP server which algorithms need test vectors generated for the validation process.  This section describes the constructs for advertising support of ECDSA algorithms to the ACVP server.<a href="#section-7-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_6f1f7155-a464-4d91-80c2-d26945005887">
+<p id="section-7-2">The algorithm capabilities <span class="bcp14">MUST</span> be advertised as JSON objects within the 'algorithms' value of the ACVP registration message. The 'algorithms' value is an array, where each array element is an individual JSON object defined in this section. The 'algorithms' value is part of the 'capability_exchange' element of the ACVP JSON registration message. See the ACVP specification <span>[<a href="#ACVP" class="xref">ACVP</a>]</span> for more details on the registration message.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</div>
+<div id="prerequisites">
+<section id="section-7.1">
+        <h3 id="name-prerequisites">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-prerequisites" class="section-name selfRef">Prerequisites</a>
+        </h3>
+<div id="_82d28365-9abf-4cd4-9aa6-dc2e87fde33d">
+<p id="section-7.1-1">Each algorithm implementation <span class="bcp14">MAY</span> rely on other cryptographic primitives. For example, RSA Signature algorithms depend on an underlying hash function. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_e0a418ef-83eb-42ba-bba5-d04f10995a98">
+<p id="section-7.1-2">Prerequisites, if applicable, <span class="bcp14">MUST</span> be submitted in the registration as the <code>prereqVals</code> JSON property array inside each element of the <code>algorithms</code> array. Each element in the <code>prereqVals</code> array <span class="bcp14">MUST</span> contain the following properties<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-prerequisite-properties"></span><div id="_05f0b85c-67b6-4662-9c15-2f6668dab138">
+<table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-prerequisite-properties" class="selfRef">Prerequisite Properties</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">a prerequisite algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">valValue</td>
+              <td class="text-left" rowspan="1" colspan="1">algorithm validation number</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_eb14363e-bbd2-4d38-95c6-7262e438031a">
+<p id="section-7.1-4">A "valValue" of "same" <span class="bcp14">SHALL</span> be used to indicate that the prerequisite is being met by a different algorithm in the capability exchange in the same registration.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_0b24018a-d501-4085-b929-6c066e1f8e9b">
+<p id="section-7.1-5">An example description of prerequisites within a single algorithm capability exchange looks like this<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+</div>
+<div id="_baa04105-3daa-4fc5-a784-30d07b210442">
+<figure id="figure-1">
+          <div id="section-7.1-6.1">
+<pre class="sourcecode lang-json">"prereqVals":
+[
+  {
+    "algorithm": "Alg1",
+    "valValue": "Val-1234"
+  },
+  {
+    "algorithm": "Alg2",
+    "valValue": "same"
+  }
+]</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="prereq_algs">
+<section id="section-7.2">
+        <h3 id="name-required-prerequisite-algor">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-required-prerequisite-algor" class="section-name selfRef">Required Prerequisite Algorithms for ECDSA Validations</a>
+        </h3>
+<div id="_4bfbcd5f-6d55-4c0c-8e18-40265e1ec7d6">
+<p id="section-7.2-1">Each ECDSA implementation relies on other cryptographic primitives. For example, ECDSA SigGen uses an underlying SHA algorithm. Each of these underlying algorithm primitives must be validated, either separately or as part of the same submission. ACVP provides a mechanism for specifying the required prerequisites:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-required-ecdsa-prerequisite"></span><div id="rereqs_table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-required-ecdsa-prerequisite" class="selfRef">Required ECDSA Prerequisite Algorithms JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">a prerequisite algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">SHA, or DRBG</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">valValue</td>
+              <td class="text-left" rowspan="1" colspan="1">algorithm validation number</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Actual number or "same"</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">prereqAlgVal</td>
+              <td class="text-left" rowspan="1" colspan="1">prerequisite algorithm validation</td>
+              <td class="text-left" rowspan="1" colspan="1">object with algorithm and valValue properties</td>
+              <td class="text-left" rowspan="1" colspan="1">See above</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="_ecdsa_algorithm_registration_properties">
+<section id="section-7.3">
+        <h3 id="name-ecdsa-algorithm-registratio">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-ecdsa-algorithm-registratio" class="section-name selfRef">ECDSA Algorithm Registration Properties</a>
+        </h3>
+<div id="_e658c9fd-366f-49e4-a466-cb1b38081469">
+<p id="section-7.3-1">Each ECDSA algorithm capability advertised is a self-contained JSON object using the following values.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-algorithm-capabilitie"></span><div id="ecdsa_caps_table">
+<table class="center" id="table-3">
+          <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-ecdsa-algorithm-capabilitie" class="selfRef">ECDSA Algorithm Capabilities JSON Values</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+              <td class="text-left" rowspan="1" colspan="1">The ECDSA algorithm to be validated</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#supported" class="xref">Section 5</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">mode</td>
+              <td class="text-left" rowspan="1" colspan="1">The ECDSA mdoe to be validated</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#supported" class="xref">Section 5</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">revision</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm testing revision to use</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#supported" class="xref">Section 5</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">prereqVals</td>
+              <td class="text-left" rowspan="1" colspan="1">Prerequisite algorithm validations</td>
+              <td class="text-left" rowspan="1" colspan="1">array of prereqAlgVal objects</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#prereq_algs" class="xref">Section 7.2</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">capabilities</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual ECDSA Mode and Revision capabilities</td>
+              <td class="text-left" rowspan="1" colspan="1">array of capability objects</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#ecdsa_keygen_capabilities" class="xref">Section 7.3.1</a>, <a href="#ecdsa_keyver_capabilities" class="xref">Section 7.3.2</a>, <a href="#ecdsa_siggen_capabilities" class="xref">Section 7.3.3</a>, <a href="#ecdsa_sigver_capabilities" class="xref">Section 7.3.4</a>, <a href="#ecdsa_detsiggen_capabilities" class="xref">Section 7.3.5</a>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">conformances</td>
+              <td class="text-left" rowspan="1" colspan="1">Used to denote the conformances that can apply to specific modes of ECDSA</td>
+              <td class="text-left" rowspan="1" colspan="1">array of strings</td>
+              <td class="text-left" rowspan="1" colspan="1">See <a href="#supported_conformances" class="xref">Section 5.1</a>
+</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_f887983e-63c2-422d-b0ed-864b073362e6">
+<aside id="section-7.3-3">
+          <p id="section-7.3-3.1">NOTE: The 'componentTest' property is only valid for detECDSA / SigGen / FIPS186-5, ECDSA / SigGen / * and ECDSA / SigVer / * registrations.<a href="#section-7.3-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="ecdsa_keygen_capabilities">
+<section id="section-7.3.1">
+          <h4 id="name-the-keygen-mode-capabilitie">
+<a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-the-keygen-mode-capabilitie" class="section-name selfRef">The KeyGen Mode Capabilities</a>
+          </h4>
+<div id="_ab0c033b-3304-4e67-b913-3fca85684a43">
+<p id="section-7.3.1-1">The ECDSA KeyGen mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_af222427-96fe-4683-b414-53d1bafff3eb">
+<p id="section-7.3.1-2">Each ECDSA KeyGen mode capability set is advertised as a self-contained JSON object.<a href="#section-7.3.1-2" class="pilcrow">¶</a></p>
+</div>
+<div id="mode_keyGen1.0">
+<section id="section-7.3.1.1">
+            <h5 id="name-keygen-capabilities-for-rev">
+<a href="#section-7.3.1.1" class="section-number selfRef">7.3.1.1. </a><a href="#name-keygen-capabilities-for-rev" class="section-name selfRef">KeyGen Capabilities For Revision "1.0"</a>
+            </h5>
+<div id="_ca3a1f46-db43-447e-9e79-a71f85ef8eb5">
+<p id="section-7.3.1.1-1">The complete list of ECDSA / KeyGen / 1.0 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.1.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keygen-10-capabilitie"></span><div id="keyGen_table_1.0">
+<table class="center" id="table-4">
+              <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-ecdsa-keygen-10-capabilitie" class="selfRef">ECDSA KeyGen 1.0 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curve names supported for the IUT in keyGen.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521", "B-233", "B-283", "B-409", "B-571", "K-233", "K-283", "K-409", "K-571"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">secretGenerationMode</td>
+                  <td class="text-left" rowspan="1" colspan="1">The method used to generate the randomness incoporated in the key.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"extra bits", "testing candidates"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_f8327c61-4acf-44b6-8df3-fd11451633ce">
+<aside id="section-7.3.1.1-3">
+              <p id="section-7.3.1.1-3.1">NOTE: The 'secretGenerationMode' can be found in <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span> Appendix B.4.<a href="#section-7.3.1.1-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_cf970041-1378-40bf-b6f0-31b3947696ce">
+<p id="section-7.3.1.1-4">Below is an example of the registration for ECDSA / KeyGen / 1.0<a href="#section-7.3.1.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_b76cb276-2c81-4840-a7f5-e6d1f0e623f1">
+<figure id="figure-2">
+              <div id="section-7.3.1.1-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "KeyGen",
+    "revision": "1.0",
+    "prereqVals": [
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "curve": [
+        "P-224",
+        "P-256",
+        "P-384",
+        "P-521",
+        "B-233",
+        "B-283",
+        "B-409",
+        "B-571",
+        "K-233",
+        "K-283",
+        "K-409",
+        "K-571"
+    ],
+    "secretGenerationMode": [
+        "extra bits",
+        "testing candidates"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_keyGenFIPS186-5">
+<section id="section-7.3.1.2">
+            <h5 id="name-keygen-capabilities-for-revi">
+<a href="#section-7.3.1.2" class="section-number selfRef">7.3.1.2. </a><a href="#name-keygen-capabilities-for-revi" class="section-name selfRef">KeyGen Capabilities For Revision "FIPS186-5"</a>
+            </h5>
+<div id="_6f8b2ea3-b03f-43f9-bd55-dfa53d91842c">
+<p id="section-7.3.1.2-1">The complete list of ECDSA / KeyGen / FIPS186-5 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.1.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keygen-fips186-5-capa"></span><div id="keyGen_table_FIPS186-5">
+<table class="center" id="table-5">
+              <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-ecdsa-keygen-fips186-5-capa" class="selfRef">ECDSA KeyGen FIPS186-5 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curve names supported for the IUT in keyGen.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">secretGenerationMode</td>
+                  <td class="text-left" rowspan="1" colspan="1">The method used to generate the randomness incoporated in the key.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"extra bits", "testing candidates"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_5d211526-516c-4e46-877d-a11eec75e3e7">
+<aside id="section-7.3.1.2-3">
+              <p id="section-7.3.1.2-3.1">NOTE: The 'secretGenerationMode' can be found in <span>[<a href="#FIPS186-5" class="xref">FIPS186-5</a>]</span> Appendix A.2.<a href="#section-7.3.1.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_226ede02-d2f9-4272-92aa-7b50c29c9dc6">
+<p id="section-7.3.1.2-4">Below is an example of the registration for ECDSA / KeyGen / FIPS186-5<a href="#section-7.3.1.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_2cd8d239-9000-4670-ac2e-44561c1aaddb">
+<figure id="figure-3">
+              <div id="section-7.3.1.2-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "KeyGen",
+    "revision": "FIPS186-5",
+    "prereqVals": [
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "curve": [
+        "P-224",
+        "P-256",
+        "P-384",
+        "P-521"
+    ],
+    "secretGenerationMode": [
+        "extra bits",
+        "testing candidates"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_keyver_capabilities">
+<section id="section-7.3.2">
+          <h4 id="name-the-keyver-mode-capabilitie">
+<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-the-keyver-mode-capabilitie" class="section-name selfRef">The KeyVer Mode Capabilities</a>
+          </h4>
+<div id="_f8946780-676e-416f-b5bc-c6c07049c894">
+<p id="section-7.3.2-1">The ECDSA KeyVer mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_b97d9346-9adc-4410-b829-c92a7f1c722e">
+<p id="section-7.3.2-2">Each ECDSA KeyVer mode capability set is advertised as a self-contained JSON object.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
+</div>
+<div id="mode_keyVer1.0">
+<section id="section-7.3.2.1">
+            <h5 id="name-keyver-capabilities-for-rev">
+<a href="#section-7.3.2.1" class="section-number selfRef">7.3.2.1. </a><a href="#name-keyver-capabilities-for-rev" class="section-name selfRef">KeyVer Capabilities For Revision "1.0"</a>
+            </h5>
+<div id="_19fa44cb-68d1-4e6a-abe2-801fdbd717bf">
+<p id="section-7.3.2.1-1">The complete list of ECDSA / KeyVer / 1.0 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.2.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keyver-10-capabilitie"></span><div id="keyVer_table_1.0">
+<table class="center" id="table-6">
+              <caption>
+<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#name-ecdsa-keyver-10-capabilitie" class="selfRef">ECDSA KeyVer 1.0 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curve names supported for the IUT in keyVer.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-192", "P-224", "P-256", "P-384", "P-521", "B-163", "B-233", "B-283", "B-409", "B-571", "K-163", "K-233", "K-283", "K-409", "K-571"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_1fded5f5-fff6-46e1-bb21-909d13acddfe">
+<p id="section-7.3.2.1-3">Below is an example of the registration for ECDSA / KeyVer / 1.0<a href="#section-7.3.2.1-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_ec3ba9a7-1677-4dd5-a012-b19b2e49f5a5">
+<figure id="figure-4">
+              <div id="section-7.3.2.1-4.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "KeyVer",
+    "revision": "1.0",
+    "prereqVals": [
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "curve": [
+        "P-192",
+        "P-224",
+        "P-256",
+        "P-384",
+        "P-521",
+        "B-163",
+        "B-233",
+        "B-283",
+        "B-409",
+        "B-571",
+        "K-163",
+        "K-233",
+        "K-283",
+        "K-409",
+        "K-571"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_keyVerFIPS18605">
+<section id="section-7.3.2.2">
+            <h5 id="name-keyver-capabilities-for-revi">
+<a href="#section-7.3.2.2" class="section-number selfRef">7.3.2.2. </a><a href="#name-keyver-capabilities-for-revi" class="section-name selfRef">KeyVer Capabilities For Revision "FIPS186-5"</a>
+            </h5>
+<div id="_12a43a31-86f1-488a-bae9-94c9cf023857">
+<p id="section-7.3.2.2-1">The complete list of ECDSA / KeyVer / FIPS186-5 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.2.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keyver-fips186-5-capa"></span><div id="keyVer_table_FIPS186-5">
+<table class="center" id="table-7">
+              <caption>
+<a href="#table-7" class="selfRef">Table 7</a>:
+<a href="#name-ecdsa-keyver-fips186-5-capa" class="selfRef">ECDSA KeyVer FIPS186-5 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curve names supported for the IUT in keyVer.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_252d30ca-974d-4d5c-800a-af1e7126d7f3">
+<p id="section-7.3.2.2-3">Below is an example of the registration for ECDSA / KeyVer / FIPS186-5<a href="#section-7.3.2.2-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_6d23bdb8-7fbd-40ff-8e1f-b3de1c18657d">
+<figure id="figure-5">
+              <div id="section-7.3.2.2-4.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "KeyVer",
+    "revision": "FIPS186-5",
+    "prereqVals": [
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "curve": [
+        "P-224",
+        "P-256",
+        "P-384",
+        "P-521"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_siggen_capabilities">
+<section id="section-7.3.3">
+          <h4 id="name-the-siggen-mode-capabilitie">
+<a href="#section-7.3.3" class="section-number selfRef">7.3.3. </a><a href="#name-the-siggen-mode-capabilitie" class="section-name selfRef">The SigGen Mode Capabilities</a>
+          </h4>
+<div id="_d670ff68-df7a-44b5-bc6b-4456acaa1a26">
+<p id="section-7.3.3-1">The ECDSA SigGen mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.3.3-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_d09489dd-af48-4db8-a7be-2911cbd19e83">
+<p id="section-7.3.3-2">Each ECDSA SigGen mode capability set is advertised as a self-contained JSON object.<a href="#section-7.3.3-2" class="pilcrow">¶</a></p>
+</div>
+<div id="mode_sigGen1.0">
+<section id="section-7.3.3.1">
+            <h5 id="name-siggen-capabilities-for-rev">
+<a href="#section-7.3.3.1" class="section-number selfRef">7.3.3.1. </a><a href="#name-siggen-capabilities-for-rev" class="section-name selfRef">SigGen Capabilities For Revision "1.0"</a>
+            </h5>
+<div id="_c484789c-a34b-45f7-a288-950b131ea899">
+<p id="section-7.3.3.1-1">The complete list of ECDSA / SigGen / 1.0 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.3.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-10-capabilitie"></span><div id="sigGen_table_1.0">
+<table class="center" id="table-8">
+              <caption>
+<a href="#table-8" class="selfRef">Table 8</a>:
+<a href="#name-ecdsa-siggen-10-capabilitie" class="selfRef">ECDSA SigGen 1.0 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curves supported with a particular set of hash algorithms.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521", "B-233", "B-283", "B-409", "B-571", "K-233", "K-283", "K-409", "K-571"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                  <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message for a particular set of curves.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_daed2ec1-c9f2-4c17-acf4-1dcdc1d4142e">
+<aside id="section-7.3.3.1-3">
+              <p id="section-7.3.3.1-3.1">NOTE: Separate capability JSON objects in the array <span class="bcp14">MAY</span> represent different groupings of curves and hash algorithms. For example if one object in the 'capabilities' array has 'curve' "P-224" and 'hashAlg' "SHA2-224" while the next object has 'curve' "P-256" and 'hashAlg' "SHA2-256", then the tests generated will maintain those relations. A test group will be generated with cases for signatures over "P-224" using "SHA2-224" and a test group will be generated with cases for signatures over "P-256" using "SHA2-256".<a href="#section-7.3.3.1-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_694f4532-9f39-43a0-b2f9-b1651dcbd440">
+<p id="section-7.3.3.1-4">Below is an example of the registration for ECDSA / SigGen / 1.0<a href="#section-7.3.3.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_07a60e41-513f-4669-8b41-3533976146fe">
+<figure id="figure-6">
+              <div id="section-7.3.3.1-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "SigGen",
+    "revision": "1.0",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "componentTest": false,
+    "capabilities": [
+    {
+        "curve": [
+            "P-224",
+            "P-256"
+        ],
+        "hashAlg": [
+            "SHA2-224",
+            "SHA2-256"
+        ]
+    },
+    {
+        "curve": [
+            "P-512"
+        ],
+        "hashAlg": [
+            "SHA3-512"
+        ]
+    }],
+    "conformances": [
+        "SP800-106"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_sigGenFIPS186-5">
+<section id="section-7.3.3.2">
+            <h5 id="name-siggen-capabilities-for-revi">
+<a href="#section-7.3.3.2" class="section-number selfRef">7.3.3.2. </a><a href="#name-siggen-capabilities-for-revi" class="section-name selfRef">SigGen Capabilities For Revision "FIPS186-5"</a>
+            </h5>
+<div id="_24cc30af-634b-4cfd-9d84-949ab22bf9b7">
+<p id="section-7.3.3.2-1">The complete list of ECDSA / SigGen / FIPS186-5 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.3.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-fips186-5-capa"></span><div id="sigGen_table_FIPS186-5">
+<table class="center" id="table-9">
+              <caption>
+<a href="#table-9" class="selfRef">Table 9</a>:
+<a href="#name-ecdsa-siggen-fips186-5-capa" class="selfRef">ECDSA SigGen FIPS186-5 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curves supported with a particular set of hash algorithms.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                  <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message for a particular set of curves.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512", "SHAKE-128", "SHAKE-256"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_b6e3500c-6758-4c46-b6df-23b79c627c76">
+<aside id="section-7.3.3.2-3">
+              <p id="section-7.3.3.2-3.1">NOTE: Separate capability JSON objects in the array <span class="bcp14">MAY</span> represent different groupings of curves and hash algorithms. For example if one object in the 'capabilities' array has 'curve' "P-224" and 'hashAlg' "SHA2-224" while the next object has 'curve' "P-256" and 'hashAlg' "SHA2-256", then the tests generated will maintain those relations. A test group will be generated with cases for signatures over "P-224" using "SHA2-224" and a test group will be generated with cases for signatures over "P-256" using "SHA2-256".<a href="#section-7.3.3.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_7f668a3d-0db0-4626-92dc-d2325df8daeb">
+<p id="section-7.3.3.2-4">Below is an example of the registration for ECDSA / SigGen / FIPS186-5<a href="#section-7.3.3.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_3d110b39-d5c0-48b1-88fc-4d05996b139d">
+<figure id="figure-7">
+              <div id="section-7.3.3.2-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "SigGen",
+    "revision": "FIPS186-5",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "componentTest": false
+    "capabilities": [
+    {
+        "curve": [
+            "P-224",
+            "P-256"
+        ],
+        "hashAlg": [
+            "SHA2-224",
+            "SHA2-256"
+        ]
+    },
+    {
+        "curve": [
+            "P-512"
+        ],
+        "hashAlg": [
+            "SHA3-512"
+        ]
+    }],
+    "conformances": [
+        "SP800-106"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_sigver_capabilities">
+<section id="section-7.3.4">
+          <h4 id="name-the-sigver-mode-capabilitie">
+<a href="#section-7.3.4" class="section-number selfRef">7.3.4. </a><a href="#name-the-sigver-mode-capabilitie" class="section-name selfRef">The SigVer Mode Capabilities</a>
+          </h4>
+<div id="_f99968e6-fd06-43ca-82fd-2ad7f3ed34a1">
+<p id="section-7.3.4-1">The ECDSA SigVer mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.3.4-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_72134bab-3e0b-4eb3-8e85-b6c426f9eb50">
+<p id="section-7.3.4-2">Each ECDSA SigVer mode capability set is advertised as a self-contained JSON object.<a href="#section-7.3.4-2" class="pilcrow">¶</a></p>
+</div>
+<div id="mode_SigVer1.0">
+<section id="section-7.3.4.1">
+            <h5 id="name-sigver-capabilities-for-rev">
+<a href="#section-7.3.4.1" class="section-number selfRef">7.3.4.1. </a><a href="#name-sigver-capabilities-for-rev" class="section-name selfRef">SigVer Capabilities For Revision "1.0"</a>
+            </h5>
+<div id="_53520226-3fe4-428a-b790-1210c6d92f3b">
+<p id="section-7.3.4.1-1">The complete list of ECDSA / SigVer / 1.0 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.4.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-sigver-capabilities-j"></span><div id="SigVer_table_1.0">
+<table class="center" id="table-10">
+              <caption>
+<a href="#table-10" class="selfRef">Table 10</a>:
+<a href="#name-ecdsa-sigver-capabilities-j" class="selfRef">ECDSA SigVer Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curves supported with a particular set of hash algorithms.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-192", "P-224", "P-256", "P-384", "P-521", "B-163", "B-233", "B-283", "B-409", "B-571", "K-163", "K-233", "K-283", "K-409", "K-571"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                  <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message for a particular set of curves.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA-1", "SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_a5e77671-eb9c-4766-9df4-07c682ec1e74">
+<aside id="section-7.3.4.1-3">
+              <p id="section-7.3.4.1-3.1">NOTE: Separate capability JSON objects in the array <span class="bcp14">MAY</span> represent different groupings of curves and hash algorithms. For example if one object in the 'capabilities' array has 'curve' "P-224" and 'hashAlg' "SHA2-224" while the next object has 'curve' "P-256" and 'hashAlg' "SHA2-256", then the tests generated will maintain those relations. A test group will be generated with cases for signatures over "P-224" using "SHA2-224" and a test group will be generated with cases for signatures over "P-256" using "SHA2-256".<a href="#section-7.3.4.1-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_c4df1fa9-5747-4581-9b66-754951fbbb21">
+<p id="section-7.3.4.1-4">Below is an example of the registration for ECDSA / SigVer / 1.0<a href="#section-7.3.4.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_6d63d8fd-e74b-411f-8e4d-0aac68b6caba">
+<figure id="figure-8">
+              <div id="section-7.3.4.1-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "SigVer",
+    "revision": "1.0",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "componentTest": false,
+    "capabilities": [
+    {
+        "curve": [
+            "P-224",
+            "P-256"
+        ],
+        "hashAlg": [
+            "SHA2-224",
+            "SHA2-256"
+        ]
+    },
+    {
+        "curve": [
+            "P-512"
+        ],
+        "hashAlg": [
+            "SHA3-512"
+        ]
+    }],
+    "conformances": [
+        "SP800-106"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="mode_SigVerFIPS186-5">
+<section id="section-7.3.4.2">
+            <h5 id="name-sigver-capabilities-for-revi">
+<a href="#section-7.3.4.2" class="section-number selfRef">7.3.4.2. </a><a href="#name-sigver-capabilities-for-revi" class="section-name selfRef">SigVer Capabilities For Revision "FIPS186-5"</a>
+            </h5>
+<div id="_80d0fe62-4311-4456-bb47-9bb89b9a8d52">
+<p id="section-7.3.4.2-1">The complete list of ECDSA / SigVer / FIPS186-5 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.4.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-sigver-capabilities-js"></span><div id="SigVer_table_FIPS186-5">
+<table class="center" id="table-11">
+              <caption>
+<a href="#table-11" class="selfRef">Table 11</a>:
+<a href="#name-ecdsa-sigver-capabilities-js" class="selfRef">ECDSA SigVer Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curves supported with a particular set of hash algorithms.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                  <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message for a particular set of curves.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512", "SHAKE-128", "SHAKE-256"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_9d2ec389-880c-4ed8-ab45-ffa5ca57ac3a">
+<aside id="section-7.3.4.2-3">
+              <p id="section-7.3.4.2-3.1">NOTE: Separate capability JSON objects in the array <span class="bcp14">MAY</span> represent different groupings of curves and hash algorithms. For example if one object in the 'capabilities' array has 'curve' "P-224" and 'hashAlg' "SHA2-224" while the next object has 'curve' "P-256" and 'hashAlg' "SHA2-256", then the tests generated will maintain those relations. A test group will be generated with cases for signatures over "P-224" using "SHA2-224" and a test group will be generated with cases for signatures over "P-256" using "SHA2-256".<a href="#section-7.3.4.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_d1ac2caf-97b2-4395-913b-c13e98109be4">
+<p id="section-7.3.4.2-4">Below is an example of the registration for ECDSA / SigVer / FIPS186-5<a href="#section-7.3.4.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_14900f26-cf44-4183-bdad-8218e7b29f0f">
+<figure id="figure-9">
+              <div id="section-7.3.4.2-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "ECDSA",
+    "mode": "SigVer",
+    "revision": "FIPS186-5",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "componentTest": false,
+    "capabilities": [
+    {
+        "curve": [
+            "P-224",
+            "P-256"
+        ],
+        "hashAlg": [
+            "SHA2-224",
+            "SHA2-256"
+        ]
+    },
+    {
+        "curve": [
+            "P-512"
+        ],
+        "hashAlg": [
+            "SHA3-512"
+        ]
+    }],
+    "conformances": [
+        "SP800-106"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_detsiggen_capabilities">
+<section id="section-7.3.5">
+          <h4 id="name-the-deterministic-ecdsa-sig">
+<a href="#section-7.3.5" class="section-number selfRef">7.3.5. </a><a href="#name-the-deterministic-ecdsa-sig" class="section-name selfRef">The Deterministic ECDSA SigGen Mode Capabilities</a>
+          </h4>
+<div id="_ae8107eb-15b9-4760-b84c-5f9c8720c3c8">
+<p id="section-7.3.5-1">The ECDSA SigGen mode capabilities are advertised as JSON objects, which are elements of the 'capabilities' array in the ACVP registration message. See the ACVP specification for details on the registration message.<a href="#section-7.3.5-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_52378478-907d-4282-bbca-3d593297a889">
+<p id="section-7.3.5-2">Each ECDSA SigGen mode capability set is advertised as a self-contained JSON object.<a href="#section-7.3.5-2" class="pilcrow">¶</a></p>
+</div>
+<div id="mode_detsiggenFIPS186-5">
+<section id="section-7.3.5.1">
+            <h5 id="name-deterministic-ecdsa-siggen-">
+<a href="#section-7.3.5.1" class="section-number selfRef">7.3.5.1. </a><a href="#name-deterministic-ecdsa-siggen-" class="section-name selfRef">Deterministic ECDSA SigGen Capabilities For Revision "FIPS186-5"</a>
+            </h5>
+<div id="_4148c340-522c-4e22-b4cb-1904c1da4772">
+<p id="section-7.3.5.1-1">The complete list of detECDSA / SigGen / FIPS186-5 capabilities <span class="bcp14">MAY</span> be advertised by the ACVP compliant crypto module:<a href="#section-7.3.5.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-deterministic-ecdsa-siggen-f"></span><div id="detsigGen_table_FIPS186-5">
+<table class="center" id="table-12">
+              <caption>
+<a href="#table-12" class="selfRef">Table 12</a>:
+<a href="#name-deterministic-ecdsa-siggen-f" class="selfRef">Deterministic ECDSA SigGen FIPS186-5 Capabilities JSON Values</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                  <th class="text-left" rowspan="1" colspan="1">Description</th>
+                  <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+                  <th class="text-left" rowspan="1" colspan="1">Valid Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">curve</td>
+                  <td class="text-left" rowspan="1" colspan="1">The curves supported with a particular set of hash algorithms.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"P-224", "P-256", "P-384", "P-521"}</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                  <td class="text-left" rowspan="1" colspan="1">The hash functions supported when signing a message for a particular set of curves.</td>
+                  <td class="text-left" rowspan="1" colspan="1">array</td>
+                  <td class="text-left" rowspan="1" colspan="1">Any non-empty subset of {"SHA2-224", "SHA2-256", "SHA2-384", "SHA2-512", "SHA2-512/224", "SHA2-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512", "SHAKE-128", "SHAKE-256"}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<div id="_f5c162d9-d916-4648-be94-ae707f471aad">
+<aside id="section-7.3.5.1-3">
+              <p id="section-7.3.5.1-3.1">NOTE: Separate capability JSON objects in the array <span class="bcp14">MAY</span> represent different groupings of curves and hash algorithms. For example if one object in the 'capabilities' array has 'curve' "P-224" and 'hashAlg' "SHA2-224" while the next object has 'curve' "P-256" and 'hashAlg' "SHA2-256", then the tests generated will maintain those relations. A test group will be generated with cases for signatures over "P-224" using "SHA2-224" and a test group will be generated with cases for signatures over "P-256" using "SHA2-256".<a href="#section-7.3.5.1-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_0ce01095-f4b1-49fc-8713-6444f9dd627b">
+<p id="section-7.3.5.1-4">Below is an example of the registration for detECDSA / SigGen / FIPS186-5<a href="#section-7.3.5.1-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_e200ec86-1133-422b-896f-9e3d8265185a">
+<figure id="figure-10">
+              <div id="section-7.3.5.1-5.1">
+<pre class="sourcecode lang-json">{
+    "algorithm": "detECDSA",
+    "mode": "SigGen",
+    "revision": "FIPS186-5",
+    "prereqVals": [{
+            "algorithm": "SHA",
+            "valValue": "123456"
+        },
+        {
+            "algorithm": "DRBG",
+            "valValue": "123456"
+        }
+    ],
+    "componentTest": false,
+    "capabilities": [
+    {
+        "curve": [
+            "P-224",
+            "P-256"
+        ],
+        "hashAlg": [
+            "SHA2-224",
+            "SHA2-256"
+        ]
+    },
+    {
+        "curve": [
+            "P-512"
+        ],
+        "hashAlg": [
+            "SHA3-512"
+        ]
+    }],
+    "conformances": [
+        "SP800-106"
+    ]
+}</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="test-vectors">
+<section id="section-8">
+      <h2 id="name-test-vectors">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<div id="_dd1870f2-2b30-40f5-8e3a-d37deca87bc6">
+<p id="section-8-1">The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation test session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual algorithm defined during the capability exchange. This section describes the JSON schema for a test vector set used with FIPS PUB 186 ECDSA algorithms.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_eac70ecf-a2b6-4b4f-b2e0-d2e65702fd31">
+<p id="section-8-2">The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.<a href="#section-8-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-top-level-test-vector-json-"></span><div id="_4de720f6-dc05-4e29-bdca-54b4376fb05e">
+<table class="center" id="table-13">
+        <caption>
+<a href="#table-13" class="selfRef">Table 13</a>:
+<a href="#name-top-level-test-vector-json-" class="selfRef">Top Level Test Vector JSON Elements</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Values</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol version identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique numeric vector set identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">Algorithm defined in the capability exchange</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">mode</td>
+            <td class="text-left" rowspan="1" colspan="1">Mode defined in the capability exchange</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">revision</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol test revision selected</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">Array of test groups containing test data, see <a href="#tgjs" class="xref">Section 9</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_014d0ad9-2343-47d3-b0a2-461aedf6b2e6">
+<p id="section-8-4">An example of this would look like this<a href="#section-8-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_a885cb41-69d6-4291-be83-dbd8d1734cf9">
+<figure id="figure-11">
+        <div id="section-8-5.1">
+<pre class="sourcecode lang-json">{
+  "acvVersion": "version",
+  "vsId": 1,
+  "algorithm": "Alg1",
+  "mode": "Mode1",
+  "revision": "Revision1.0",
+  "testGroups": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="tgjs">
+<section id="section-9">
+      <h2 id="name-test-vectors-2">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-test-vectors-2" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<div id="_54e7e46f-2b6f-4b8e-aef7-bd9df4a4dc34">
+<p id="section-9-1">The ACVP server provides test vectors to the ACVP client, which are then processed and returned to the ACVP server for validation. A typical ACVP validation session would require multiple test vector sets to be downloaded and processed by the ACVP client. Each test vector set represents an individual crypto algorithm, such as ECDSA / SigGen / 1.0, ECDSA / KeyVer / FIPS186-5, etc. This section describes the JSON schema for a test vector set used with ECDSA crypto algorithms.<a href="#section-9-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_b2d7505c-443b-4850-a7ea-ad244ce4df28">
+<p id="section-9-2">The test vector set JSON schema is a multi-level hierarchy that contains meta data for the entire vector set as well as individual test vectors to be processed by the ACVP client. The following table describes the JSON elements at the top level of the hierarchy.<a href="#section-9-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-vector-set-json-objec"></span><div id="ecdsa_vs_top_table">
+<table class="center" id="table-14">
+        <caption>
+<a href="#table-14" class="selfRef">Table 14</a>:
+<a href="#name-ecdsa-vector-set-json-objec" class="selfRef">ECDSA Vector Set JSON Object</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">Protocol version identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">Unique numeric identifier for the vector set</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">The algorithm used for the test vectors</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">mode</td>
+            <td class="text-left" rowspan="1" colspan="1">The mode used for the test vectors</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">revision</td>
+            <td class="text-left" rowspan="1" colspan="1">The algorithm testing revision to use</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">Array of test group JSON objects, which are defined in <a href="#ecdsa_keygen_tgjs" class="xref">Section 9.1.1</a>, <a href="#ecdsa_keyver_tgjs" class="xref">Section 9.2.1</a>, <a href="#ecdsa_siggen_tgjs" class="xref">Section 9.3.1</a>, <a href="#ecdsa_sigver_tgjs" class="xref">Section 9.4.1</a> or <a href="#ecdsa_detsiggen_tgjs" class="xref">Section 9.5.1</a> depending on the algorithm</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="ecdsa_keygen_test_vectors">
+<section id="section-9.1">
+        <h3 id="name-ecdsa-keygen-test-vectors">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-ecdsa-keygen-test-vectors" class="section-name selfRef">ECDSA KeyGen Test Vectors</a>
+        </h3>
+<div id="ecdsa_keygen_tgjs">
+<section id="section-9.1.1">
+          <h4 id="name-ecdsa-keygen-test-groups-js">
+<a href="#section-9.1.1" class="section-number selfRef">9.1.1. </a><a href="#name-ecdsa-keygen-test-groups-js" class="section-name selfRef">ECDSA KeyGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_cc6bca6b-b8c9-4956-8229-47df059a70b8">
+<p id="section-9.1.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.1.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_5ef5bec7-da9a-46e9-9f8d-1b57c4f11005">
+<p id="section-9.1.1-2">The test group for ECDSA / KeyGen / * is as follows:<a href="#section-9.1.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keygen-test-group-jso"></span><div id="ecdsa_keygen_vs_tg_table">
+<table class="center" id="table-15">
+            <caption>
+<a href="#table-15" class="selfRef">Table 15</a>:
+<a href="#name-ecdsa-keygen-test-group-jso" class="selfRef">ECDSA KeyGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">curve</td>
+                <td class="text-left" rowspan="1" colspan="1">The curve type used for the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">secretGenerationMode</td>
+                <td class="text-left" rowspan="1" colspan="1">The secret generation mode used for the group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#ecdsa_keygen_tvjs" class="xref">Section 9.1.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="ecdsa_keygen_tvjs">
+<section id="section-9.1.2">
+          <h4 id="name-ecdsa-keygen-test-groups-jso">
+<a href="#section-9.1.2" class="section-number selfRef">9.1.2. </a><a href="#name-ecdsa-keygen-test-groups-jso" class="section-name selfRef">ECDSA KeyGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_e2fb5d23-4dbd-4ff6-b9d8-bf1f948d83a3">
+<p id="section-9.1.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA test vector.<a href="#section-9.1.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keygen-test-case-json"></span><div id="ecdsa_keygen_vs_tc_table">
+<table class="center" id="table-16">
+            <caption>
+<a href="#table-16" class="selfRef">Table 16</a>:
+<a href="#name-ecdsa-keygen-test-case-json" class="selfRef">ECDSA KeyGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_c46116f6-b385-4b65-8d00-b7dec4004fb7">
+<p id="section-9.1.2-3">The following is an example JSON object sent from the server to the client for ECDSA / KeyGen. While the example will specify a revision, the format is identical for both revisions available.<a href="#section-9.1.2-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_a4a3b062-9bee-4d5d-b1d5-21ed6760a74c">
+<figure id="figure-12">
+            <div id="section-9.1.2-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "ECDSA",
+        "mode": "KeyGen",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "curve": "P-224",
+                "secretGenerationMode": "extra bits",
+                "tests": [
+                    {
+                        "tcId": 1
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_keyver_test_vectors">
+<section id="section-9.2">
+        <h3 id="name-ecdsa-keyver-test-vectors">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-ecdsa-keyver-test-vectors" class="section-name selfRef">ECDSA KeyVer Test Vectors</a>
+        </h3>
+<div id="ecdsa_keyver_tgjs">
+<section id="section-9.2.1">
+          <h4 id="name-ecdsa-keyver-test-groups-js">
+<a href="#section-9.2.1" class="section-number selfRef">9.2.1. </a><a href="#name-ecdsa-keyver-test-groups-js" class="section-name selfRef">ECDSA KeyVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_eda5ebd5-d8c7-459e-b8da-f8b6a0d43b61">
+<p id="section-9.2.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.2.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_b6d3b3b8-ea80-4fe9-ba68-6eb83d98adc4">
+<p id="section-9.2.1-2">The test group for ECDSA / KeyVer / * is as follows:<a href="#section-9.2.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keyver-test-group-jso"></span><div id="ecdsa_keyver_vs_tg_table">
+<table class="center" id="table-17">
+            <caption>
+<a href="#table-17" class="selfRef">Table 17</a>:
+<a href="#name-ecdsa-keyver-test-group-jso" class="selfRef">ECDSA KeyVer Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">curve</td>
+                <td class="text-left" rowspan="1" colspan="1">The curve type used for the test group</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#ecdsa_keyver_tvjs" class="xref">Section 9.2.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="ecdsa_keyver_tvjs">
+<section id="section-9.2.2">
+          <h4 id="name-ecdsa-keyver-test-groups-jso">
+<a href="#section-9.2.2" class="section-number selfRef">9.2.2. </a><a href="#name-ecdsa-keyver-test-groups-jso" class="section-name selfRef">ECDSA KeyVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_5aa89365-ea00-42d1-8386-ff26ff4bff22">
+<p id="section-9.2.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA test vector.<a href="#section-9.2.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keyver-test-case-json"></span><div id="ecdsa_keyver_vs_tc_table">
+<table class="center" id="table-18">
+            <caption>
+<a href="#table-18" class="selfRef">Table 18</a>:
+<a href="#name-ecdsa-keyver-test-case-json" class="selfRef">ECDSA KeyVer Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qx</td>
+                <td class="text-left" rowspan="1" colspan="1">The public key curve point x</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qy</td>
+                <td class="text-left" rowspan="1" colspan="1">The public key curve point y</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_a14d0a06-79fb-4976-a9dc-669419fd18c7">
+<p id="section-9.2.2-3">The following is an example JSON object sent from the server to the client for ECDSA / KeyVer. While the example will specify a revision, the format is identical for both revisions available.<a href="#section-9.2.2-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_17071c8b-f5b7-4718-addd-d2f1c40a5e89">
+<figure id="figure-13">
+            <div id="section-9.2.2-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "ECDSA",
+        "mode": "KeyVer",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "curve": "P-192",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "qx": "01ED77E3F1591D2EC730D0ED6D592F8DD24158D0E696408DBD",
+                        "qy": "BF31C6463EB1B6B55C8930550B88CF8D1F6432A832B40FB4"
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_siggen_test_vectors">
+<section id="section-9.3">
+        <h3 id="name-ecdsa-siggen-test-vectors">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-ecdsa-siggen-test-vectors" class="section-name selfRef">ECDSA SigGen Test Vectors</a>
+        </h3>
+<div id="ecdsa_siggen_tgjs">
+<section id="section-9.3.1">
+          <h4 id="name-ecdsa-siggen-test-groups-js">
+<a href="#section-9.3.1" class="section-number selfRef">9.3.1. </a><a href="#name-ecdsa-siggen-test-groups-js" class="section-name selfRef">ECDSA SigGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_3e2e120a-63df-4041-a362-c7b0d92d43e6">
+<p id="section-9.3.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.3.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_0436e9ef-f5d6-4dac-b06b-a21ebd3d666f">
+<p id="section-9.3.1-2">The test group for ECDSA / SigGen / * is as follows:<a href="#section-9.3.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-test-group-jso"></span><div id="ecdsa_siggen_vs_tg_table">
+<table class="center" id="table-19">
+            <caption>
+<a href="#table-19" class="selfRef">Table 19</a>:
+<a href="#name-ecdsa-siggen-test-group-jso" class="selfRef">ECDSA SigGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">curve</td>
+                <td class="text-left" rowspan="1" colspan="1">The curve type used for the test vectors</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">SHA version used</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">conformance</td>
+                <td class="text-left" rowspan="1" colspan="1">Signifies all test cases within the group should utilize random message hashing as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#ecdsa_siggen_tvjs" class="xref">Section 9.3.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="ecdsa_siggen_tvjs">
+<section id="section-9.3.2">
+          <h4 id="name-ecdsa-siggen-test-groups-jso">
+<a href="#section-9.3.2" class="section-number selfRef">9.3.2. </a><a href="#name-ecdsa-siggen-test-groups-jso" class="section-name selfRef">ECDSA SigGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_2a5c309e-4f16-43b6-9f87-a90e8a2cf80b">
+<p id="section-9.3.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA test vector.<a href="#section-9.3.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-test-case-json"></span><div id="ecdsa_siggen_vs_tc_table">
+<table class="center" id="table-20">
+            <caption>
+<a href="#table-20" class="selfRef">Table 20</a>:
+<a href="#name-ecdsa-siggen-test-case-json" class="selfRef">ECDSA SigGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">message</td>
+                <td class="text-left" rowspan="1" colspan="1">The message used to generate signature or verify signature</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value's bit length</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_e0e35a72-b93c-4332-8c59-85a41f91bde1">
+<aside id="section-9.3.2-3">
+            <p id="section-9.3.2-3.1">NOTE: The 'randomValue' and 'randomValueLen' will only be present if the 'conformance' "SP800-106" is present in the group.<a href="#section-9.3.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_9d1977d9-6d59-461a-87f5-440bda98ed9e">
+<p id="section-9.3.2-4">The following is an example JSON object sent from the server to the client for ECDSA / SigGen. While the example will specify a revision, the format is identical for both revisions available.<a href="#section-9.3.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_f2c9b005-fe87-483b-bc8b-2f8d1792e465">
+<figure id="figure-14">
+            <div id="section-9.3.2-5.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "ECDSA",
+        "mode": "SigGen",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "curve": "P-224",
+                "hashAlg": "SHA2-224",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "message": "AB6F57713A3BD323B4AFDCFBE202EE0..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "curve": "P-224",
+                "hashAlg": "SHA2-224",
+                "conformance": "SP800-106",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "message": "23B4AFDCFBE202EE00A9CF5C787D19FD90..."
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_sigver_test_vectors">
+<section id="section-9.4">
+        <h3 id="name-ecdsa-sigver-testvectors">
+<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-ecdsa-sigver-testvectors" class="section-name selfRef">ECDSA SigVer TestVectors</a>
+        </h3>
+<div id="ecdsa_sigver_tgjs">
+<section id="section-9.4.1">
+          <h4 id="name-ecdsa-sigver-test-groups-js">
+<a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-ecdsa-sigver-test-groups-js" class="section-name selfRef">ECDSA SigVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_c4840af8-b2d8-40d8-b64f-6fbe016bde34">
+<p id="section-9.4.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.4.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_d051b6b9-b72b-48cc-83eb-a26baddbd2d6">
+<p id="section-9.4.1-2">The test group for ECDSA / SigVer / * is as follows:<a href="#section-9.4.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-sigver-test-group-jso"></span><div id="ecdsa_sigver_vs_tg_table">
+<table class="center" id="table-21">
+            <caption>
+<a href="#table-21" class="selfRef">Table 21</a>:
+<a href="#name-ecdsa-sigver-test-group-jso" class="selfRef">ECDSA SigVer Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">curve</td>
+                <td class="text-left" rowspan="1" colspan="1">The curve type used for the test vectors</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">SHA version used</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">conformance</td>
+                <td class="text-left" rowspan="1" colspan="1">Signifies all test cases within the group should utilize random message hashing as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#ecdsa_sigver_tvjs" class="xref">Section 9.4.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="ecdsa_sigver_tvjs">
+<section id="section-9.4.2">
+          <h4 id="name-ecdsa-sigver-test-groups-jso">
+<a href="#section-9.4.2" class="section-number selfRef">9.4.2. </a><a href="#name-ecdsa-sigver-test-groups-jso" class="section-name selfRef">ECDSA SigVer Test Groups JSON Schema</a>
+          </h4>
+<div id="_d52fda66-3171-429d-ab80-eed49ba35d82">
+<p id="section-9.4.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA test vector.<a href="#section-9.4.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-sigver-test-case-json"></span><div id="ecdsa_sigver_vs_tc_table">
+<table class="center" id="table-22">
+            <caption>
+<a href="#table-22" class="selfRef">Table 22</a>:
+<a href="#name-ecdsa-sigver-test-case-json" class="selfRef">ECDSA SigVer Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">message</td>
+                <td class="text-left" rowspan="1" colspan="1">The message used to generate signature or verify signature</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qx</td>
+                <td class="text-left" rowspan="1" colspan="1">The public key curve point x</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">qy</td>
+                <td class="text-left" rowspan="1" colspan="1">The public key curve point y</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">r</td>
+                <td class="text-left" rowspan="1" colspan="1">The signature component R</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">s</td>
+                <td class="text-left" rowspan="1" colspan="1">The signature component S</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value's bit length</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_9106e92a-3450-4b9e-b5ff-b4bc208e8092">
+<aside id="section-9.4.2-3">
+            <p id="section-9.4.2-3.1">NOTE: The 'randomValue' and 'randomValueLen' will only be present if the 'conformance' "SP800-106" is present in the group.<a href="#section-9.4.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_e02e516b-d5b5-4789-8725-dc477bdb340f">
+<p id="section-9.4.2-4">The following is an example JSON object sent from the server to the client for ECDSA / SigVer. While the example will specify a revision, the format is identical for both revisions available.<a href="#section-9.4.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_e6d699f5-68e0-4042-8a2f-178ab74aa5b7">
+<figure id="figure-15">
+            <div id="section-9.4.2-5.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "ECDSA",
+        "mode": "sigVer",
+        "revision": "1.0",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "curve": "P-192",
+                "hashAlg": "SHA-1",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "message": "D38A81D0C5201BA4A06A8C4760AC15DB266B1...",
+                        "qx": "B08AFEAC74E42C66EBAF13807E2EB5769F5123645C...",
+                        "qy": "55847857E5E48025BE9053952E0E1ECFB1D883CF9F...",
+                        "r": "E31121E544D476DC3FA79B4DCB0A7252B6E80468BBF...",
+                        "s": "6E3F47F2327E36AD936E0F4BE245C05F264BA9300E9..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "curve": "P-192",
+                "hashAlg": "SHA-1",
+                "conformance": "SP800-106",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "message": "D38A81D04A06A8C4760AC15DB266B17B48B...",
+                        "randomValue": "1527E0FE37FD1162F5DD0D975E83C0D...",
+                        "randomValueLen": 1024
+                        "qx": "D1E896486D9D986A464D3469941F93FC65556E2CB...",
+                        "qy": "ADCB8D50375DC76907195B6AF6C06F...",
+                        "r": "6D9D986A464D3469941F93FC65556E2CB8AB5F113...",
+                        "s": "8E713EB6106EF0E19E241DB4B4831E06437E5C..."
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="ecdsa_detsiggen_test_vectors">
+<section id="section-9.5">
+        <h3 id="name-deterministic-ecdsa-siggen-t">
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-deterministic-ecdsa-siggen-t" class="section-name selfRef">Deterministic ECDSA SigGen Test Vectors</a>
+        </h3>
+<div id="ecdsa_detsiggen_tgjs">
+<section id="section-9.5.1">
+          <h4 id="name-deterministic-ecdsa-siggen-te">
+<a href="#section-9.5.1" class="section-number selfRef">9.5.1. </a><a href="#name-deterministic-ecdsa-siggen-te" class="section-name selfRef">Deterministic ECDSA SigGen Test Groups JSON Schema</a>
+          </h4>
+<div id="_a63195f0-0985-46b3-80c4-94e7fd893455">
+<p id="section-9.5.1-1">The testGroups element at the top level in the test vector JSON object is an array of test groups. Test vectors are grouped into similar test cases to reduce the amount of data transmitted in the vector set. For instance, all test vectors that use the same key size would be grouped together. The Test Group JSON object contains meta data that applies to all test vectors within the group. The following table describes the secure hash JSON elements of the Test Group JSON object.<a href="#section-9.5.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_c8c0e51e-fae3-450d-a530-840078476051">
+<p id="section-9.5.1-2">The test group for detECDSA / SigGen / * is as follows:<a href="#section-9.5.1-2" class="pilcrow">¶</a></p>
+</div>
+<span id="name-deterministic-ecdsa-siggen-tes"></span><div id="ecdsa_detsiggen_vs_tg_table">
+<table class="center" id="table-23">
+            <caption>
+<a href="#table-23" class="selfRef">Table 23</a>:
+<a href="#name-deterministic-ecdsa-siggen-tes" class="selfRef">Deterministic ECDSA SigGen Test Group JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">testType</td>
+                <td class="text-left" rowspan="1" colspan="1">The test operation performed</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">curve</td>
+                <td class="text-left" rowspan="1" colspan="1">The curve type used for the test vectors</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hashAlg</td>
+                <td class="text-left" rowspan="1" colspan="1">SHA version used</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">conformance</td>
+                <td class="text-left" rowspan="1" colspan="1">Signifies all test cases within the group should utilize random message hashing as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">string</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tests</td>
+                <td class="text-left" rowspan="1" colspan="1">Array of individual test vector JSON objects, which are defined in <a href="#ecdsa_siggen_tvjs" class="xref">Section 9.3.2</a>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">array</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="ecdsa_detsiggen_tvjs">
+<section id="section-9.5.2">
+          <h4 id="name-detecdsa-siggen-test-case-j">
+<a href="#section-9.5.2" class="section-number selfRef">9.5.2. </a><a href="#name-detecdsa-siggen-test-case-j" class="section-name selfRef">detECDSA SigGen Test Case JSON Schema</a>
+          </h4>
+<div id="_6c2810bd-2082-42da-97c8-39fce537442f">
+<p id="section-9.5.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA test vector.<a href="#section-9.5.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-deterministic-ecdsa-siggen-test"></span><div id="ecdsa_detsiggen_vs_tc_table">
+<table class="center" id="table-24">
+            <caption>
+<a href="#table-24" class="selfRef">Table 24</a>:
+<a href="#name-deterministic-ecdsa-siggen-test" class="selfRef">Deterministic ECDSA SigGen Test Case JSON Object</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">tcId</td>
+                <td class="text-left" rowspan="1" colspan="1">Numeric identifier for the test case, unique across the entire vector set</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">message</td>
+                <td class="text-left" rowspan="1" colspan="1">The message used to generate signature or verify signature</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+                <td class="text-left" rowspan="1" colspan="1">hex</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+                <td class="text-left" rowspan="1" colspan="1">The random value's bit length</td>
+                <td class="text-left" rowspan="1" colspan="1">integer</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<div id="_73fac89f-27fa-45e2-8d56-55725fece49f">
+<aside id="section-9.5.2-3">
+            <p id="section-9.5.2-3.1">NOTE: The 'randomValue' and 'randomValueLen' will only be present if the 'conformance' "SP800-106" is present in the group.<a href="#section-9.5.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_30e9eac1-2bd4-48d6-94e3-16989ddc6f4f">
+<p id="section-9.5.2-4">The following is an example JSON object sent from the server to the client for detECDSA / SigGen / FIPS186-5.<a href="#section-9.5.2-4" class="pilcrow">¶</a></p>
+</div>
+<div id="_0debcb5c-0b99-44fc-813e-fae6cbd6b314">
+<figure id="figure-16">
+            <div id="section-9.5.2-5.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "algorithm": "detECDSA",
+        "mode": "SigGen",
+        "revision": "FIPS186-5",
+        "testGroups": [
+            {
+                "tgId": 1,
+                "curve": "P-224",
+                "hashAlg": "SHA2-224",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "message": "AB6F57713A3BD323B4AFDCFBE202EE0..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "curve": "P-224",
+                "hashAlg": "SHA2-224",
+                "conformance": "SP800-106",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "message": "23B4AFDCFBE202EE00A9CF5C787D19FD90..."
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="responses">
+<section id="section-10">
+      <h2 id="name-test-vector-responses">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-test-vector-responses" class="section-name selfRef">Test Vector Responses</a>
+      </h2>
+<div id="_75f241c4-b7a3-4c03-9cfb-cae10e1cb779">
+<p id="section-10-1">After the ACVP client downloads and processes a vector set, it must send the response vectors back to the ACVP server. The following table describes the JSON object that represents a vector set response.<a href="#section-10-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-response-json-object"></span><div id="response_table">
+<table class="center" id="table-25">
+        <caption>
+<a href="#table-25" class="selfRef">Table 25</a>:
+<a href="#name-response-json-object" class="selfRef">Response JSON Object</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">acvVersion</td>
+            <td class="text-left" rowspan="1" colspan="1">The ACVP version used</td>
+            <td class="text-left" rowspan="1" colspan="1">string</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">vsId</td>
+            <td class="text-left" rowspan="1" colspan="1">The vector set identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">testGroups</td>
+            <td class="text-left" rowspan="1" colspan="1">The test group objects in the response, see <a href="#response_group_table" class="xref">Table 26</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_995c97aa-35de-4c0f-8484-d12856977557">
+<p id="section-10-3">An example of this is the following<a href="#section-10-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_96f68671-a328-43d9-9972-8ecd3d6ab701">
+<figure id="figure-17">
+        <div id="section-10-4.1">
+<pre class="sourcecode lang-json">{
+    "acvVersion": "version",
+    "vsId": 1,
+    "testGroups": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a></figcaption></figure>
+</div>
+<div id="_f5dd7944-6271-4eda-9d52-d1ebc05e4b5f">
+<p id="section-10-5">The 'testGroups' section is used to organize the ACVP client response in a similar manner to how it distributes vectors.<a href="#section-10-5" class="pilcrow">¶</a></p>
+</div>
+<span id="name-response-group-objects"></span><div id="response_group_table">
+<table class="center" id="table-26">
+        <caption>
+<a href="#table-26" class="selfRef">Table 26</a>:
+<a href="#name-response-group-objects" class="selfRef">Response Group Objects</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">JSON Property</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">JSON Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">tgId</td>
+            <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+            <td class="text-left" rowspan="1" colspan="1">integer</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">tests</td>
+            <td class="text-left" rowspan="1" colspan="1">The test case objects in the response, depending on the algorithm see <a href="#ecdsa_keygen_vs_tr_table" class="xref">Table 27</a>, <a href="#ecdsa_keyver_vs_tr_table" class="xref">Table 28</a>, <a href="#ecdsa_siggen_vs_tr_table" class="xref">Table 30</a>, <a href="#ecdsa_sigver_vs_tr_table" class="xref">Table 31</a> or <a href="#ecdsa_detsiggen_vs_tr_table" class="xref">Table 33</a>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">array</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div id="_15e5185b-5489-4c72-9f32-9c6f6c804274">
+<p id="section-10-7">An example of this is the following<a href="#section-10-7" class="pilcrow">¶</a></p>
+</div>
+<div id="_391fdc40-146e-451a-b7c3-89cdba9509c4">
+<figure id="figure-18">
+        <div id="section-10-8.1">
+<pre class="sourcecode">{
+    "tgId": 1,
+    "tests": [ ... ]
+}</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a></figcaption></figure>
+</div>
+<div id="ecdsa_keygen_vector_responses">
+<section id="section-10.1">
+        <h3 id="name-ecdsa-keygen-test-vector-re">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-ecdsa-keygen-test-vector-re" class="section-name selfRef">ECDSA KeyGen Test Vector Responses</a>
+        </h3>
+<div id="_12e25c63-060c-4eae-a026-07fc63de7e03">
+<p id="section-10.1-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA / KeyGen / * test vector.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keygen-test-case-resp"></span><div id="ecdsa_keygen_vs_tr_table">
+<table class="center" id="table-27">
+          <caption>
+<a href="#table-27" class="selfRef">Table 27</a>:
+<a href="#name-ecdsa-keygen-test-case-resp" class="selfRef">ECDSA KeyGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">d</td>
+              <td class="text-left" rowspan="1" colspan="1">The private key</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qx</td>
+              <td class="text-left" rowspan="1" colspan="1">The public key curve point x</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qy</td>
+              <td class="text-left" rowspan="1" colspan="1">The public key curve point y</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_13a80aeb-2baa-417f-8f56-3d7afadfba2c">
+<p id="section-10.1-3">The following is an example JSON test vector response object for ECDSA / KeyGen. While the example will not specify a revision, the format is identical for both revisions available.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_5b7f1649-41f7-4cb0-bb5e-16a8041928dd">
+<figure id="figure-19">
+          <div id="section-10.1-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "qx": "7B1AA6BE712542282B8D088C23316...",
+                        "qy": "BCC9213347A7F988A2FF9EF14C852...",
+                        "d": "38524F26660BBA72E74EB39DEF3855..."
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ecdsa_keyver_vector_responses">
+<section id="section-10.2">
+        <h3 id="name-ecdsa-keyver-test-vector-re">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-ecdsa-keyver-test-vector-re" class="section-name selfRef">ECDSA KeyVer Test Vector Responses</a>
+        </h3>
+<div id="_d86e85cc-1fe1-4dbe-8d19-6d3076abcd4b">
+<p id="section-10.2-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA / KeyVer / * test vector.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-keyver-test-case-resp"></span><div id="ecdsa_keyver_vs_tr_table">
+<table class="center" id="table-28">
+          <caption>
+<a href="#table-28" class="selfRef">Table 28</a>:
+<a href="#name-ecdsa-keyver-test-case-resp" class="selfRef">ECDSA KeyVer Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">testPassed</td>
+              <td class="text-left" rowspan="1" colspan="1">Whether or not the key verified</td>
+              <td class="text-left" rowspan="1" colspan="1">boolean</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_79149c1b-caa9-45bb-81ab-4cc5c7d1cbe3">
+<p id="section-10.2-3">The following is an example JSON test vector response object for ECDSA / KeyVer. While the example will not specify a revision, the format is identical for both revisions available.<a href="#section-10.2-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_4a84aec2-45f7-4b8d-bd65-25787000a4c7">
+<figure id="figure-20">
+          <div id="section-10.2-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "testPassed": false
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ecdsa_siggen_vector_responses">
+<section id="section-10.3">
+        <h3 id="name-ecdsa-siggen-test-vector-re">
+<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-ecdsa-siggen-test-vector-re" class="section-name selfRef">ECDSA SigGen Test Vector Responses</a>
+        </h3>
+<div id="_92e37019-9968-4248-a4f1-bc0edb2f7bb0">
+<p id="section-10.3-1">The test groups for ECDSA / SigGen / * contain public key properties. The groups can be described using the following table.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-test-group-res"></span><div id="ecdsa_siggen_group_table">
+<table class="center" id="table-29">
+          <caption>
+<a href="#table-29" class="selfRef">Table 29</a>:
+<a href="#name-ecdsa-siggen-test-group-res" class="selfRef">ECDSA SigGen Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qx</td>
+              <td class="text-left" rowspan="1" colspan="1">The x component of the public key</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qy</td>
+              <td class="text-left" rowspan="1" colspan="1">The y component of the public key</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_d87ec5ea-546c-4e5b-b158-4550ce3b98e2">
+<p id="section-10.3-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA / SigGen / * test vector.<a href="#section-10.3-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-siggen-test-case-resp"></span><div id="ecdsa_siggen_vs_tr_table">
+<table class="center" id="table-30">
+          <caption>
+<a href="#table-30" class="selfRef">Table 30</a>:
+<a href="#name-ecdsa-siggen-test-case-resp" class="selfRef">ECDSA SigGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">r</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component R</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">s</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component S</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value's bit length</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_1e1de6c1-3299-41c8-bb75-9b4740382f5f">
+<aside id="section-10.3-5">
+          <p id="section-10.3-5.1">NOTE: The properties 'randomValue' and 'randomValueLen' <span class="bcp14">SHALL</span> only be present in test groups where the corresponding test group in the prompt had the 'conformance' property set to "SP800-106".<a href="#section-10.3-5.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_aa8ee41f-cf61-421b-bf0d-f1971a2db8d6">
+<p id="section-10.3-6">The following is an example JSON test vector response object for ECDSA / SigGen. While the example will not specify a revision, the format is identical for both revisions available.<a href="#section-10.3-6" class="pilcrow">¶</a></p>
+</div>
+<div id="_6377f306-53d7-491a-85e2-1b91aa8ce8a3">
+<figure id="figure-21">
+          <div id="section-10.3-7.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "qx": "3B1D9E4D986F651C3C213B2A1304693BDB...",
+                "qy": "E56F7B7C9E6355E573B7B3B6C0E1ECD70E...",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "r": "3E2A9588DF3D3F11B16368A30C8...",
+                        "s": "C6E4A8C51E0A0E11C4C6D6F8F3C..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "qx": "A1304693BDBA632CB93A3B8BA632CB93A3...",
+                "qy": "ECD70E4ABBA632CB93A3BA632CB93A3DF1...",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "r": "3E2A9588DF3D3F11B16368A30C8...",
+                        "s": "C6E4A8C51E0A0E11C4C6D6F8F3C...",
+                        "randomValue": "0A0E11C4C6D6F8F3C..."
+                        "randomValueLen": 1024
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ecdsa_sigver_vector_responses">
+<section id="section-10.4">
+        <h3 id="name-ecdsa-sigver-test-vector-re">
+<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-ecdsa-sigver-test-vector-re" class="section-name selfRef">ECDSA SigVer Test Vector Responses</a>
+        </h3>
+<div id="_700ab3ca-06bd-4dad-8d84-95aaa26e8e7c">
+<p id="section-10.4-1">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each ECDSA / SigVer / * test vector.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-ecdsa-sigver-test-case-resp"></span><div id="ecdsa_sigver_vs_tr_table">
+<table class="center" id="table-31">
+          <caption>
+<a href="#table-31" class="selfRef">Table 31</a>:
+<a href="#name-ecdsa-sigver-test-case-resp" class="selfRef">ECDSA SigVer Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">testPassed</td>
+              <td class="text-left" rowspan="1" colspan="1">Whether or not the signature verified</td>
+              <td class="text-left" rowspan="1" colspan="1">boolean</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_52e9ea6f-71a5-4974-827a-d18f0a69d776">
+<p id="section-10.4-3">The following is an example JSON test vector response object for ECDSA / SigVer. While the example will not specify a revision, the format is identical for both revisions available.<a href="#section-10.4-3" class="pilcrow">¶</a></p>
+</div>
+<div id="_12c8b804-3022-41ce-9380-1d43be5b80d7">
+<figure id="figure-22">
+          <div id="section-10.4-4.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "testPassed": false
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ecdsa_detsiggen_vector_responses">
+<section id="section-10.5">
+        <h3 id="name-deterministic-ecdsa-siggen-test-">
+<a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-deterministic-ecdsa-siggen-test-" class="section-name selfRef">Deterministic ECDSA SigGen Test Vector Responses</a>
+        </h3>
+<div id="_30bdb008-e90a-4f5e-9135-d18112bdd7ce">
+<p id="section-10.5-1">The test groups for detECDSA / SigGen / FIPS186-5 contain public key properties. The groups can be described using the following table.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
+</div>
+<span id="name-deterministic-ecdsa-siggen-test-g"></span><div id="ecdsa_detsiggen_group_table">
+<table class="center" id="table-32">
+          <caption>
+<a href="#table-32" class="selfRef">Table 32</a>:
+<a href="#name-deterministic-ecdsa-siggen-test-g" class="selfRef">Deterministic ECDSA SigGen Test Group Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tgId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test group identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qx</td>
+              <td class="text-left" rowspan="1" colspan="1">The x component of the public key</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">qy</td>
+              <td class="text-left" rowspan="1" colspan="1">The y component of the public key</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tests</td>
+              <td class="text-left" rowspan="1" colspan="1">The individual test cases for the group</td>
+              <td class="text-left" rowspan="1" colspan="1">array</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_54c31328-b873-4e7b-9f64-6f4875d39c81">
+<p id="section-10.5-3">Each test group contains an array of one or more test cases. Each test case is a JSON object that represents a single test vector to be processed by the ACVP client. The following table describes the JSON elements for each detECDSA / SigGen / FIPS186-5 test vector.<a href="#section-10.5-3" class="pilcrow">¶</a></p>
+</div>
+<span id="name-deterministic-ecdsa-siggen-test-c"></span><div id="ecdsa_detsiggen_vs_tr_table">
+<table class="center" id="table-33">
+          <caption>
+<a href="#table-33" class="selfRef">Table 33</a>:
+<a href="#name-deterministic-ecdsa-siggen-test-c" class="selfRef">Deterministic ECDSA SigGen Test Case Response JSON Object</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">JSON Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">JSON type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">tcId</td>
+              <td class="text-left" rowspan="1" colspan="1">The test case identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">r</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component R</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">s</td>
+              <td class="text-left" rowspan="1" colspan="1">The signature component S</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValue</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value to be used as an input into the message randomization function as described in <span>[<a href="#SP800-106" class="xref">SP800-106</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">hex</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">randomValueLen</td>
+              <td class="text-left" rowspan="1" colspan="1">The random value's bit length</td>
+              <td class="text-left" rowspan="1" colspan="1">integer</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="_43c365e6-a40c-4146-89c4-fdb1ce2dc297">
+<aside id="section-10.5-5">
+          <p id="section-10.5-5.1">NOTE: The properties 'randomValue' and 'randomValueLen' <span class="bcp14">SHALL</span> only be present in test groups where the corresponding test group in the prompt had the 'conformance' property set to "SP800-106".<a href="#section-10.5-5.1" class="pilcrow">¶</a></p>
+</aside>
+</div>
+<div id="_05424fe3-2241-4147-a204-c3c98f53ba92">
+<p id="section-10.5-6">The following is an example JSON test vector response object for detECDSA / SigGen / FIPS186-5.<a href="#section-10.5-6" class="pilcrow">¶</a></p>
+</div>
+<div id="_d46552a2-771a-4b81-a95a-8c31582f926a">
+<figure id="figure-23">
+          <div id="section-10.5-7.1">
+<pre class="sourcecode lang-json">[
+    {
+        "acvVersion": &lt;acvp-version&gt;
+    },
+    {
+        "vsId": 1564,
+        "testGroups": [
+            {
+                "tgId": 1,
+                "qx": "3B1D9E4D986F651C3C213B2A1304693BDB...",
+                "qy": "E56F7B7C9E6355E573B7B3B6C0E1ECD70E...",
+                "tests": [
+                    {
+                        "tcId": 1,
+                        "r": "3E2A9588DF3D3F11B16368A30C8...",
+                        "s": "C6E4A8C51E0A0E11C4C6D6F8F3C..."
+                    }
+                ]
+            },
+            {
+                "tgId": 2,
+                "qx": "A1304693BDBA632CB93A3B8BA632CB93A3...",
+                "qy": "ECD70E4ABBA632CB93A3BA632CB93A3DF1...",
+                "tests": [
+                    {
+                        "tcId": 2,
+                        "r": "3E2A9588DF3D3F11B16368A30C8...",
+                        "s": "C6E4A8C51E0A0E11C4C6D6F8F3C...",
+                        "randomValue": "0A0E11C4C6D6F8F3C..."
+                        "randomValueLen": 1024
+                    }
+                ]
+            }
+        ]
+    }
+]</pre>
+</div>
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="security">
+<section id="section-11">
+      <h2 id="name-security-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<div id="_5ba1fea6-8552-46b5-9967-c10dd23afbdf">
+<p id="section-11-1">There are no additional security considerations outside of those outlined in the ACVP document.<a href="#section-11-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="iana">
+<section id="section-12">
+      <h2 id="name-iana-considerations">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="_68f3b597-241e-4043-90d3-eebf47406579">
+<p id="section-12-1">This document does not require any action by IANA.<a href="#section-12-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_normative_references">
+<section id="section-13">
+      <h2 id="name-normative-references">
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-normative-references" class="section-name selfRef">Normative references</a>
+      </h2>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+      <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="refContent">IETF RFC 2119</span>, <span class="seriesInfo">IETF RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7991">[RFC7991]</dt>
+      <dd>
+<span class="refAuthor">Hoffman, P.</span>, <span class="refTitle">"The "xml2rfc" Version 3 Vocabulary"</span>, <span class="refContent">IETF RFC 7991</span>, <span class="seriesInfo">IETF RFC 7991</span>, <span class="seriesInfo">DOI 10.17487/RFC7991</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7991">https://www.rfc-editor.org/info/rfc7991</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="refContent">IETF RFC 8174</span>, <span class="seriesInfo">IETF RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ACVP">[ACVP]</dt>
+      <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Automatic Cryptographic Validation Protocol"</span>, <span class="refContent">ACVP ACVP</span>, <time datetime="2019" class="refDate">2019</time>. </dd>
+<dd class="break"></dd>
+<dt id="FIPS186-4">[FIPS186-4]</dt>
+      <dd>
+<span class="refTitle">"FIPS Pub 186-4"</span>, <span class="refContent">FIPS186 FIPS186-4</span>. </dd>
+<dd class="break"></dd>
+<dt id="SP800-89">[SP800-89]</dt>
+      <dd>
+<span class="refTitle">"SP800-89"</span>, <span class="refContent">SP800 SP800-89</span>. </dd>
+<dd class="break"></dd>
+<dt id="SP800-106">[SP800-106]</dt>
+      <dd>
+<span class="refTitle">"SP800-106"</span>, <span class="refContent">SP800 SP800-106</span>. </dd>
+<dd class="break"></dd>
+<dt id="FIPS186-5">[FIPS186-5]</dt>
+    <dd>
+<span class="refTitle">"FIPS Pub 186-5"</span>, <span class="refContent">FIPS186 FIPS186-5</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="section-appendix.a">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Barry Fussell (<span class="role">editor</span>)</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bfussell@cisco.com" class="email">bfussell@cisco.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
